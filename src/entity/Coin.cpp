@@ -2,7 +2,7 @@
 
 namespace game {
 
-    void Collectible::becomeCollected(Player player) {
+    void Coin::becomeCollected(Player player) {
         // TODO
     }
 

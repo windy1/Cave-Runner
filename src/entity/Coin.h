@@ -6,6 +6,10 @@
 namespace game {
 
     class Coin : public Collectible {
+    public:
+
+        virtual void becomeCollected(Player player) override;
+
     };
 
 }

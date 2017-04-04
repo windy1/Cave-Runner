@@ -2,12 +2,12 @@
 #define CS_120_FINAL_PROJECT_GRAPPLINGHOOK_H
 
 #include "../math.h"
+#include "Entity.h"
 
 namespace game {
 
-    class GrapplingHook {
+    class GrapplingHook : public Entity {
 
-        Point2d pos;
         bool hooked;
 
     public:

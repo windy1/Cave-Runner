@@ -6,6 +6,10 @@
 namespace game {
 
     class PowerUp : public Collectible {
+    public:
+
+        virtual void becomeCollected(Player player);
+
     };
 
 }
