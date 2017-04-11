@@ -9,12 +9,16 @@ namespace game {
     class GrapplingHook : public Entity {
 
         bool hooked;
+        
+        bool shot;
 
     public:
 
         void shoot(Point2d target);
 
         bool isHooked() const;
+        
+        bool isShot() const;
 
     };
 
