@@ -34,3 +34,6 @@ bool game::isRunning() {
 void game::setRunning(bool r) {
     running = r;
 }
+
+
+//THIS WORKED
