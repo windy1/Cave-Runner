@@ -10,7 +10,12 @@ namespace game {
     class Collectible : public Entity {
     public:
 
-        virtual void becomeCollected(Player player) = 0;
+        /**
+         * Requires: the collectible has not been collected already
+         * Modifies: none
+         * Effects: applies any effects this collectible has on the player
+         */
+        virtual void becomeCollected(Player &player) = 0;
 
     };
 

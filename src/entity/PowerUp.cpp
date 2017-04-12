@@ -2,7 +2,7 @@
 
 namespace game {
 
-    void PowerUp::becomeCollected(Player player) {
+    void PowerUp::becomeCollected(Player &player) {
         // TODO
     }
 

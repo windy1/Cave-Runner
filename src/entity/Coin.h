@@ -8,7 +8,9 @@ namespace game {
     class Coin : public Collectible {
     public:
 
-        virtual void becomeCollected(Player player) override;
+        virtual void becomeCollected(Player &player) override;
+
+        virtual void draw() const override;
 
     };
 

@@ -14,7 +14,7 @@ namespace game {
 
     public:
 
-        void shoot(Point2d target);
+        void shoot(Vector2i target);
 
         bool isHooked() const;
         

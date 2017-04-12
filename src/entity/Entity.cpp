@@ -2,23 +2,21 @@
 
 namespace game {
 
-    /**
-     * Requires: nothing
-     * Modifies: nothing
-     * Effects: returns entity position as Point2D
-     */
-    Point2d Entity::getPosition() const {
+    Vector2i Entity::getPosition() const {
         return pos;
     }
-    
-    /**
-     * Requires: nothing
-     * Modifies: pos
-     * Effects: moves entity by given amounts along the x and y axes
-     */
+
+    Vector2i Entity::getVelocity() const {
+        return velocity;
+    }
+
     void Entity::move(float deltaX, float deltaY) {
         pos.x += deltaX;
         pos.y += deltaY;
+    }
+
+    void Entity::update() {
+        move(velocity.x, velocity.y);
     }
 
 }
