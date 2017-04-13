@@ -6,6 +6,9 @@
 namespace game {
 
     class Obstacle : public Entity {
+
+        virtual void draw() const override;
+
     };
 
 }

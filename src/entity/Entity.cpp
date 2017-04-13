@@ -2,12 +2,20 @@
 
 namespace game {
 
-    Vector2i Entity::getPosition() const {
+    Vector2f Entity::getPosition() const {
         return pos;
     }
 
-    Vector2i Entity::getVelocity() const {
+    void Entity::setPosition(Vector2f pos) {
+        this->pos = pos;
+    }
+
+    Vector2f Entity::getVelocity() const {
         return velocity;
+    }
+
+    void Entity::setVelocity(Vector2f velocity) {
+        this->velocity = velocity;
     }
 
     bool Entity::isDead() const {

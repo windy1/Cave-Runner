@@ -1,5 +1,9 @@
-//
-// Created by Walker Crouse on 4/12/17.
-//
-
 #include "Obstacle.h"
+
+namespace game {
+
+    void Obstacle::draw() const {
+        // TODO
+    }
+
+}

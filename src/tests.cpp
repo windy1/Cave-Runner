@@ -7,12 +7,19 @@ using namespace std;
 
 namespace game {
 
+    // game.h
     int testUpdateEntities();
+
+    // Entity.h
+    int testEntityPosition();
+    int testEntityVelocity();
 
     int runTests() {
         cout << "Running tests..." << endl;
         int failed = 0;
         failed += testUpdateEntities();
+        failed += testEntityPosition();
+        failed += testEntityVelocity();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -31,6 +38,40 @@ namespace game {
             }
         }
         return 0;
+    }
+
+    int testEntityPosition() {
+        Coin entity;
+        Vector2f pos(0, 0);
+        entity.setPosition(pos);
+        int failed = 0;
+        if (entity.getPosition() != pos) {
+            cout << "unexpected entity position" << endl;
+            failed++;
+        }
+        entity.move(10, 20);
+        if (Vector2f(10, 20) != entity.getPosition()) {
+            cout << "unexpected entity position after move" << endl;
+            failed++;
+        }
+        return failed;
+    }
+
+    int testEntityVelocity() {
+        Coin entity;
+        Vector2f velocity(420, 1337);
+        entity.setVelocity(velocity);
+        int failed = 0;
+        if (entity.getVelocity() != velocity) {
+            cout << "unexpected entity velocity" << endl;
+            failed++;
+        }
+        entity.update();
+        if (Vector2f(420, 1337) != entity.getPosition()) {
+            cout << "unexpected entity position after velocity update" << endl;
+            failed++;
+        }
+        return failed;
     }
 
 }

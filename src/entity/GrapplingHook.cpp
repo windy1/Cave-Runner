@@ -2,7 +2,7 @@
 
 namespace game {
 
-    void GrapplingHook::shoot(Vector2i target) {
+    void GrapplingHook::shoot(Vector2f target) {
         if (!shot) {
             // TODO
         }
@@ -14,6 +14,10 @@ namespace game {
 
     bool GrapplingHook::isShot() const {
         return shot;
+    }
+
+    void GrapplingHook::draw() const {
+        // TODO
     }
 
 }

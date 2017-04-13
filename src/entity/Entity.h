@@ -8,8 +8,8 @@ namespace game {
     class Entity {
     protected:
 
-        Vector2i pos;
-        Vector2i velocity;
+        Vector2f pos;
+        Vector2f velocity;
         bool dead;
 
     public:
@@ -19,14 +19,29 @@ namespace game {
          * Modifies: nothing
          * Effects: returns entity position as Point2D
          */
-        Vector2i getPosition() const;
+        Vector2f getPosition() const;
+
+        /**
+         * Requires: a position
+         * Modifies: the entities position
+         * Effects: sets the position to the supplied Vector2i
+         */
+        void setPosition(Vector2f pos);
 
         /**
          * Requires: nothing
          * Modifies: nothing
          * Effects: returns this entities velocity
          */
-        Vector2i getVelocity() const;
+        Vector2f getVelocity() const;
+
+        /**
+         * Requires: a velocity
+         * Modifies: the entities velocity
+         * Effects: sets the velocity to the supplied Vector2i
+         * @param velocity
+         */
+        void setVelocity(Vector2f velocity);
 
         /**
          * Requires: nothing
