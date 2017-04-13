@@ -14,13 +14,21 @@ int main() {
     graphics::init();
     while (running) {
         // update entities
-        for (int i = 0; i < entities.size(); i++) {
-            entities[i]->update();
+        vector<entity_ptr>::iterator iter = entities.begin();
+        while (iter != entities.end()) {
+            entity_ptr entity = *iter;
+            if (entity->isDead()) {
+                // remove entity from vector
+                iter = entities.erase(iter);
+            } else {
+                // update and continue
+                entity->update();
+                iter++;
+            }
         }
-
         // draw entities
         for (int i = 0; i < entities.size(); i++) {
-            // TODO
+            entities[i]->draw();
         }
         graphics::display();
     }

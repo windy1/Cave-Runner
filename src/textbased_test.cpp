@@ -8,7 +8,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int textBased() {
     //TODO
     return 0;
 }

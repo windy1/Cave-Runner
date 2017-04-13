@@ -10,6 +10,7 @@ namespace game {
 
         Vector2i pos;
         Vector2i velocity;
+        bool dead;
 
     public:
 
@@ -26,6 +27,13 @@ namespace game {
          * Effects: returns this entities velocity
          */
         Vector2i getVelocity() const;
+
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns true if the entity is dead and should be removed
+         */
+        bool isDead() const;
 
         /**
          * Requires: nothing

@@ -8,7 +8,7 @@ namespace game {
      * Effects: grappling hook pos updates towards selected target, stops on object if ever overlaps object on way to target until player reaches target
      */
     void GrapplingHook::shoot(Vector2i target) {
-        if (!isShot) {
+        if (!shot) {
             // TODO
         }
     }
