@@ -58,7 +58,7 @@ namespace game {
 
         /**
          * Requires: nothing
-         * Modfies: nothing
+         * Modifies: nothing
          * Effects: draws this entity to the screen
          */
         virtual void draw() const = 0;

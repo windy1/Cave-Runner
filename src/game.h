@@ -11,15 +11,40 @@ typedef std::shared_ptr<game::Entity> entity_ptr;
 
 namespace game {
 
-    bool isRunning();
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns true if the game is running
+     */
+    bool isRunning() const;
 
+    /**
+     * Requires: none
+     * Modifies: running state
+     * Effects: sets the running state of the game
+     */
     void setRunning(bool running);
 
-    player_ptr getPlayer();
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the player
+     */
+    player_ptr getPlayer() const;
 
+    /**
+     * Requires: a vector of entities
+     * Modifies: removes any dead entities and updates any alive entities
+     * Effects: the given entity vector
+     */
     void updateEntities(std::vector<entity_ptr> &entities);
 
-    void drawEntities(std::vector<entity_ptr> &entities);
+    /**
+     * Requires: a vector of entities
+     * Modifies: draws each entity to the screen
+     * Effects: none
+     */
+    void drawEntities(const std::vector<entity_ptr> &entities) const;
 
 }
 
