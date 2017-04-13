@@ -16,7 +16,7 @@ namespace game {
      * Modifies: none
      * Effects: returns true if the game is running
      */
-    bool isRunning() const;
+    bool isRunning();
 
     /**
      * Requires: none
@@ -30,7 +30,7 @@ namespace game {
      * Modifies: none
      * Effects: returns the player
      */
-    player_ptr getPlayer() const;
+    player_ptr getPlayer();
 
     /**
      * Requires: a vector of entities
@@ -44,7 +44,7 @@ namespace game {
      * Modifies: draws each entity to the screen
      * Effects: none
      */
-    void drawEntities(const std::vector<entity_ptr> &entities) const;
+    void drawEntities(const std::vector<entity_ptr> &entities);
 
 }
 

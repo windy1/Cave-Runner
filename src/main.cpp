@@ -42,17 +42,17 @@ namespace game {
         }
     }
 
-    void drawEntities(const vector<entity_ptr> &entities) const {
+    void drawEntities(const vector<entity_ptr> &entities) {
         for (int i = 0; i < entities.size(); i++) {
             entities[i]->draw();
         }
     }
 
-    player_ptr game::getPlayer() const {
+    player_ptr getPlayer() {
         return player;
     }
 
-    bool isRunning() const {
+    bool isRunning() {
         return running;
     }
 
