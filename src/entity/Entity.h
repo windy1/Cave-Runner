@@ -37,6 +37,13 @@ namespace game {
 
         /**
          * Requires: nothing
+         * Modifies: sets the "dead" state of the entity
+         * Effects: nothing
+         */
+        void setDead(bool dead);
+
+        /**
+         * Requires: nothing
          * Modifies: pos
          * Effects: moves entity by given amounts along the x and y axes
          */

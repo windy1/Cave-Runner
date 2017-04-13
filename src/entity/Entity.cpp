@@ -14,6 +14,10 @@ namespace game {
         return dead;
     }
 
+    void Entity::setDead(bool dead) {
+        this->dead = dead;
+    }
+
     void Entity::move(float deltaX, float deltaY) {
         pos.x += deltaX;
         pos.y += deltaY;

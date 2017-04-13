@@ -1,6 +1,7 @@
 #include "graphics/graphics.h"
 #include "game.h"
-#include <vector>
+#include "tests.h"
+#include <iostream>
 
 using namespace std;
 
@@ -8,12 +9,25 @@ bool running = true;
 player_ptr player;
 vector<entity_ptr> entities;
 
-int main() {
+int main(int argc, char **argv) {
+    if (argc > 1 && strcmp(*argv, "--tests")) {
+        return game::runTests();
+    }
+    cout << "Starting..." << endl;
     player = make_shared<game::Player>();
     entities.push_back(player);
     graphics::init();
     while (running) {
-        // update entities
+        game::updateEntities(entities);
+        game::drawEntities(entities);
+        graphics::display();
+    }
+    return 0;
+}
+
+namespace game {
+
+    void updateEntities(vector<entity_ptr> &entities) {
         vector<entity_ptr>::iterator iter = entities.begin();
         while (iter != entities.end()) {
             entity_ptr entity = *iter;
@@ -26,19 +40,20 @@ int main() {
                 iter++;
             }
         }
-        // draw entities
+    }
+
+    void drawEntities(vector<entity_ptr> &entities) {
         for (int i = 0; i < entities.size(); i++) {
             entities[i]->draw();
         }
-        graphics::display();
     }
-    return 0;
-}
 
-bool game::isRunning() {
-    return running;
-}
+    bool isRunning() {
+        return running;
+    }
 
-void game::setRunning(bool r) {
-    running = r;
+    void setRunning(bool r) {
+        running = r;
+    }
+
 }
