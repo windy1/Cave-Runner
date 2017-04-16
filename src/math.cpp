@@ -13,3 +13,8 @@ bool Vector2f::operator==(const Vector2f &other) const {
 bool Vector2f::operator!=(const Vector2f &other) const {
     return !(*this == other);
 }
+
+ostream& operator<<(ostream &stream, const Vector2f &vec2f) {
+    stream << "(" << vec2f.x << ", " << vec2f.y << ")";
+    return stream;
+}

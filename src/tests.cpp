@@ -14,12 +14,16 @@ namespace game {
     int testEntityPosition();
     int testEntityVelocity();
 
+    // Player.h
+    int testPlayerJump();
+
     int runTests() {
         cout << "Running tests..." << endl;
         int failed = 0;
         failed += testUpdateEntities();
         failed += testEntityPosition();
         failed += testEntityVelocity();
+        failed += testPlayerJump();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -72,6 +76,16 @@ namespace game {
             failed++;
         }
         return failed;
+    }
+
+    int testPlayerJump() {
+        Player player;
+        player.jump();
+        do {
+            player.update();
+            cout << player.getPosition() << endl;
+        } while (player.getPosition().y > 0);
+        return 0;
     }
 
 }

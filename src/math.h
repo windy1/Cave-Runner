@@ -1,6 +1,10 @@
 #ifndef CS_120_FINAL_PROJECT_MATH_H
 #define CS_120_FINAL_PROJECT_MATH_H
 
+#include <iostream>
+
+using namespace std;
+
 struct Vector2f {
 
     float x = 0;
@@ -13,6 +17,8 @@ struct Vector2f {
     bool operator==(const Vector2f &other) const;
 
     bool operator!=(const Vector2f &other) const;
+
+    friend ostream& operator<<(ostream& stream, const Vector2f &vec2f);
 
 };
 
