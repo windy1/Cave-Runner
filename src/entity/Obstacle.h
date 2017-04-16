@@ -6,8 +6,13 @@
 namespace game {
 
     class Obstacle : public Entity {
+    public:
 
-        virtual void draw() const override;
+        Obstacle();
+
+        Obstacle(Vector2f pos);
+
+        static const float SCROLL_VELOCITY;
 
     };
 

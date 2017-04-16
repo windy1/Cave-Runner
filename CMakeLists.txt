@@ -15,6 +15,6 @@ set(SOURCE_FILES
         src/entity/GrapplingHook.cpp src/entity/GrapplingHook.h
         src/entity/Collectible.cpp src/entity/Collectible.h
         src/entity/Coin.cpp src/entity/Coin.h
-        src/entity/PowerUp.cpp src/entity/PowerUp.h src/entity/Obstacle.cpp src/entity/Obstacle.h src/entity/Collectible.cpp src/math.cpp)
+        src/entity/PowerUp.cpp src/entity/PowerUp.h src/entity/Obstacle.cpp src/entity/Obstacle.h src/entity/Collectible.cpp src/math.cpp src/entity/Barrier.cpp src/entity/Barrier.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})

@@ -1,6 +1,7 @@
 #include "tests.h"
 #include "game.h"
 #include "entity/Coin.h"
+#include "entity/Barrier.h"
 #include <iostream>
 
 using namespace std;
@@ -17,6 +18,9 @@ namespace game {
     // Player.h
     int testPlayerJump();
 
+    // Obstacle.h
+    int testObstacleScroll();
+
     int runTests() {
         cout << "Running tests..." << endl;
         int failed = 0;
@@ -24,11 +28,13 @@ namespace game {
         failed += testEntityPosition();
         failed += testEntityVelocity();
         failed += testPlayerJump();
+        failed += testObstacleScroll();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
 
     int testUpdateEntities() {
+        cout << "**** testUpdateEntities() ****" << endl;
         vector<entity_ptr> entities;
         entities.push_back(make_shared<Player>());
         entities.push_back(make_shared<Coin>());
@@ -45,6 +51,7 @@ namespace game {
     }
 
     int testEntityPosition() {
+        cout << "**** testEntityPosition() ****" << endl;
         Coin entity;
         Vector2f pos(0, 0);
         entity.setPosition(pos);
@@ -62,6 +69,7 @@ namespace game {
     }
 
     int testEntityVelocity() {
+        cout << "**** testEntityVelocity() ****" << endl;
         Coin entity;
         Vector2f velocity(420, 1337);
         entity.setVelocity(velocity);
@@ -79,12 +87,23 @@ namespace game {
     }
 
     int testPlayerJump() {
+        cout << "**** testPlayerJump() ****" << endl;
         Player player;
         player.jump();
         do {
             player.update();
             cout << player.getPosition() << endl;
         } while (player.getPosition().y > 0);
+        return 0;
+    }
+
+    int testObstacleScroll() {
+        cout << "**** testObstacleScroll() ****" << endl;
+        Barrier barrier(Vector2f(100, 50));
+        do {
+            barrier.update();
+            cout << barrier.getPosition() << endl;
+        } while (barrier.getPosition().x > 0);
         return 0;
     }
 
