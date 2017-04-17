@@ -8,10 +8,10 @@ namespace game {
     class PowerUp : public Collectible {
     public:
 
-        //default constructor
+        // default constructor
         PowerUp();
         
-        //constructor with position parameter
+        // constructor with position parameter
         PowerUp(Vector2f pos);
         
         /**

@@ -8,11 +8,13 @@ namespace game {
     class Obstacle : public Entity {
     public:
 
+        static const float SCROLL_VELOCITY;
+
         Obstacle();
 
         Obstacle(Vector2f pos);
 
-        static const float SCROLL_VELOCITY;
+        virtual void update() override;
 
     };
 

@@ -9,15 +9,15 @@ namespace game {
 
     class Collectible : public Entity {
     public:
-        
+
+        static const float SCROLL_VELOCITY;
+
         //default constructor
         Collectible();
         
         //constructor with position parameter
         Collectible(Vector2f pos);
-        
-        static const float SCROLL_VELOCITY;
-        
+
         /**
          * Requires: the collectible has not been collected already
          * Modifies: none

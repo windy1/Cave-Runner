@@ -16,11 +16,11 @@ namespace game {
         pos = Vector2f(SCORE_POS_X, SCORE_POS_Y);
     }
     
-    int getScore() const {
+    int Score::getScore() const {
         return score;
     }
     
-    void updateScore(int newPoints) {
+    void Score::updateScore(int newPoints) {
         score = score + newPoints;
     }
     

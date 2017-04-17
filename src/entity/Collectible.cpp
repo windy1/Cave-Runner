@@ -6,7 +6,6 @@ namespace game {
     
     Collectible::Collectible() {
         velocity.x = SCROLL_VELOCITY;
-        dead = false;
     }
     
     Collectible::Collectible(Vector2f pos) : Collectible::Collectible() {

@@ -6,15 +6,21 @@
 namespace game {
     
     class Score : public Entity {
-        
+
+        int score;
+
     public:
+
+        // default score display position
+        static const float SCORE_POS_X;
+        static const float SCORE_POS_Y;
         
-        //default constructor
+        // default constructor
         Score();
-        //constructor with score value parameter
+
+        // constructor with score value parameter
         Score(int startScore);
         
-        //getter
         int getScore() const;
         
         /**
@@ -23,15 +29,7 @@ namespace game {
          * Effects: increments score by given amount
          */
         void updateScore(int newPoints);
-        
-        //default score display position
-        static const float SCORE_POS_X;
-        static const float SCORE_POS_Y;
-        
-    private:
-        
-        int score;
-        
+
     };
     
 }

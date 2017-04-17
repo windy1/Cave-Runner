@@ -33,6 +33,10 @@ namespace game {
 
     void Entity::update() {
         move(velocity.x, velocity.y);
+        if (pos.x < 0) {
+            // remove once off screen
+            dead = true;
+        }
     }
 
 }

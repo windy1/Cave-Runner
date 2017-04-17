@@ -7,20 +7,22 @@
 namespace game {
 
     class Player : public Entity {
+
+        Score playerScore;
+        bool powerUp;
+
     public:
 
         static const float JUMP_VELOCITY;
         static const float GRAVITY;
         static const float TERM_VELOCITY;
 
-        //getters
-        Score getPlayerScore();
-        bool hasPowerUp();
+        Score getPlayerScore() const;
+
+        bool hasPowerUp() const;
         
-        //setter
         void setPowerUp(bool newPowerUp);
         
-        //updater
         void updatePlayerScore(int newPlayerPoints);
         
         /**
@@ -40,11 +42,6 @@ namespace game {
         virtual void update() override;
 
         virtual void draw() const override;
-        
-    private:
-        
-        Score playerScore;
-        bool powerUp;
 
     };
 

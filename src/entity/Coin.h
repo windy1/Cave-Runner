@@ -7,15 +7,15 @@ namespace game {
 
     class Coin : public Collectible {
     public:
+
+        // coin value (score points)
+        static const int COIN_VALUE;
         
-        //default constructor
+        // default constructor
         Coin();
         
-        //constructor with position parameter
+        // constructor with position parameter
         Coin(Vector2f pos);
-        
-        //coin value (score points)
-        static const float COIN_VALUE;
         
         /**
          * Requires: nothing
