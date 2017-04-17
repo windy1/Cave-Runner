@@ -3,6 +3,8 @@
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
+#include "../math.h"
+
 #else
 #include <GL/glut.h>
 #endif
@@ -14,6 +16,9 @@ namespace graphics {
         float g;
         float b;
         float a;
+
+        friend ostream& operator<<(ostream &stream, const Color &color);
+
     };
 
     /**
@@ -22,6 +27,13 @@ namespace graphics {
      * Modifies: game state
      */
     void init(int argc, char **argv);
+
+    /**
+     * Requires: dimen's x and y are both non-negative
+     * Effects: draws a rectangle with the given dimensions, position, and color
+     * Modifies: the window buffer
+     */
+    void drawRect(const Vector2i &dimen, const Vector2i &pos, const Color &color = {1, 1, 1, 1});
 
 }
 

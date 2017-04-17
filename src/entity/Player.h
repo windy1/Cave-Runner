@@ -10,12 +10,16 @@ namespace game {
 
         Score playerScore;
         bool powerUp;
+        Vector2i dimensions = Vector2i(50, 50);
 
     public:
 
         static const float JUMP_VELOCITY;
         static const float GRAVITY;
         static const float TERM_VELOCITY;
+        static const float X_POSITION;
+
+        Player();
 
         Score getPlayerScore() const;
 
@@ -24,6 +28,10 @@ namespace game {
         void setPowerUp(bool newPowerUp);
         
         void updatePlayerScore(int newPlayerPoints);
+
+        Vector2i getDimensions() const;
+
+        void setDimensions(Vector2i dimensions);
         
         /**
          * Requires: player is not jumping already
