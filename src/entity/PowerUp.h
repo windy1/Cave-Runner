@@ -8,7 +8,20 @@ namespace game {
     class PowerUp : public Collectible {
     public:
 
-        virtual void becomeCollected(Player &player);
+        //default constructor
+        PowerUp();
+        
+        //constructor with position parameter
+        PowerUp(Vector2f pos);
+        
+        /**
+         * Requires: nothing
+         * Modifies: powerup and player powerup field
+         * Effects: powerup disappears from screen and player saves boolean access to powerup
+         */
+        virtual void becomeCollected(Player &player) override;
+        
+        virtual void draw() const override;
 
     };
 

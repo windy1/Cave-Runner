@@ -8,6 +8,22 @@ namespace game {
     const float Player::GRAVITY = 0.1;
     const float Player::TERM_VELOCITY = -1;
 
+    Score Player::getPlayerScore() {
+        return playerScore;
+    }
+    
+    bool Player::hasPowerUp() {
+        return powerUp;
+    }
+    
+    void Player::setPowerUp(bool newPowerUp) {
+        powerUp = newPowerUp;
+    }
+    
+    void Player::updatePlayerScore(int newPlayerPoints) {
+        playerScore.updateScore(newPlayerPoints);
+    }
+    
     bool Player::jump() {
         if (pos.y == 0 && velocity.y == 0) {
             // start jumping

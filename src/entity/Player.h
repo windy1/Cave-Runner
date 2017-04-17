@@ -2,6 +2,7 @@
 #define CS_120_FINAL_PROJECT_PLAYER_H
 
 #include "Entity.h"
+#include "Score.h"
 
 namespace game {
 
@@ -12,6 +13,16 @@ namespace game {
         static const float GRAVITY;
         static const float TERM_VELOCITY;
 
+        //getters
+        Score getPlayerScore();
+        bool hasPowerUp();
+        
+        //setter
+        void setPowerUp(bool newPowerUp);
+        
+        //updater
+        void updatePlayerScore(int newPlayerPoints);
+        
         /**
          * Requires: player is not jumping already
          * Modifies: player y position
@@ -29,6 +40,11 @@ namespace game {
         virtual void update() override;
 
         virtual void draw() const override;
+        
+    private:
+        
+        Score playerScore;
+        bool powerUp;
 
     };
 
