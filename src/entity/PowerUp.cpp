@@ -12,7 +12,11 @@ namespace game {
         dead = true;
         player.setPowerUp(true);
     }
-    
+
+    string PowerUp::getType() const {
+        return POWER_UP;
+    }
+
     void PowerUp::draw() const {
         // TODO
     }

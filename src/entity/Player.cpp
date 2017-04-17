@@ -5,12 +5,14 @@ using namespace std;
 
 namespace game {
 
-    const float Player::JUMP_VELOCITY = 1;
-    const float Player::GRAVITY = 0.1;
-    const float Player::TERM_VELOCITY = -100;
-    const float Player::X_POSITION = 100;
+    const float     Player::JUMP_VELOCITY   =   10;
+    const float     Player::GRAVITY         =   0.5;
+    const float     Player::TERM_VELOCITY   =   -100;
+    const float     Player::X_POSITION      =   100;
+    const Vector2i  Player::DIMENSIONS          (50, 50);
 
     Player::Player() {
+        dimensions = DIMENSIONS;
         pos.x = X_POSITION;
         pos.y = 500; // TODO: remove this, only here to test falling
     }
@@ -29,14 +31,6 @@ namespace game {
     
     void Player::updatePlayerScore(int newPlayerPoints) {
         playerScore.updateScore(newPlayerPoints);
-    }
-
-    Vector2i Player::getDimensions() const {
-        return dimensions;
-    }
-
-    void Player::setDimensions(Vector2i dimensions) {
-        this->dimensions = dimensions;
     }
     
     bool Player::jump() {
@@ -62,6 +56,10 @@ namespace game {
             pos.y = 0;
             velocity.y = 0;
         }
+    }
+
+    string Player::getType() const {
+        return PLAYER;
     }
 
     void Player::draw() const {

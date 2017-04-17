@@ -21,7 +21,8 @@ set(SOURCE_FILES
         src/entity/Collectible.cpp
         src/math.cpp
         src/entity/Barrier.cpp src/entity/Barrier.h
-        src/entity/Score.h src/entity/Score.cpp)
+        src/entity/Score.h src/entity/Score.cpp
+        src/level_loader.cpp src/level_loader.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})
 

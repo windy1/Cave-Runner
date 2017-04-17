@@ -10,14 +10,14 @@ namespace game {
 
         Score playerScore;
         bool powerUp;
-        Vector2i dimensions = Vector2i(50, 50);
 
     public:
 
-        static const float JUMP_VELOCITY;
-        static const float GRAVITY;
-        static const float TERM_VELOCITY;
-        static const float X_POSITION;
+        static const float      JUMP_VELOCITY;
+        static const float      GRAVITY;
+        static const float      TERM_VELOCITY;
+        static const float      X_POSITION;
+        static const Vector2i   DIMENSIONS;
 
         Player();
 
@@ -29,10 +29,8 @@ namespace game {
         
         void updatePlayerScore(int newPlayerPoints);
 
-        Vector2i getDimensions() const;
+        virtual string getType() const override;
 
-        void setDimensions(Vector2i dimensions);
-        
         /**
          * Requires: player is not jumping already
          * Modifies: player y position

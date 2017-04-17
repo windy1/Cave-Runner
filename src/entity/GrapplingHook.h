@@ -34,6 +34,8 @@ namespace game {
          */
         bool isShot() const;
 
+        virtual string getType() const override;
+
         virtual void draw() const override;
 
     };

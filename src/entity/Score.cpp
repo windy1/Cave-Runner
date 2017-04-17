@@ -24,8 +24,12 @@ namespace game {
         score = score + newPoints;
     }
 
+    string Score::getType() const {
+        return SCORE;
+    }
+
     void Score::draw() const {
         // TODO
     }
-    
+
 }

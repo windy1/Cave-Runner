@@ -2,6 +2,7 @@
 #include "game.h"
 #include "entity/Coin.h"
 #include "entity/Barrier.h"
+#include "level_loader.h"
 #include <iostream>
 
 using namespace std;
@@ -21,6 +22,9 @@ namespace game {
     // Obstacle.h
     int testObstacleScroll();
 
+    // level_loader.h
+    int testLoadLevel();
+
     int runTests() {
         cout << "Running tests..." << endl;
         int failed = 0;
@@ -29,6 +33,7 @@ namespace game {
         failed += testEntityVelocity();
         failed += testPlayerJump();
         failed += testObstacleScroll();
+        failed += testLoadLevel();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -104,6 +109,15 @@ namespace game {
             barrier.update();
             cout << barrier.getPosition() << endl;
         } while (barrier.getPosition().x > 0);
+        return 0;
+    }
+
+    int testLoadLevel() {
+        cout << "**** testLoadLevel() ****" << endl;
+        vector<entity_ptr> entities = loadLevel(1, 100);
+        for (int i = 0; i < entities.size(); i++) {
+            cout << entities[i] << endl;
+        }
         return 0;
     }
 

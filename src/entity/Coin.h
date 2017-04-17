@@ -16,6 +16,8 @@ namespace game {
         
         // constructor with position parameter
         Coin(Vector2f pos);
+
+        virtual string getType() const override;
         
         /**
          * Requires: nothing

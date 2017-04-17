@@ -20,4 +20,8 @@ namespace game {
         // TODO
     }
 
+    string GrapplingHook::getType() const {
+        return GRAPPLING_HOOK;
+    }
+
 }

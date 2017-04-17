@@ -68,7 +68,13 @@ namespace graphics {
 
     static void onKey(unsigned char key, int x, int y) {
         cout << "Key: " << key << " " << Vector2i(x, y) << endl;
-        // TODO
+        switch (key) {
+            case ' ':
+                game::getPlayer()->jump();
+                break;
+            default:
+                break;
+        }
         glutPostRedisplay();
     }
 

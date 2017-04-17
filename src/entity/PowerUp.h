@@ -13,7 +13,9 @@ namespace game {
         
         // constructor with position parameter
         PowerUp(Vector2f pos);
-        
+
+        virtual string getType() const override;
+
         /**
          * Requires: nothing
          * Modifies: powerup and player powerup field

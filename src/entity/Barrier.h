@@ -12,6 +12,8 @@ namespace game {
 
         Barrier(Vector2f pos);
 
+        virtual string getType() const override;
+
         virtual void draw() const override;
 
     };

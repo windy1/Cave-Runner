@@ -10,9 +10,18 @@ namespace game {
 
         Vector2f pos;
         Vector2f velocity;
+        Vector2i dimensions;
         bool dead;
 
     public:
+
+        // entity type names (no abstracts)
+        static const string BARRIER;
+        static const string COIN;
+        static const string GRAPPLING_HOOK;
+        static const string PLAYER;
+        static const string POWER_UP;
+        static const string SCORE;
 
         /**
          * Requires: nothing
@@ -42,6 +51,27 @@ namespace game {
          * @param velocity
          */
         void setVelocity(Vector2f velocity);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the entities width and height in a vector
+         */
+        Vector2i getDimensions() const;
+
+        /**
+         * Requires: dimensions x and y are non-negative
+         * Modifies: entities dimensions
+         * Effects: sets the entities dimensions
+         */
+        void setDimensions(Vector2i dimensions);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the string name of this entity type
+         */
+        virtual string getType() const = 0;
 
         /**
          * Requires: nothing
@@ -77,6 +107,8 @@ namespace game {
          * Effects: draws this entity to the screen
          */
         virtual void draw() const = 0;
+
+        friend ostream& operator<<(ostream &stream, const Entity &entity);
 
     };
 

@@ -1,6 +1,14 @@
 #include "Entity.h"
+#include <cassert>
 
 namespace game {
+
+    const string Entity::BARRIER = "barrier";
+    const string Entity::COIN = "coin";
+    const string Entity::GRAPPLING_HOOK = "grapplingHook";
+    const string Entity::PLAYER = "player";
+    const string Entity::POWER_UP = "powerUp";
+    const string Entity::SCORE = "score";
 
     Vector2f Entity::getPosition() const {
         return pos;
@@ -16,6 +24,15 @@ namespace game {
 
     void Entity::setVelocity(Vector2f velocity) {
         this->velocity = velocity;
+    }
+
+    Vector2i Entity::getDimensions() const {
+        return dimensions;
+    }
+
+    void Entity::setDimensions(Vector2i dimensions) {
+        assert(dimensions.x >= 0 && dimensions.y >= 0);
+        this->dimensions = dimensions;
     }
 
     bool Entity::isDead() const {
@@ -37,6 +54,16 @@ namespace game {
             // remove once off screen
             dead = true;
         }
+    }
+
+    ostream& operator<<(ostream &stream, const Entity &entity) {
+        stream << "Entity(";
+        stream << "type=" << entity.getType() << ", ";
+        stream << "pos=" << entity.getPosition() << ", ";
+        stream << "velocity=" << entity.getVelocity() << ", ";
+        stream << "dimensions=" << entity.getDimensions() << ", ";
+        stream << "dead=" << entity.isDead() << ")";
+        return stream;
     }
 
 }

@@ -30,6 +30,8 @@ namespace game {
          */
         void updateScore(int newPoints);
 
+        virtual string getType() const override;
+
         virtual void draw() const override;
 
     };

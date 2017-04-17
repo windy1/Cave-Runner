@@ -19,4 +19,8 @@ namespace game {
         // TODO
     }
 
+    string Coin::getType() const {
+        return GRAPPLING_HOOK;
+    }
+
 }

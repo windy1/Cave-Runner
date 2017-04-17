@@ -12,4 +12,8 @@ namespace game {
         // TODO
     }
 
+    string Barrier::getType() const {
+        return BARRIER;
+    }
+
 }
