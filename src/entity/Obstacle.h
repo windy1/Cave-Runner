@@ -13,9 +13,7 @@ namespace game {
         Obstacle();
 
         Obstacle(Vector2f pos);
-
-        virtual void update() override;
-
+        
     };
 
 }
