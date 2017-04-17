@@ -23,5 +23,9 @@ namespace game {
     void Score::updateScore(int newPoints) {
         score = score + newPoints;
     }
+
+    void Score::draw() const {
+        // TODO
+    }
     
 }

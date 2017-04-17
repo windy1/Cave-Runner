@@ -14,23 +14,16 @@ namespace game {
     /**
      * Requires: none
      * Modifies: none
-     * Effects: returns true if the game is running
-     */
-    bool isRunning();
-
-    /**
-     * Requires: none
-     * Modifies: running state
-     * Effects: sets the running state of the game
-     */
-    void setRunning(bool running);
-
-    /**
-     * Requires: none
-     * Modifies: none
      * Effects: returns the player
      */
     player_ptr getPlayer();
+
+    /**
+     * Requires: none
+     * Modifies: updates and draws game entities
+     * Effects: game entities
+     */
+    void update();
 
     /**
      * Requires: a vector of entities

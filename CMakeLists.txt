@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(CS_120_Final_Project)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS -Wno-deprecated-declarations)
 
 set(SOURCE_FILES
         src/main.cpp
@@ -23,3 +24,9 @@ set(SOURCE_FILES
         src/entity/Score.h src/entity/Score.cpp)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})
+
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
+
+target_link_libraries(CS_120_Final_Project ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

@@ -22,4 +22,22 @@ struct Vector2f {
 
 };
 
+struct Vector2i {
+
+    int x = 0;
+    int y = 0;
+
+    Vector2i();
+
+    Vector2i(int x, int y);
+
+    bool operator==(const Vector2i &other) const;
+
+    bool operator!=(const Vector2i &other) const;
+
+    friend ostream& operator<<(ostream& stream, const Vector2i &vec2i);
+
+};
+
+
 #endif //CS_120_FINAL_PROJECT_MATH_H

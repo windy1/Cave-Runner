@@ -5,7 +5,6 @@
 
 using namespace std;
 
-bool running = true;
 player_ptr player;
 vector<entity_ptr> entities;
 
@@ -16,16 +15,16 @@ int main(int argc, char **argv) {
     cout << "Starting..." << endl;
     player = make_shared<game::Player>();
     entities.push_back(player);
-    graphics::init();
-    while (running) {
-        game::updateEntities(entities);
-        game::drawEntities(entities);
-        graphics::display();
-    }
+    graphics::init(argc, argv);
     return 0;
 }
 
 namespace game {
+
+    void update() {
+        updateEntities(entities);
+        drawEntities(entities);
+    }
 
     void updateEntities(vector<entity_ptr> &entities) {
         vector<entity_ptr>::iterator iter = entities.begin();
@@ -50,14 +49,6 @@ namespace game {
 
     player_ptr getPlayer() {
         return player;
-    }
-
-    bool isRunning() {
-        return running;
-    }
-
-    void setRunning(bool r) {
-        running = r;
     }
 
 }

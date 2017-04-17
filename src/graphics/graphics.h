@@ -1,17 +1,27 @@
 #ifndef CS_120_FINAL_PROJECT_GRAPHICS_H
 #define CS_120_FINAL_PROJECT_GRAPHICS_H
 
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 namespace graphics {
 
     struct Color {
-        int r;
-        int g;
-        int b;
+        float r;
+        float g;
+        float b;
+        float a;
     };
 
-    void init();
-
-    void display();
+    /**
+     * Requires: none
+     * Effects: starts the main game loop
+     * Modifies: game state
+     */
+    void init(int argc, char **argv);
 
 }
 
