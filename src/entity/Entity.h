@@ -2,6 +2,7 @@
 #define CS_120_FINAL_PROJECT_ENTITY_H
 
 #include "../math.h"
+#include "../graphics/Color.h"
 
 namespace game {
 
@@ -11,6 +12,7 @@ namespace game {
         Vector2f pos;
         Vector2f velocity;
         Vector2i dimensions;
+        Color color = Color::WHITE;
         bool dead;
 
     public:
@@ -65,6 +67,20 @@ namespace game {
          * Effects: sets the entities dimensions
          */
         void setDimensions(Vector2i dimensions);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns this entity's color
+         */
+        Color getColor() const;
+
+        /**
+         * Requires: none
+         * Modifies: entity color
+         * Effects: sets this entity's color
+         */
+        void setColor(Color color);
 
         /**
          * Requires: none

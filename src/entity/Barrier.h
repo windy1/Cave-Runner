@@ -2,6 +2,7 @@
 #define CS_120_FINAL_PROJECT_BARRIER_H
 
 #include "Obstacle.h"
+#include "../graphics/graphics.h"
 
 namespace game {
 

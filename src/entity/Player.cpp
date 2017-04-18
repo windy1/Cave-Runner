@@ -12,6 +12,7 @@ namespace game {
     const Vector2i  Player::DIMENSIONS          (50, 50);
 
     Player::Player() {
+        color = Color::BLUE;
         dimensions = DIMENSIONS;
         pos.x = X_POSITION;
         pos.y = 500; // TODO: remove this, only here to test falling
@@ -63,7 +64,7 @@ namespace game {
     }
 
     void Player::draw() const {
-        graphics::drawRect(dimensions, pos.round());
+        graphics::drawRect(dimensions, pos.round(), color);
     }
 
 }

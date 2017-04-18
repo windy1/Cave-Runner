@@ -1,4 +1,5 @@
 #include "Barrier.h"
+#include "../graphics/graphics.h"
 
 namespace game {
 
@@ -8,12 +9,12 @@ namespace game {
     Barrier::Barrier(Vector2f pos) : Obstacle::Obstacle(pos) {
     }
 
-    void Barrier::draw() const {
-        // TODO
-    }
-
     string Barrier::getType() const {
         return BARRIER;
+    }
+
+    void Barrier::draw() const {
+        graphics::drawRect(dimensions, pos.round(), color);
     }
 
 }

@@ -35,6 +35,14 @@ namespace game {
         this->dimensions = dimensions;
     }
 
+    Color Entity::getColor() const {
+        return color;
+    }
+
+    void Entity::setColor(Color color) {
+        this->color = color;
+    }
+
     bool Entity::isDead() const {
         return dead;
     }
@@ -50,7 +58,7 @@ namespace game {
 
     void Entity::update() {
         move(velocity.x, velocity.y);
-        if (pos.x < 0) {
+        if (pos.x < -dimensions.x) {
             // remove once off screen
             dead = true;
         }

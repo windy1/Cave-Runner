@@ -10,6 +10,7 @@ namespace graphics {
 
     static int windowId;
 
+    // callback declarations
     static void display();
     static void onKey(unsigned char key, int x, int y);
     static void onSpecialKey(int key, int x, int y);
@@ -49,6 +50,9 @@ namespace graphics {
         glVertex2i(screenPos.x, screenPos.y);                       // bottom left
         glEnd();
     }
+
+
+    /* callback definitions */
 
     static void display() {
         // initialize
@@ -99,11 +103,6 @@ namespace graphics {
     static void timer(int extra) {
         glutPostRedisplay();
         glutTimerFunc(2, timer, 0);
-    }
-
-    ostream& operator<<(ostream &stream, const Color &color) {
-        stream << "Color(" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << ")";
-        return stream;
     }
 
 }

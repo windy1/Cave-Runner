@@ -4,22 +4,13 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #include "../math.h"
+#include "Color.h"
 
 #else
 #include <GL/glut.h>
 #endif
 
 namespace graphics {
-
-    struct Color {
-        float r;
-        float g;
-        float b;
-        float a;
-
-        friend ostream& operator<<(ostream &stream, const Color &color);
-
-    };
 
     /**
      * Requires: none

@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Score.h"
+#include "../graphics/Color.h"
 
 namespace game {
 

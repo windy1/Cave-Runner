@@ -5,7 +5,13 @@
 
 namespace game {
 
-    vector<entity_ptr> loadLevel(int level, int x);
+    /**
+     * Requires: level > 0
+     * Modifies: the given entity vector
+     * Effects: loads the specified level into the specified entity vector
+     * starting at the specified x-position
+     */
+    void loadLevel(unsigned int level, unsigned int x, vector<entity_ptr> &entities);
 
 }
 

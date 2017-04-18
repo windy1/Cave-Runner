@@ -114,9 +114,10 @@ namespace game {
 
     int testLoadLevel() {
         cout << "**** testLoadLevel() ****" << endl;
-        vector<entity_ptr> entities = loadLevel(1, 100);
+        vector<entity_ptr> entities;
+        loadLevel(1, 100, entities);
         for (int i = 0; i < entities.size(); i++) {
-            cout << entities[i] << endl;
+            cout << *entities[i] << endl;
         }
         return 0;
     }
