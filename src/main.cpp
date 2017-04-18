@@ -2,7 +2,6 @@
 #include "game.h"
 #include "tests.h"
 #include "level_loader.h"
-#include <iostream>
 
 using namespace std;
 
@@ -14,7 +13,6 @@ int main(int argc, char **argv) {
         return game::runTests();
     }
     cout << "Starting..." << endl;
-    Color::initConstants();
     game::loadLevel(1, 500, entities);
     player = make_shared<game::Player>();
     entities.push_back(player);

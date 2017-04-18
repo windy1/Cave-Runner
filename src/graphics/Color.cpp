@@ -19,12 +19,3 @@ ostream& operator<<(ostream &stream, const Color &color) {
     stream << "Color(" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << ")";
     return stream;
 }
-
-void Color::initConstants() {
-    // workaround to fix static initialization order issue
-//    Color::WHITE = {1, 1, 1};
-//    Color::BLACK = {0, 0, 0};
-//    Color::RED = {1, 0, 0};
-//    Color::GREEN = {0, 1, 0};
-//    Color::BLUE = {0, 0, 1};
-}

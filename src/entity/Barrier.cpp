@@ -1,5 +1,4 @@
 #include "Barrier.h"
-#include "../graphics/graphics.h"
 
 namespace game {
 

@@ -26,8 +26,6 @@ struct Color {
 
     friend ostream& operator<<(ostream &stream, const Color &color);
 
-    static void initConstants();
-
 };
 
 
