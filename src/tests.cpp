@@ -50,6 +50,7 @@ namespace game {
         failed += testObstacleScroll();
         failed += testBarrierPointOverlap();
         failed += testBarrierPlayerOverlap();
+        failed += testCollectiblePlayerOverlap();
         failed += testLoadLevel();
         failed += testSaveGame();
         failed += testLoadGame();
@@ -117,7 +118,7 @@ namespace game {
         do {
             player.update();
             cout << player.getPosition() << endl;
-        } while (player.getPosition().y > 0);
+        } while (player.getPosition().y > game::getGroundY());
         return 0;
     }
 
