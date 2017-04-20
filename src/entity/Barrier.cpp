@@ -37,8 +37,30 @@ namespace game {
         return true;
     }
     
+    bool Barrier::isOverlapping(Vector2i point) const {
+        if (isOverlapping(point.x, point.y)) {
+            return true;
+        }
+        return false;
+    }
+    
     bool Barrier::isOverlapping(const Player &player) const {
-        //TODO
-        return true;
+        if (isOverlapping(player.getPosition().x, player.getPosition().y)) {
+            // bottom-left corner of player overlaps barrier
+            return true;
+        }
+        if (isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y)) {
+            // bottom-right corner of player overlaps barrier
+            return true;
+        }
+        if (isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y)) {
+            // top-right corner of player overlaps barrier
+            return true;
+        }
+        if (isOverlapping(player.getPosition().x, player.getPosition().y - player.getDimensions().y)) {
+            // top-left corner of player overlaps barrier
+            return true;
+        }
+        return false;
     }
 }

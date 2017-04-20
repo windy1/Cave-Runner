@@ -3,6 +3,7 @@
 
 #include "Obstacle.h"
 #include "../graphics/graphics.h"
+#include "Player.h"
 
 namespace game {
 
@@ -17,11 +18,26 @@ namespace game {
 
         virtual void draw() const override;
         
-        virtual bool isOverlapping(float xIn, float yIn) const override;
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if barrier overlaps the given coordinates
+         */
+        virtual bool isOverlapping(float xIn, float yIn) const;
         
-        //this is causing an error - will deal with tomorrow morning
-        virtual bool isOverlapping(const Player &player) const override;
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if barrier overlaps the given point
+         */
+        virtual bool isOverlapping(Vector2i point) const;
         
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if barrier overlaps the player
+         */
+        virtual bool isOverlapping(const Player &player) const;
     };
 
 }

@@ -24,6 +24,9 @@ namespace game {
 
     // level_loader.h
     int testLoadLevel();
+    
+    // Barrier.h
+    int testBarrierPointOverlap();
 
     int runTests() {
         cout << "Running tests..." << endl;
@@ -34,6 +37,7 @@ namespace game {
         failed += testPlayerJump();
         failed += testObstacleScroll();
         failed += testLoadLevel();
+        failed += testBarrierPointOverlap();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -120,6 +124,61 @@ namespace game {
             cout << *entities[i] << endl;
         }
         return 0;
+    }
+    
+    int testBarrierPointOverlap() {
+        cout << "**** testBarrierPointOverlap() ****" << endl;
+        Barrier barrier;
+        Vector2f pos(50, 100);
+        barrier.setPosition(pos);
+        barrier.setDimensions(Vector2i(10, 20));
+        int failed = 0;
+        Vector2i overlap_point(55, 90);
+        // barrier overlaps point
+        if (!barrier.isOverlapping(overlap_point)) {
+            cout << "unexpected barrier overlap determination: expect overlapping" << endl;
+            cout << "barrier pos: " << pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "point pos: " << overlap_point << endl;
+            failed++;
+        }
+        Vector2i left_point(10, 90);
+        // point to left of barrier
+        if (barrier.isOverlapping(left_point)) {
+            cout << "unexpected barrier overlap determination: expect left of barrier" << endl;
+            cout << "barrier pos: " << pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "point pos: " << left_point << endl;
+            failed++;
+        }
+        Vector2i right_point(70, 90);
+        // point to right of barrier
+        if (barrier.isOverlapping(right_point)) {
+            cout << "unexpected barrier overlap determination: expect right of barrier" << endl;
+            cout << "barrier pos: " << pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "point pos: " << right_point << endl;
+            failed++;
+        }
+        Vector2i above_point(55, 75);
+        // point above barrier
+        if (barrier.isOverlapping(above_point)) {
+            cout << "unexpected barrier overlap determination: expect above barrier" << endl;
+            cout << "barrier pos: " << pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "point pos: " << above_point << endl;
+            failed++;
+        }
+        Vector2i below_point(55, 110);
+        // point above barrier
+        if (barrier.isOverlapping(below_point)) {
+            cout << "unexpected barrier overlap determination below: expect below barrier" << endl;
+            cout << "barrier pos: " << pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "point pos: " << below_point << endl;
+            failed++;
+        }
+        return failed;
     }
 
 }
