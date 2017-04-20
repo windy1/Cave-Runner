@@ -6,6 +6,7 @@ namespace graphics {
 
     static const char KEY_SPACE     = ' ';
     static const char KEY_ESCAPE    = 27;
+    static const char KEY_QUIT      = 'q';
 
     static const Vector2i   WINDOW_DIMEN            (900, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
@@ -97,6 +98,10 @@ namespace graphics {
                 break;
             case KEY_ESCAPE:
                 game::setPaused(!game::isPaused());
+                break;
+            case KEY_QUIT:
+                glutDestroyWindow(windowId);
+                exit(0);
                 break;
             default:
                 break;
