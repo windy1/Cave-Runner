@@ -27,6 +27,7 @@ namespace game {
     
     // Barrier.h
     int testBarrierPointOverlap();
+    int testBarrierPlayerOverlap();
 
     int runTests() {
         cout << "Running tests..." << endl;
@@ -38,6 +39,7 @@ namespace game {
         failed += testObstacleScroll();
         failed += testLoadLevel();
         failed += testBarrierPointOverlap();
+        failed += testBarrierPlayerOverlap();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -176,6 +178,58 @@ namespace game {
             cout << "barrier pos: " << pos << endl;
             cout << "barrier dimensions: " << barrier.getDimensions() << endl;
             cout << "point pos: " << below_point << endl;
+            failed++;
+        }
+        return failed;
+    }
+    
+    int testBarrierPlayerOverlap() {
+        cout << "**** testBarrierPlayerOverlap() ****" << endl;
+        Barrier barrier;
+        Vector2f barrier_pos(50, 100);
+        barrier.setPosition(barrier_pos);
+        barrier.setDimensions(Vector2i(10, 20)); //barrier points [(50,100), (60,100), (50, 80), (60,80)]
+        int failed = 0;
+        Player player;
+        player.setDimensions(Vector2i(5, 5));
+        player.setPosition(Vector2f(58, 82));
+        // barrier overlaps bottom-left corner of player
+        if (!barrier.isOverlapping(player)) {
+            cout << "unexpected barrier overlap determination: expect overlapping" << endl;
+            cout << "barrier pos: " << barrier_pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(48, 82));
+        // barrier overlaps bottom-right corner of player
+        if (!barrier.isOverlapping(player)) {
+            cout << "unexpected barrier overlap determination: expect overlapping" << endl;
+            cout << "barrier pos: " << barrier_pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(48, 102));
+        // barrier overlaps top-right corner of player
+        if (!barrier.isOverlapping(player)) {
+            cout << "unexpected barrier overlap determination: expect overlapping" << endl;
+            cout << "barrier pos: " << barrier_pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(58, 102));
+        // barrier overlaps top-left corner of player
+        if (!barrier.isOverlapping(player)) {
+            cout << "unexpected barrier overlap determination: expect overlapping" << endl;
+            cout << "barrier pos: " << barrier_pos << endl;
+            cout << "barrier dimensions: " << barrier.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
         return failed;
