@@ -17,10 +17,6 @@ namespace game {
         pos.x = X_POSITION;
         pos.y = 500; // TODO: remove this, only here to test falling
     }
-
-    Score Player::getPlayerScore() const {
-        return playerScore;
-    }
     
     bool Player::hasPowerUp() const {
         return powerUp;
@@ -28,10 +24,6 @@ namespace game {
     
     void Player::setPowerUp(bool newPowerUp) {
         powerUp = newPowerUp;
-    }
-    
-    void Player::updatePlayerScore(int newPlayerPoints) {
-        playerScore.updateScore(newPlayerPoints);
     }
     
     bool Player::jump() {

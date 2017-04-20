@@ -1,4 +1,6 @@
 #include "Coin.h"
+#include "../graphics/graphics.h"
+#include "../game.h"
 
 namespace game {
 
@@ -12,7 +14,7 @@ namespace game {
 
     void Coin::becomeCollected(Player &player) {
         dead = true;
-        player.updatePlayerScore(COIN_VALUE);
+        game::getGameState()->score.updateScore(COIN_VALUE);
     }
 
     void Coin::draw() const {

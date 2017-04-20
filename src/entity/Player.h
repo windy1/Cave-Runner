@@ -9,7 +9,6 @@ namespace game {
 
     class Player : public Entity {
 
-        Score playerScore;
         bool powerUp;
 
     public:
@@ -22,14 +21,10 @@ namespace game {
 
         Player();
 
-        Score getPlayerScore() const;
-
         bool hasPowerUp() const;
         
         void setPowerUp(bool newPowerUp);
         
-        void updatePlayerScore(int newPlayerPoints);
-
         virtual string getType() const override;
 
         /**

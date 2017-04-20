@@ -12,6 +12,7 @@ typedef std::shared_ptr<game::Entity> entity_ptr;
 struct GameState {
     player_ptr          player;
     vector<entity_ptr>  entities;
+    game::Score         score;
     int                 globalX;
     int                 scrollSpeed;
     int                 level;
