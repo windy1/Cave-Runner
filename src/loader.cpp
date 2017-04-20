@@ -11,6 +11,10 @@ namespace game {
 
     static void skipChars(ifstream &file, int amount, char &ch);
 
+    /**
+     * Reads the game state in the given file into the given game state
+     * reference.
+     */
     static bool readGameState(string fileName, GameState &gameState, bool saveFile = false);
 
     /**
@@ -32,8 +36,14 @@ namespace game {
      */
     static void writeEntity(ofstream &out, const entity_ptr &entity);
 
+    /**
+     * Reads the properties of the given game state from the given stream.
+     */
     static bool readProperties(ifstream &in, GameState &gameState, int &lineNum);
 
+    /**
+     * Writes the properties of the given game state to the given stream.
+     */
     static void writeProperties(ofstream &out, const GameState &gameState);
 
     bool loadLevel(int level, GameState &gameState) {
