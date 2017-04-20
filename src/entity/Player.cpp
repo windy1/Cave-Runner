@@ -58,5 +58,26 @@ namespace game {
     void Player::draw() const {
         graphics::drawRect(dimensions, pos.round(), color);
     }
+    
+    bool Player::isOverlapping(float xIn, float yIn) const {
+        //getPosition returns bottom left point of player
+        if (xIn < getPosition().x) {
+            // out of bounds to the left of the rectangle
+            return false;
+        }
+        if (xIn > getPosition().x + getDimensions().x) {
+            // out of bounds to the right of the rectangle
+            return false;
+        }
+        if (yIn < getPosition().y - getDimensions().y) {
+            // out of bounds above the rectangle
+            return false;
+        }
+        if (yIn > getPosition().y) {
+            // out of bounds below the rectangle
+            return false;
+        }
+        return true;
+    }
 
 }

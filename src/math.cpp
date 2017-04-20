@@ -19,6 +19,10 @@ bool Vector2f::operator!=(const Vector2f &other) const {
     return !(*this == other);
 }
 
+float Vector2f::distance(const Vector2f &p1, const Vector2f &p2) const {
+    return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
+}
+
 ostream& operator<<(ostream &stream, const Vector2f &vec2f) {
     stream << "(" << vec2f.x << ", " << vec2f.y << ")";
     return stream;

@@ -44,6 +44,13 @@ namespace game {
         virtual void update() override;
 
         virtual void draw() const override;
+        
+        /*
+        * Requires: nothing
+        * Modifies: nothing
+        * Effects: determines if player overlaps the given coordinates
+        */
+        virtual bool isOverlapping(float xIn, float yIn) const;
 
     };
 
