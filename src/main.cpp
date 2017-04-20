@@ -1,21 +1,26 @@
 #include "graphics/graphics.h"
 #include "game.h"
 #include "tests.h"
-#include "level_loader.h"
+#include "loader.h"
 
 using namespace std;
 
-player_ptr player;
-vector<entity_ptr> entities;
+GameState gameState;
 
 int main(int argc, char **argv) {
     if (argc > 1 && strcmp(*argv, "--tests")) {
         return game::runTests();
     }
     cout << "Starting..." << endl;
-    game::loadLevel(1, 500, entities);
-    player = make_shared<game::Player>();
-    entities.push_back(player);
+    gameState.player = make_shared<game::Player>();
+    gameState.entities.push_back(gameState.player);
+    gameState.globalX = 500;
+    gameState.scrollSpeed = 1;
+    gameState.level = 1;
+    game::loadLevel(1, gameState);
+    for (int i = 0; i < gameState.entities.size(); i++) {
+        cout << *gameState.entities[i] << endl;
+    }
     graphics::init(argc, argv);
     return 0;
 }
@@ -23,8 +28,10 @@ int main(int argc, char **argv) {
 namespace game {
 
     void update() {
-        updateEntities(entities);
-        drawEntities(entities);
+        gameState.globalX += gameState.scrollSpeed;
+        //cout << "gx = " << gameState.globalX << endl;
+        updateEntities(gameState.entities);
+        drawEntities(gameState.entities);
     }
 
     void updateEntities(vector<entity_ptr> &entities) {
@@ -49,7 +56,15 @@ namespace game {
     }
 
     player_ptr getPlayer() {
-        return player;
+        return gameState.player;
+    }
+
+    GameState* getGameState() {
+        return &gameState;
+    }
+
+    void setGameState(GameState gs) {
+        gameState = gs;
     }
 
 }

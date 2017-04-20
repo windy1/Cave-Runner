@@ -9,6 +9,14 @@
 typedef std::shared_ptr<game::Player> player_ptr;
 typedef std::shared_ptr<game::Entity> entity_ptr;
 
+struct GameState {
+    player_ptr          player;
+    vector<entity_ptr>  entities;
+    int                 globalX;
+    int                 scrollSpeed;
+    int                 level;
+};
+
 namespace game {
 
     /**
@@ -17,6 +25,20 @@ namespace game {
      * Effects: returns the player
      */
     player_ptr getPlayer();
+
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the current game state
+     */
+    GameState* getGameState();
+
+    /**
+     * Requires: none
+     * Modifies: the global game state
+     * Effects: sets the global game state
+     */
+    void setGameState(GameState gameState);
 
     /**
      * Requires: none

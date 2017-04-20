@@ -1,11 +1,10 @@
 #include "Collectible.h"
+#include "../game.h"
 
 namespace game {
-    
-    const float Collectible::SCROLL_VELOCITY = -1;
-    
+
     Collectible::Collectible() {
-        velocity.x = SCROLL_VELOCITY;
+        velocity.x = -game::getGameState()->scrollSpeed;
     }
     
     Collectible::Collectible(Vector2f pos) : Collectible::Collectible() {

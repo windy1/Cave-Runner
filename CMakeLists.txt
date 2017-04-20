@@ -22,7 +22,7 @@ set(SOURCE_FILES
         src/math.cpp
         src/entity/Barrier.cpp src/entity/Barrier.h
         src/entity/Score.h src/entity/Score.cpp
-        src/level_loader.cpp src/level_loader.h
+        src/loader.cpp src/loader.h
         src/graphics/Color.cpp src/graphics/Color.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})

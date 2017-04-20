@@ -2,7 +2,7 @@
 #include "game.h"
 #include "entity/Coin.h"
 #include "entity/Barrier.h"
-#include "level_loader.h"
+#include "loader.h"
 #include <iostream>
 
 using namespace std;
@@ -22,24 +22,33 @@ namespace game {
     // Obstacle.h
     int testObstacleScroll();
 
-    // level_loader.h
+    // loader.h
     int testLoadLevel();
-    
+    int testSaveGame();
+    int testLoadGame();
+
     // Barrier.h
     int testBarrierPointOverlap();
     int testBarrierPlayerOverlap();
 
     int runTests() {
         cout << "Running tests..." << endl;
+        GameState testState;
+        testState.globalX = 500;
+        testState.scrollSpeed = 1;
+        testState.level = 1;
+        game::setGameState(testState);
         int failed = 0;
         failed += testUpdateEntities();
         failed += testEntityPosition();
         failed += testEntityVelocity();
         failed += testPlayerJump();
         failed += testObstacleScroll();
-        failed += testLoadLevel();
         failed += testBarrierPointOverlap();
         failed += testBarrierPlayerOverlap();
+        failed += testLoadLevel();
+        failed += testSaveGame();
+        failed += testLoadGame();
         cout << "Done [failed " << failed << " tests]" << endl;
         return failed;
     }
@@ -115,16 +124,6 @@ namespace game {
             barrier.update();
             cout << barrier.getPosition() << endl;
         } while (barrier.getPosition().x > 0);
-        return 0;
-    }
-
-    int testLoadLevel() {
-        cout << "**** testLoadLevel() ****" << endl;
-        vector<entity_ptr> entities;
-        loadLevel(1, 100, entities);
-        for (int i = 0; i < entities.size(); i++) {
-            cout << *entities[i] << endl;
-        }
         return 0;
     }
     
@@ -233,6 +232,38 @@ namespace game {
             failed++;
         }
         return failed;
+    }
+
+    int testLoadLevel() {
+        cout << "**** testLoadLevel() ****" << endl;
+        loadLevel(1, *game::getGameState());
+        vector<entity_ptr> *entities = &game::getGameState()->entities;
+        for (int i = 0; i < entities->size(); i++) {
+            cout << *(*entities)[i] << endl;
+        }
+        return 0;
+    }
+
+    int testSaveGame() {
+        cout << "**** testSaveGame() ****" << endl;
+        if (!saveGame(*game::getGameState())) {
+            return 1;
+        }
+        return 0;
+    }
+
+    int testLoadGame() {
+        cout << "**** testLoadGame() ****" << endl;
+        GameState loadedState;
+        if (!loadGame(loadedState)) {
+            return 1;
+        }
+        for (int i = 0; i < loadedState.entities.size(); i++) {
+            cout << *loadedState.entities[i] << endl;
+        }
+        cout << "globalX = " << loadedState.globalX << endl;
+        cout << "scrollSpeed = " << loadedState.scrollSpeed << endl;
+        return 0;
     }
 
 }

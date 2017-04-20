@@ -1,11 +1,10 @@
 #include "Obstacle.h"
+#include "../game.h"
 
 namespace game {
 
-    const float Obstacle::SCROLL_VELOCITY = -1;
-
     Obstacle::Obstacle() {
-        velocity.x = SCROLL_VELOCITY;
+        velocity.x = -game::getGameState()->scrollSpeed;
     }
 
     Obstacle::Obstacle(Vector2f pos) : Obstacle::Obstacle() {
