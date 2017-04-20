@@ -16,7 +16,12 @@ namespace game {
         virtual string getType() const override;
 
         virtual void draw() const override;
-
+        
+        virtual bool isOverlapping(float xIn, float yIn) const override;
+        
+        //this is causing an error - will deal with tomorrow morning
+        virtual bool isOverlapping(const Player &player) const override;
+        
     };
 
 }

@@ -76,6 +76,9 @@ namespace graphics {
             case ' ':
                 game::getPlayer()->jump();
                 break;
+            case 27:
+                glutDestroyWindow(windowId);
+                exit(0);
             default:
                 break;
         }

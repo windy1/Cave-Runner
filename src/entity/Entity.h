@@ -3,6 +3,7 @@
 
 #include "../math.h"
 #include "../graphics/Color.h"
+class Player;
 
 namespace game {
 
@@ -120,9 +121,25 @@ namespace game {
         /**
          * Requires: nothing
          * Modifies: nothing
-         * Effects: draws this entity to the screen
+         * Effects: draws this entity to the screen - pure virtual
          */
         virtual void draw() const = 0;
+        
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if entity overlaps the given point - pure virtual
+         */
+        //TODO actually make this pure virtual
+        virtual bool isOverlapping(float xIn, float yIn) const;
+        
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if entity overlaps the player - pure virtual
+         */
+        //TODO actually make this pure virtual
+        virtual bool isOverlapping(const Player &player) const;
 
         friend ostream& operator<<(ostream &stream, const Entity &entity);
 
