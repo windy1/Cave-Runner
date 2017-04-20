@@ -19,6 +19,22 @@ bool Vector2f::operator!=(const Vector2f &other) const {
     return !(*this == other);
 }
 
+Vector2f Vector2f::operator+(const Vector2f &other) const {
+    return Vector2f(x + other.x, y + other.y);
+}
+
+Vector2f Vector2f::operator-(const Vector2f &other) const {
+    return Vector2f(x - other.x, y - other.y);
+}
+
+Vector2f Vector2f::operator*(const Vector2f &other) const {
+    return Vector2f(x * other.x, y * other.y);
+}
+
+Vector2f Vector2f::operator/(const Vector2f &other) const {
+    return Vector2f(x / other.x, y / other.y);
+}
+
 ostream& operator<<(ostream &stream, const Vector2f &vec2f) {
     stream << "(" << vec2f.x << ", " << vec2f.y << ")";
     return stream;
@@ -36,6 +52,22 @@ bool Vector2i::operator==(const Vector2i &other) const {
 
 bool Vector2i::operator!=(const Vector2i &other) const {
     return !(*this == other);
+}
+
+Vector2i Vector2i::operator+(const Vector2i &other) const {
+    return Vector2i(x + other.x, y + other.y);
+}
+
+Vector2i Vector2i::operator-(const Vector2i &other) const {
+    return Vector2i(x - other.x, y - other.y);
+}
+
+Vector2i Vector2i::operator*(const Vector2i &other) const {
+    return Vector2i(x * other.x, y * other.y);
+}
+
+Vector2i Vector2i::operator/(const Vector2i &other) const {
+    return Vector2i(x / other.x, y / other.y);
 }
 
 ostream& operator<<(ostream &stream, const Vector2i &vec2i) {

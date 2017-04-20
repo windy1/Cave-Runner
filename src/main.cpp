@@ -2,6 +2,7 @@
 #include "game.h"
 #include "tests.h"
 #include "loader.h"
+#include "entity/Torch.h"
 
 using namespace std;
 
@@ -30,6 +31,10 @@ namespace game {
 
     void update() {
         gameState.globalX += gameState.scrollSpeed;
+        if (gameState.globalX % 300 == 0) {
+            cout << "adding torch" << endl;
+            gameState.entities.push_back(make_shared<Torch>());
+        }
         //cout << "gx = " << gameState.globalX << endl;
         updateEntities(gameState.entities);
     }

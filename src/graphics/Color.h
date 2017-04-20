@@ -14,6 +14,8 @@ struct Color {
     static const Color BLUE;
     static const Color SAND;
     static const Color SAND_DARK;
+    static const Color BROWN;
+    static const Color ORANGE;
 
     float r;
     float g;

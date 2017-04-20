@@ -75,6 +75,10 @@ namespace graphics {
         glEnd();
     }
 
+    Vector2i getWindowDimensions() {
+        return WINDOW_DIMEN;
+    }
+
     /* callback definitions */
 
     static void display() {
