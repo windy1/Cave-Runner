@@ -35,8 +35,9 @@ namespace game {
         cout << "Running tests..." << endl;
         GameState testState;
         testState.globalX = 500;
-        testState.scrollSpeed = 1;
-        testState.level = 1;
+        testState.scrollSpeed = 42;
+        testState.level = 13;
+        testState.score.updateScore(1337);
         game::setGameState(testState);
         int failed = 0;
         failed += testUpdateEntities();
@@ -263,6 +264,8 @@ namespace game {
         }
         cout << "globalX = " << loadedState.globalX << endl;
         cout << "scrollSpeed = " << loadedState.scrollSpeed << endl;
+        cout << "level = " << loadedState.level << endl;
+        cout << "score = " << loadedState.score.getScore() << endl;
         return 0;
     }
 

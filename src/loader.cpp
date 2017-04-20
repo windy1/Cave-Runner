@@ -11,7 +11,7 @@ namespace game {
 
     static void skipChars(ifstream &file, int amount, char &ch);
 
-    static bool readGameState(string fileName, GameState &gameState);
+    static bool readGameState(string fileName, GameState &gameState, bool saveFile = false);
 
     /**
      * Reads the next entity in the stream into the given ptr. Returns true if
@@ -71,41 +71,14 @@ namespace game {
     }
 
     bool loadGame(GameState &gameState) {
-        ifstream file(FILE_SAVE);
-        if (!file) {
-            cerr << "Error: Could not open save file." << endl;
+        if (!readGameState(FILE_SAVE, gameState, true)) {
+            cerr << "Error: Could not open save file" << endl;
             return false;
         }
-
-        string ln;
-        int lineNum = 1;
-        bool success = true;
-        while (getline(file, ln)) {
-            if (ln == SECTION_ENTITIES) {
-                // read entity section
-                success = readEntities(file, gameState.entities, lineNum, ln);
-                if (!success) {
-                    break;
-                }
-
-                // done reading entities, check for properties
-                if (ln == SECTION_PROPERTIES) {
-                    success = readProperties(file, gameState, lineNum);
-                    if (!success) {
-                        break;
-                    }
-                }
-            }
-        }
-
-        file.close();
-        if (!success) {
-            cerr << " (failed on line " << lineNum << ")" << endl;
-        }
-        return success;
+        return true;
     }
 
-    static bool readGameState(string fileName, GameState &gameState) {
+    static bool readGameState(string fileName, GameState &gameState, bool saveFile) {
         // get file handle
         ifstream file(fileName);
         if (!file) {
@@ -128,6 +101,21 @@ namespace game {
                     success = readProperties(file, gameState, lineNum);
                     if (!success) {
                         break;
+                    }
+
+                    if (saveFile) {
+                        getline(file, ln);
+                        lineNum++;
+                        char ch;
+                        skipChars(file, 6, ch);
+                        int score = -1;
+                        file >> score;
+                        cout << "s = " << score << endl;
+                        if (gameState.score.getScore() == -1) {
+                            cerr << "Error: Could not read score";
+                            return false;
+                        }
+                        gameState.score.updateScore(score);
                     }
                 }
             }
@@ -231,6 +219,7 @@ namespace game {
     static bool readProperties(ifstream &in, GameState &gameState, int &lineNum) {
         gameState.globalX = -1;
         gameState.scrollSpeed = -1;
+        gameState.level = -1;
         char ch;
         string ln;
 
@@ -249,6 +238,15 @@ namespace game {
             cerr << "Error: Could not read scrollSpeed";
             return false;
         }
+        getline(in, ln);
+        lineNum++;
+
+        skipChars(in, 6, ch);
+        in >> gameState.level;
+        if (gameState.level == -1) {
+            cerr << "Error: Could not read level";
+            return false;
+        }
 
         return true;
     }
@@ -257,6 +255,7 @@ namespace game {
         out << "globalX=" << gameState.globalX << endl;
         out << "scrollSpeed=" << gameState.scrollSpeed << endl;
         out << "level=" << gameState.level << endl;
+        out << "score=" << gameState.score.getScore() << endl;
     }
 
     static void skipChars(ifstream &file, int amount, char &ch) {
