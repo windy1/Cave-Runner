@@ -5,6 +5,8 @@ const Color Color::BLACK(0, 0, 0);
 const Color Color::RED(1, 0, 0);
 const Color Color::GREEN(0, 1, 0);
 const Color Color::BLUE(0, 0, 1);
+const Color Color::SAND(0.761, 0.698, 0.502);
+const Color Color::SAND_DARK(0.4627, 0.4, 0.2039);
 
 Color::Color() {
 }

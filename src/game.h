@@ -41,9 +41,26 @@ namespace game {
      */
     void setGameState(GameState gameState);
 
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns true if the game is paused
+     */
     bool isPaused();
 
+    /**
+     * Requires: none
+     * Modifies: paused state
+     * Effects: sets whether the game is paused
+     */
     void setPaused(bool paused);
+
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the ground y-position
+     */
+    int getGroundY();
 
     /**
      * Requires: none

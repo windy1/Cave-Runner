@@ -40,4 +40,3 @@ namespace game {
 
 
 #endif //CS_120_FINAL_PROJECT_SCORE_H
-
