@@ -3,12 +3,13 @@
 
 namespace game {
 
-    const string Entity::BARRIER = "barrier";
-    const string Entity::COIN = "coin";
+    const string Entity::BARRIER        = "barrier";
+    const string Entity::COIN           = "coin";
     const string Entity::GRAPPLING_HOOK = "grapplingHook";
-    const string Entity::PLAYER = "player";
-    const string Entity::POWER_UP = "powerUp";
-    const string Entity::SCORE = "score";
+    const string Entity::PLAYER         = "player";
+    const string Entity::POWER_UP       = "powerUp";
+    const string Entity::SCORE          = "score";
+    const string Entity::TORCH          = "torch";
 
     Vector2f Entity::getPosition() const {
         return pos;

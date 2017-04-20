@@ -34,6 +34,8 @@ namespace graphics {
      */
     void drawCircle(const Vector2i &dimen, const Vector2i &center, const Color &color = {1, 1, 1, 1});
 
+    Vector2i getWindowDimensions();
+
 }
 
 #endif //CS_120_FINAL_PROJECT_GRAPHICS_H

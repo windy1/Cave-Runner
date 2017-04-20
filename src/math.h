@@ -18,6 +18,14 @@ struct Vector2i {
 
     bool operator!=(const Vector2i &other) const;
 
+    Vector2i operator+(const Vector2i &other) const;
+
+    Vector2i operator-(const Vector2i &other) const;
+
+    Vector2i operator*(const Vector2i &other) const;
+
+    Vector2i operator/(const Vector2i &other) const;
+
     friend ostream& operator<<(ostream& stream, const Vector2i &vec2i);
 
 };
@@ -38,6 +46,14 @@ struct Vector2f {
     bool operator!=(const Vector2f &other) const;
     
     static float distance(const Vector2f &p1, const Vector2f &p2);
+
+    Vector2f operator+(const Vector2f &other) const;
+
+    Vector2f operator-(const Vector2f &other) const;
+
+    Vector2f operator*(const Vector2f &other) const;
+
+    Vector2f operator/(const Vector2f &other) const;
 
     friend ostream& operator<<(ostream& stream, const Vector2f &vec2f);
 

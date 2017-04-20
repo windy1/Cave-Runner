@@ -1,5 +1,6 @@
 #include "loader.h"
 #include "entity/Barrier.h"
+#include "entity/Coin.h"
 #include <fstream>
 #include <cassert>
 
@@ -159,6 +160,8 @@ namespace game {
         in >> entityName;
         if (entityName == Entity::BARRIER) {
             entity = make_shared<Barrier>();
+        } else if (entityName == Entity::COIN) {
+            entity = make_shared<Coin>();
         } else if (entityName == "" || entityName[0] == '[') {
             ln = entityName;
             return true;

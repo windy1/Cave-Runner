@@ -24,6 +24,7 @@ namespace game {
         static const string PLAYER;
         static const string POWER_UP;
         static const string SCORE;
+        static const string TORCH;
 
         /**
          * Requires: nothing

@@ -19,8 +19,25 @@ bool Vector2f::operator!=(const Vector2f &other) const {
     return !(*this == other);
 }
 
+<<<<<<< HEAD
 float Vector2f::distance(const Vector2f &p1, const Vector2f &p2) const {
     return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
+=======
+Vector2f Vector2f::operator+(const Vector2f &other) const {
+    return Vector2f(x + other.x, y + other.y);
+}
+
+Vector2f Vector2f::operator-(const Vector2f &other) const {
+    return Vector2f(x - other.x, y - other.y);
+}
+
+Vector2f Vector2f::operator*(const Vector2f &other) const {
+    return Vector2f(x * other.x, y * other.y);
+}
+
+Vector2f Vector2f::operator/(const Vector2f &other) const {
+    return Vector2f(x / other.x, y / other.y);
+>>>>>>> 31f3d35bc6ed4fd3acc5db239486303f044e3df2
 }
 
 ostream& operator<<(ostream &stream, const Vector2f &vec2f) {
@@ -40,6 +57,22 @@ bool Vector2i::operator==(const Vector2i &other) const {
 
 bool Vector2i::operator!=(const Vector2i &other) const {
     return !(*this == other);
+}
+
+Vector2i Vector2i::operator+(const Vector2i &other) const {
+    return Vector2i(x + other.x, y + other.y);
+}
+
+Vector2i Vector2i::operator-(const Vector2i &other) const {
+    return Vector2i(x - other.x, y - other.y);
+}
+
+Vector2i Vector2i::operator*(const Vector2i &other) const {
+    return Vector2i(x * other.x, y * other.y);
+}
+
+Vector2i Vector2i::operator/(const Vector2i &other) const {
+    return Vector2i(x / other.x, y / other.y);
 }
 
 ostream& operator<<(ostream &stream, const Vector2i &vec2i) {

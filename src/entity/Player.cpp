@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../graphics/graphics.h"
+#include "../game.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ namespace game {
         color = Color::BLUE;
         dimensions = DIMENSIONS;
         pos.x = X_POSITION;
-        pos.y = 500; // TODO: remove this, only here to test falling
+        pos.y = game::getGroundY(); // TODO: remove this, only here to test falling
     }
     
     bool Player::hasPowerUp() const {
@@ -27,7 +28,7 @@ namespace game {
     }
     
     bool Player::jump() {
-        if (pos.y == 0 && velocity.y == 0) {
+        if (pos.y == game::getGroundY() && velocity.y == 0) {
             // start jumping
             velocity.y = JUMP_VELOCITY;
             return true;
@@ -41,12 +42,13 @@ namespace game {
 
     void Player::update() {
         Entity::update();
-        if (pos.y > 0 && velocity.y > TERM_VELOCITY) {
+        int groundY = game::getGroundY();
+        if (pos.y > groundY && velocity.y > TERM_VELOCITY) {
             // apply gravity
             velocity.y = max(velocity.y - GRAVITY, TERM_VELOCITY);
-        } else if (pos.y <= 0) {
+        } else if (pos.y <= groundY) {
             // hit ground
-            pos.y = 0;
+            pos.y = groundY;
             velocity.y = 0;
         }
     }
