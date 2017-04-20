@@ -53,6 +53,8 @@ struct Vector2f {
     
     Vector2f operator/(const Vector2f &other) const;
     
+    static float distance(const Vector2f &p1, const Vector2f &p2);
+    
     friend ostream& operator<<(ostream& stream, const Vector2f &vec2f);
     
 };
