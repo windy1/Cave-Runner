@@ -50,7 +50,20 @@ namespace graphics {
         glVertex2i(screenPos.x, screenPos.y);                       // bottom left
         glEnd();
     }
-
+    
+    void drawCirc(const Vector2i &dimen, const Vector2i &center, const Color &color) {
+        // dimen = (radius, number of points for triangle fan)
+        assert(dimen.x >= 0 && dimen.y >= 0);
+        int radius = dimen.x;
+        glBegin(GL_TRIANGLE_FAN);
+        glColor4f(color.r, color.g, color.b, color.a);
+        glVertex2i(center.x, center.y);
+        for (int i=0; i<=dimen.y; i++) {
+            double radians = i * M_PI / 180.0;
+            glVertex2i(center.x + radius * cos(radians), center.y + radius * sin(radians));
+        }
+        glEnd();
+    }
 
     /* callback definitions */
 

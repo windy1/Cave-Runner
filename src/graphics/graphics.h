@@ -5,6 +5,7 @@
 #include <GLUT/glut.h>
 #include "../math.h"
 #include "Color.h"
+#include <cmath>
 
 #else
 #include <GL/glut.h>
@@ -25,6 +26,13 @@ namespace graphics {
      * Modifies: the window buffer
      */
     void drawRect(const Vector2i &dimen, const Vector2i &pos, const Color &color = {1, 1, 1, 1});
+    
+    /**
+     * Requires: dimen's x (radius) and y (numb pts for tri fan) are both non-negative
+     * Effects: draws a circle with the given radius and num tri fan pts, center, and color
+     * Modifies: the window buffer
+     */
+    void drawCirc(const Vector2i &dimen, const Vector2i &center, const Color &color = {1, 1, 1, 1});
 
 }
 

@@ -18,7 +18,7 @@ namespace game {
     }
 
     void PowerUp::draw() const {
-        // TODO
+        graphics::drawCirc(dimensions, pos.round(), color);
     }
 
 }

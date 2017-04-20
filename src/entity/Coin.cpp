@@ -16,7 +16,7 @@ namespace game {
     }
 
     void Coin::draw() const {
-        // TODO
+        graphics::drawCirc(dimensions, pos.round(), color);
     }
 
     string Coin::getType() const {
