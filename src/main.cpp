@@ -6,6 +6,7 @@
 using namespace std;
 
 GameState gameState;
+bool paused = false;
 
 int main(int argc, char **argv) {
     if (argc > 1 && strcmp(*argv, "--tests")) {
@@ -31,6 +32,9 @@ namespace game {
         gameState.globalX += gameState.scrollSpeed;
         //cout << "gx = " << gameState.globalX << endl;
         updateEntities(gameState.entities);
+    }
+
+    void draw() {
         drawEntities(gameState.entities);
     }
 
@@ -61,6 +65,14 @@ namespace game {
 
     GameState* getGameState() {
         return &gameState;
+    }
+
+    bool isPaused() {
+        return paused;
+    }
+
+    void setPaused(bool p) {
+        paused = p;
     }
 
     void setGameState(GameState gs) {

@@ -4,6 +4,9 @@
 
 namespace graphics {
 
+    static const char KEY_SPACE     = ' ';
+    static const char KEY_ESCAPE    = 27;
+
     static const Vector2i   WINDOW_DIMEN            (900, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
     static const Color      BACKGROUND_COLOR    =   {0, 0, 0, 1};
@@ -51,7 +54,7 @@ namespace graphics {
         glEnd();
     }
     
-    void drawCirc(const Vector2i &dimen, const Vector2i &center, const Color &color) {
+    void drawCircle(const Vector2i &dimen, const Vector2i &center, const Color &color) {
         // dimen = (radius, number of points for triangle fan)
         assert(dimen.x >= 0 && dimen.y >= 0);
         int radius = dimen.x;
@@ -77,7 +80,10 @@ namespace graphics {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         // draw stuff
-        game::update();
+        if (!game::isPaused()) {
+            game::update();
+        }
+        game::draw();
 
         // finished
         glFlush();
@@ -86,12 +92,12 @@ namespace graphics {
     static void onKey(unsigned char key, int x, int y) {
         cout << "Key: " << key << " " << Vector2i(x, y) << endl;
         switch (key) {
-            case ' ':
+            case KEY_SPACE:
                 game::getPlayer()->jump();
                 break;
-            case 27:
-                glutDestroyWindow(windowId);
-                exit(0);
+            case KEY_ESCAPE:
+                game::setPaused(!game::isPaused());
+                break;
             default:
                 break;
         }

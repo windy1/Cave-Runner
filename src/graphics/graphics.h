@@ -32,7 +32,7 @@ namespace graphics {
      * Effects: draws a circle with the given radius and num tri fan pts, center, and color
      * Modifies: the window buffer
      */
-    void drawCirc(const Vector2i &dimen, const Vector2i &center, const Color &color = {1, 1, 1, 1});
+    void drawCircle(const Vector2i &dimen, const Vector2i &center, const Color &color = {1, 1, 1, 1});
 
 }
 

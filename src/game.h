@@ -41,12 +41,23 @@ namespace game {
      */
     void setGameState(GameState gameState);
 
+    bool isPaused();
+
+    void setPaused(bool paused);
+
     /**
      * Requires: none
-     * Modifies: updates and draws game entities
+     * Modifies: updates game elements
      * Effects: game entities
      */
     void update();
+
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: draws game elements
+     */
+    void draw();
 
     /**
      * Requires: a vector of entities
