@@ -29,7 +29,7 @@ namespace game {
             // x is in collectible's x-range
             (x1 >= getPosition().x - getDimensions().x) && (x1 <= getPosition().x + getDimensions().x) &&
             // center of collectible is in between y1 and y2
-            ((getPosition().x > y1) == (getPosition().y < y2))) {
+            ((getPosition().y > y1) == (getPosition().y < y2))) {
             return true;
         }
         // horizontal line segment

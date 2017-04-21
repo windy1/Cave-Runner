@@ -248,6 +248,17 @@ namespace game {
         int failed = 0;
         Player player;
         player.setDimensions(Vector2i(5, 5));
+        // center of collectible overlaps player
+        player.setPosition(Vector2f(48, 102));
+        if (!collectible.isOverlapping(player)) {
+            cout << "unexpected collectible overlap determination: expect overlapping" << endl;
+            cout << "collectible pos: " << collectible_pos << endl;
+            cout << "collectible dimensions: " << collectible.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        // collectible overlaps corner of player
         player.setPosition(Vector2f(50, 100));
         // bottom-left corner of player
         if (!collectible.isOverlapping(player)) {
@@ -280,6 +291,47 @@ namespace game {
         }
         player.setPosition(Vector2f(50, 104.5));
         // top-left corner of player
+        if (!collectible.isOverlapping(player)) {
+            cout << "unexpected collectible overlap determination: expect overlapping" << endl;
+            cout << "collectible pos: " << collectible_pos << endl;
+            cout << "collectible dimensions: " << collectible.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        // collectible overlaps edge of player
+        player.setPosition(Vector2f(42.5, 102));
+        // right edge of player
+        if (!collectible.isOverlapping(player)) {
+            cout << "unexpected collectible overlap determination: expect overlapping" << endl;
+            cout << "collectible pos: " << collectible_pos << endl;
+            cout << "collectible dimensions: " << collectible.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(52.5, 102));
+        // left edge of player
+        if (!collectible.isOverlapping(player)) {
+            cout << "unexpected collectible overlap determination: expect overlapping" << endl;
+            cout << "collectible pos: " << collectible_pos << endl;
+            cout << "collectible dimensions: " << collectible.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(47.5, 97.5));
+        // bottom edge of player
+        if (!collectible.isOverlapping(player)) {
+            cout << "unexpected collectible overlap determination: expect overlapping" << endl;
+            cout << "collectible pos: " << collectible_pos << endl;
+            cout << "collectible dimensions: " << collectible.getDimensions() << endl;
+            cout << "player pos: " << player.getPosition() << endl;
+            cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        player.setPosition(Vector2f(47.5, 107.5));
+        // top edge of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
             cout << "collectible pos: " << collectible_pos << endl;
