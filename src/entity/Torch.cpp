@@ -19,7 +19,7 @@ namespace game {
     }
 
     void Torch::draw() const {
-        Vector2i pos2i = ((Vector2f) pos).round();
+        Vector2i pos2i = Vector2f(pos).round();
         graphics::drawRect(HANDLE_DIMEN, pos2i, Color::BROWN);
         graphics::drawRect(FLAME_DIMEN, pos2i + Vector2i(0, HANDLE_DIMEN.y), Color::ORANGE);
     }

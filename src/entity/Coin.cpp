@@ -18,7 +18,7 @@ namespace game {
     }
 
     void Coin::draw() const {
-        graphics::drawCircle(dimensions, ((Vector2f) pos).round(), color);
+        graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
     string Coin::getType() const {

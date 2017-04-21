@@ -58,7 +58,7 @@ namespace game {
     }
 
     void Player::draw() const {
-        graphics::drawRect(dimensions, static_cast<Vector2f>(pos).round(), color);
+        graphics::drawRect(dimensions, Vector2f(pos).round(), color);
     }
     
     bool Player::isOverlapping(float xIn, float yIn) const {

@@ -13,7 +13,7 @@ namespace game {
     }
 
     void Barrier::draw() const {
-        graphics::drawRect(dimensions, ((Vector2f) pos).round(), color);
+        graphics::drawRect(dimensions, Vector2f(pos).round(), color);
     }
 
     bool Barrier::isOverlapping(float xIn, float yIn) const {
