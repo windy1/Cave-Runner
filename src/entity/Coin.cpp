@@ -9,7 +9,7 @@ namespace game {
     Coin::Coin() : Collectible::Collectible() {
     }
     
-    Coin::Coin(Vector2f pos) : Collectible::Collectible(pos) {
+    Coin::Coin(Vector3f pos) : Collectible::Collectible(pos) {
     }
 
     void Coin::becomeCollected(Player &player) {
@@ -18,7 +18,7 @@ namespace game {
     }
 
     void Coin::draw() const {
-        graphics::drawCircle(dimensions, pos.round(), color);
+        graphics::drawCircle(dimensions, ((Vector2f) pos).round(), color);
     }
 
     string Coin::getType() const {

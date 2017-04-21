@@ -12,6 +12,7 @@ namespace game {
 
     // game.h
     int testUpdateEntities();
+    int testInsertEntity();
 
     // Entity.h
     int testEntityPosition();
@@ -51,6 +52,7 @@ namespace game {
         game::setGameState(testState);
         int failed = 0;
         failed += testUpdateEntities();
+        failed += testInsertEntity();
         failed += testEntityPosition();
         failed += testEntityVelocity();
         failed += testPlayerJump();
@@ -84,10 +86,52 @@ namespace game {
         return 0;
     }
 
+    int testInsertEntity() {
+        cout << "**** testInsertEntity() ****" << endl;
+        int failed = 0;
+        vector<entity_ptr> entities;
+        entity_ptr e1 = make_shared<Barrier>(Vector3f(0, 0, 1));
+        entity_ptr e2 = make_shared<Barrier>(Vector3f(0, 0, 1));
+        entity_ptr e3 = make_shared<Barrier>(Vector3f(0, 0, 0));
+        entity_ptr e4 = make_shared<Barrier>(Vector3f(0, 0, 0));
+        entity_ptr e5 = make_shared<Barrier>(Vector3f(0, 0, 2));
+        insertEntity(e1, entities);
+        insertEntity(e2, entities);
+        insertEntity(e3, entities);
+        insertEntity(e4, entities);
+        insertEntity(e5, entities);
+
+        for (int i = 0; i < entities.size(); i++) {
+            cout << "- " << *entities[i] << endl;
+        }
+
+        if (entities[0] != e3) {
+            cerr << "unexpected entity index for e3" << endl;
+            failed++;
+        }
+        if (entities[1] != e4) {
+            cerr << "unexpected entity index for e4" << endl;
+            failed++;
+        }
+        if (entities[2] != e1) {
+            cerr << "unexpected entity index for e1" << endl;
+            failed++;
+        }
+        if (entities[3] != e2) {
+            cerr << "unexpected entity index for e2" << endl;
+            failed++;
+        }
+        if (entities[4] != e5) {
+            cerr << "unexpected entity index for e5" << endl;
+            failed++;
+        }
+        return failed;
+    }
+
     int testEntityPosition() {
         cout << "**** testEntityPosition() ****" << endl;
         Coin entity;
-        Vector2f pos(0, 0);
+        Vector3f pos(0, 0, 0);
         entity.setPosition(pos);
         int failed = 0;
         if (entity.getPosition() != pos) {
@@ -133,7 +177,7 @@ namespace game {
 
     int testObstacleScroll() {
         cout << "**** testObstacleScroll() ****" << endl;
-        Barrier barrier(Vector2f(100, 50));
+        Barrier barrier(Vector3f(100, 50, 0));
         do {
             barrier.update();
             cout << barrier.getPosition() << endl;
@@ -144,7 +188,7 @@ namespace game {
     int testBarrierPointOverlap() {
         cout << "**** testBarrierPointOverlap() ****" << endl;
         Barrier barrier;
-        Vector2f pos(50, 100);
+        Vector3f pos(50, 100, 0);
         barrier.setPosition(pos);
         barrier.setDimensions(Vector2i(10, 20));
         int failed = 0;
@@ -199,13 +243,13 @@ namespace game {
     int testBarrierPlayerOverlap() {
         cout << "**** testBarrierPlayerOverlap() ****" << endl;
         Barrier barrier;
-        Vector2f barrier_pos(50, 100);
+        Vector3f barrier_pos(50, 100, 0);
         barrier.setPosition(barrier_pos);
         barrier.setDimensions(Vector2i(10, 20)); //barrier points [(50,100), (60,100), (50, 80), (60,80)]
         int failed = 0;
         Player player;
         player.setDimensions(Vector2i(5, 5));
-        player.setPosition(Vector2f(58, 82));
+        player.setPosition(Vector3f(58, 82, 0));
         // barrier overlaps bottom-left corner of player
         if (!barrier.isOverlapping(player)) {
             cout << "unexpected barrier overlap determination: expect overlapping" << endl;
@@ -215,7 +259,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(48, 82));
+        player.setPosition(Vector3f(48, 82, 0));
         // barrier overlaps bottom-right corner of player
         if (!barrier.isOverlapping(player)) {
             cout << "unexpected barrier overlap determination: expect overlapping" << endl;
@@ -225,7 +269,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(48, 102));
+        player.setPosition(Vector3f(48, 102, 0));
         // barrier overlaps top-right corner of player
         if (!barrier.isOverlapping(player)) {
             cout << "unexpected barrier overlap determination: expect overlapping" << endl;
@@ -235,7 +279,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(58, 102));
+        player.setPosition(Vector3f(58, 102, 0));
         // barrier overlaps top-left corner of player
         if (!barrier.isOverlapping(player)) {
             cout << "unexpected barrier overlap determination: expect overlapping" << endl;
@@ -251,14 +295,14 @@ namespace game {
     int testCollectiblePlayerOverlap() {
         cout << "**** testCollectiblePlayerOverlap() ****" << endl;
         Coin collectible;
-        Vector2f collectible_pos(50, 100);
+        Vector3f collectible_pos(50, 100, 0);
         collectible.setPosition(collectible_pos);
         collectible.setDimensions(Vector2i(3, 360)); // radius = 3
         int failed = 0;
         Player player;
         player.setDimensions(Vector2i(5, 5));
         // center of collectible overlaps player
-        player.setPosition(Vector2f(48, 102));
+        player.setPosition(Vector3f(48, 102, 0));
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
             cout << "collectible pos: " << collectible_pos << endl;
@@ -268,7 +312,7 @@ namespace game {
             failed++;
         }
         // collectible overlaps corner of player
-        player.setPosition(Vector2f(50, 100));
+        player.setPosition(Vector3f(50, 100, 0));
         // bottom-left corner of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -278,7 +322,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(46, 100));
+        player.setPosition(Vector3f(46, 100, 0));
         // bottom-right corner of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -288,7 +332,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(48, 104.5));
+        player.setPosition(Vector3f(48, 104.5, 0));
         // top-right corner of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -298,7 +342,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(50, 104.5));
+        player.setPosition(Vector3f(50, 104.5, 0));
         // top-left corner of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -309,7 +353,7 @@ namespace game {
             failed++;
         }
         // collectible overlaps edge of player
-        player.setPosition(Vector2f(42.5, 102));
+        player.setPosition(Vector3f(42.5, 102, 0));
         // right edge of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -319,7 +363,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(52.5, 102));
+        player.setPosition(Vector3f(52.5, 102, 0));
         // left edge of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -329,7 +373,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(47.5, 97.5));
+        player.setPosition(Vector3f(47.5, 97.5, 0));
         // bottom edge of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;
@@ -339,7 +383,7 @@ namespace game {
             cout << "player dimensions: " << player.getDimensions() << endl;
             failed++;
         }
-        player.setPosition(Vector2f(47.5, 107.5));
+        player.setPosition(Vector3f(47.5, 107.5, 0));
         // top edge of player
         if (!collectible.isOverlapping(player)) {
             cout << "unexpected collectible overlap determination: expect overlapping" << endl;

@@ -12,8 +12,9 @@ namespace game {
         // constructors
         
         PowerUp();
-        
-        PowerUp(Vector2f pos);
+
+        // constructor with position parameter
+        PowerUp(Vector3f pos);
 
         // get type
         virtual string getType() const override;

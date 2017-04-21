@@ -7,13 +7,13 @@ namespace game {
     
     Score::Score() {
         score = 0;
-        pos = Vector2f(SCORE_POS_X, SCORE_POS_Y);
+        pos = Vector3f(SCORE_POS_X, SCORE_POS_Y, 0);
         
     }
     
     Score::Score(int startScore){
         score = startScore;
-        pos = Vector2f(SCORE_POS_X, SCORE_POS_Y);
+        pos = Vector3f(SCORE_POS_X, SCORE_POS_Y, 0);
     }
     
     int Score::getScore() const {

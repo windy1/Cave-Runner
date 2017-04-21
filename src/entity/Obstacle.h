@@ -15,7 +15,7 @@ namespace game {
         
         Obstacle();
 
-        Obstacle(Vector2f pos);
+        Obstacle(Vector3f pos);
 
     };
 

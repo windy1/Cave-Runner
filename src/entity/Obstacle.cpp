@@ -7,7 +7,7 @@ namespace game {
         velocity.x = -game::getGameState()->scrollSpeed;
     }
 
-    Obstacle::Obstacle(Vector2f pos) : Obstacle::Obstacle() {
+    Obstacle::Obstacle(Vector3f pos) : Obstacle::Obstacle() {
         this->pos = pos;
     }
 

@@ -5,6 +5,8 @@
 
 using namespace std;
 
+struct Vector3f;
+
 struct Vector2i {
     
     int x = 0;
@@ -38,6 +40,8 @@ struct Vector2f {
     Vector2f();
     
     Vector2f(float x, float y);
+
+    Vector2f(Vector3f vec3f);
     
     Vector2i round() const;
     
@@ -57,6 +61,34 @@ struct Vector2f {
     
     friend ostream& operator<<(ostream& stream, const Vector2f &vec2f);
     
+};
+
+struct Vector3f {
+
+    float x = 0;
+    float y = 0;
+    float z = 0;
+
+    Vector3f();
+
+    Vector3f(float x, float y, float z);
+    
+    Vector3f(Vector2f vec2f, float z);
+
+    bool operator==(const Vector3f &other) const;
+    
+    bool operator!=(const Vector3f &other) const;
+
+    Vector3f operator+(const Vector3f &other) const;
+
+    Vector3f operator-(const Vector3f &other) const;
+
+    Vector3f operator*(const Vector3f &other) const;
+
+    Vector3f operator/(const Vector3f &other) const;
+    
+    friend ostream& operator<<(ostream& stream, const Vector3f &vec2f);
+
 };
 
 Vector2i invertY(const Vector2i &coords, const Vector2i &screenDimen);

@@ -28,6 +28,14 @@ namespace game {
     player_ptr getPlayer();
 
     /**
+     * Requires: non-null entity
+     * Modifies: entity vector
+     * Effects: inserts the entity into the entity vector based on it's
+     * z-position
+     */
+    void insertEntity(entity_ptr entity, vector<entity_ptr> &entities);
+
+    /**
      * Requires: none
      * Modifies: none
      * Effects: returns the current game state

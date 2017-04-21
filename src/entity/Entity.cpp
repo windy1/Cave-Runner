@@ -11,11 +11,11 @@ namespace game {
     const string Entity::SCORE          = "score";
     const string Entity::TORCH          = "torch";
 
-    Vector2f Entity::getPosition() const {
+    Vector3f Entity::getPosition() const {
         return pos;
     }
 
-    void Entity::setPosition(Vector2f pos) {
+    void Entity::setPosition(Vector3f pos) {
         this->pos = pos;
     }
 

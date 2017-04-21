@@ -16,8 +16,9 @@ namespace game {
         // constructors
         
         Collectible();
-        
-        Collectible(Vector2f pos);
+
+        // constructor with position parameter
+        Collectible(Vector3f pos);
 
         /**
          * Requires: the collectible has not been collected already

@@ -18,7 +18,7 @@ namespace game {
     }
 
     void GrapplingHook::draw() const {
-        graphics::drawCircle(dimensions, pos.round(), color);
+        graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
     string GrapplingHook::getType() const {

@@ -9,11 +9,11 @@ namespace game {
     class Entity {
     protected:
 
-        Vector2f pos;
+        Vector3f pos;
         Vector2f velocity;
         Vector2i dimensions;
         Color color = Color::WHITE;
-        bool dead;
+        bool dead = false;
 
     public:
 
@@ -31,14 +31,14 @@ namespace game {
          * Modifies: nothing
          * Effects: returns entity position as Point2D
          */
-        Vector2f getPosition() const;
+        Vector3f getPosition() const;
 
         /**
          * Requires: a position
          * Modifies: the entity's position
          * Effects: sets the position to the supplied Vector2i
          */
-        void setPosition(Vector2f pos);
+        void setPosition(Vector3f pos);
 
         /**
          * Requires: nothing

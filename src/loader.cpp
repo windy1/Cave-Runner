@@ -186,7 +186,7 @@ namespace game {
         entity->setDimensions(dimensions);
 
         // set position
-        Vector2f pos(-1, -1);
+        Vector3f pos(-1, -1, 0);
         skipChars(in, 1, ch);
         in >> pos.x;
         skipChars(in, 1, ch);

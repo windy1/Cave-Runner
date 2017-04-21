@@ -10,6 +10,7 @@ namespace game {
     Torch::Torch() : Entity() {
         pos.y = graphics::getWindowDimensions().y * 0.5f;
         pos.x = graphics::getWindowDimensions().x;
+        pos.z = -1;
         velocity.x = -game::getGameState()->scrollSpeed;
     }
 
@@ -18,8 +19,9 @@ namespace game {
     }
 
     void Torch::draw() const {
-        graphics::drawRect(HANDLE_DIMEN, pos.round(), Color::BROWN);
-        graphics::drawRect(FLAME_DIMEN, pos.round() + Vector2i(0, HANDLE_DIMEN.y), Color::ORANGE);
+        Vector2i pos2i = ((Vector2f) pos).round();
+        graphics::drawRect(HANDLE_DIMEN, pos2i, Color::BROWN);
+        graphics::drawRect(FLAME_DIMEN, pos2i + Vector2i(0, HANDLE_DIMEN.y), Color::ORANGE);
     }
 
 }

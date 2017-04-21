@@ -6,7 +6,7 @@ namespace game {
     PowerUp::PowerUp() : Collectible::Collectible() {
     }
     
-    PowerUp::PowerUp(Vector2f pos) : Collectible::Collectible(pos) {
+    PowerUp::PowerUp(Vector3f pos) : Collectible::Collectible(pos) {
     }
     
     void PowerUp::becomeCollected(Player &player) {
@@ -19,7 +19,7 @@ namespace game {
     }
 
     void PowerUp::draw() const {
-        graphics::drawCircle(dimensions, pos.round(), color);
+        graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
 }

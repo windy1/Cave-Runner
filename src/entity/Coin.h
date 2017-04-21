@@ -15,8 +15,9 @@ namespace game {
         // constructors
         
         Coin();
-        
-        Coin(Vector2f pos);
+
+        // constructor with position parameter
+        Coin(Vector3f pos);
 
         //get type
         virtual string getType() const override;

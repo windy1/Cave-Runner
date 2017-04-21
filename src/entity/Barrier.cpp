@@ -5,7 +5,7 @@ namespace game {
     Barrier::Barrier() : Obstacle::Obstacle() {
     }
 
-    Barrier::Barrier(Vector2f pos) : Obstacle::Obstacle(pos) {
+    Barrier::Barrier(Vector3f pos) : Obstacle::Obstacle(pos) {
     }
 
     string Barrier::getType() const {
@@ -13,7 +13,7 @@ namespace game {
     }
 
     void Barrier::draw() const {
-        graphics::drawRect(dimensions, pos.round(), color);
+        graphics::drawRect(dimensions, ((Vector2f) pos).round(), color);
     }
 
     bool Barrier::isOverlapping(float xIn, float yIn) const {

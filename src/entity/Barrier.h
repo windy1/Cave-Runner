@@ -14,7 +14,7 @@ namespace game {
         
         Barrier();
 
-        Barrier(Vector2f pos);
+        Barrier(Vector3f pos);
 
         // get type
         virtual string getType() const override;
