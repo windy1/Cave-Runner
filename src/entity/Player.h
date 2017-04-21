@@ -19,12 +19,25 @@ namespace game {
         static const float      X_POSITION;
         static const Vector2i   DIMENSIONS;
 
+        // constructors
+        
         Player();
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: checks if player has access to powerup
+         */
         bool hasPowerUp() const;
         
+        /**
+         * Requires: nothing
+         * Modifies: player's powerup access status
+         * Effects: sets player's powerup status
+         */
         void setPowerUp(bool newPowerUp);
         
+        // get type
         virtual string getType() const override;
 
         /**
@@ -41,8 +54,18 @@ namespace game {
          */
         void move(float deltaY);
 
+        /**
+         * Requires: nothing
+         * Modifies: player y velocity, sometimes player y position
+         * Effects: applies gravity to player movement
+         */
         virtual void update() override;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws player as rectangle
+         */
         virtual void draw() const override;
         
         /*

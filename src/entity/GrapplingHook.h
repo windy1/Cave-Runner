@@ -33,9 +33,15 @@ namespace game {
          * Effects: checks if grappling hook is currently being shot
          */
         bool isShot() const;
-
+        
+        // get type
         virtual string getType() const override;
-
+        
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws grappling hook as circle
+         */
         virtual void draw() const override;
 
     };

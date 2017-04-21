@@ -12,12 +12,13 @@ namespace game {
         // coin value (score points)
         static const int COIN_VALUE;
         
-        // default constructor
+        // constructors
+        
         Coin();
         
-        // constructor with position parameter
         Coin(Vector2f pos);
 
+        //get type
         virtual string getType() const override;
         
         /**
@@ -27,6 +28,11 @@ namespace game {
          */
         virtual void becomeCollected(Player &player) override;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws coin as circle
+         */
         virtual void draw() const override;
 
     };

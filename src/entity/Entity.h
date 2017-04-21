@@ -35,7 +35,7 @@ namespace game {
 
         /**
          * Requires: a position
-         * Modifies: the entities position
+         * Modifies: the entity's position
          * Effects: sets the position to the supplied Vector2i
          */
         void setPosition(Vector2f pos);
@@ -43,13 +43,13 @@ namespace game {
         /**
          * Requires: nothing
          * Modifies: nothing
-         * Effects: returns this entities velocity
+         * Effects: returns this entity's velocity
          */
         Vector2f getVelocity() const;
 
         /**
          * Requires: a velocity
-         * Modifies: the entities velocity
+         * Modifies: the entity's velocity
          * Effects: sets the velocity to the supplied Vector2i
          * @param velocity
          */
@@ -58,14 +58,14 @@ namespace game {
         /**
          * Requires: none
          * Modifies: none
-         * Effects: returns the entities width and height in a vector
+         * Effects: returns the entity's width and height in a vector
          */
         Vector2i getDimensions() const;
 
         /**
          * Requires: dimensions x and y are non-negative
-         * Modifies: entities dimensions
-         * Effects: sets the entities dimensions
+         * Modifies: entity's dimensions
+         * Effects: sets the entity's dimensions
          */
         void setDimensions(Vector2i dimensions);
 

@@ -9,12 +9,13 @@ namespace game {
     class PowerUp : public Collectible {
     public:
 
-        // default constructor
+        // constructors
+        
         PowerUp();
         
-        // constructor with position parameter
         PowerUp(Vector2f pos);
 
+        // get type
         virtual string getType() const override;
 
         /**
@@ -24,6 +25,11 @@ namespace game {
          */
         virtual void becomeCollected(Player &player) override;
         
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws powerup as circle
+         */
         virtual void draw() const override;
 
     };

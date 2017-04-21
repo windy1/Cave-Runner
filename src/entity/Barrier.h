@@ -9,13 +9,21 @@ namespace game {
 
     class Barrier : public Obstacle {
     public:
-
+        
+        //constructors
+        
         Barrier();
 
         Barrier(Vector2f pos);
 
+        // get type
         virtual string getType() const override;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws barrier as rectangle
+         */
         virtual void draw() const override;
         
         /**

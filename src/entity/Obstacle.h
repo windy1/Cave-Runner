@@ -8,8 +8,11 @@ namespace game {
     class Obstacle : public Entity {
     public:
 
+        //scroll velocity - velocity at which entities move horizontally, towards player
         static const float SCROLL_VELOCITY;
 
+        // constructors
+        
         Obstacle();
 
         Obstacle(Vector2f pos);

@@ -12,15 +12,9 @@ namespace game {
         this->pos = pos;
     }
     
-    bool Collectible::isOverlapping(const Collectible &c) const {
-        double distanceBetweenCenters = Vector2f::distance(c.getPosition(), getPosition());
-        return distanceBetweenCenters <= c.getDimensions().x + getDimensions().x;
-    }
-    
     bool Collectible::isOverlapping(int xIn, int yIn) const {
-        Coin c;
-        c.setPosition(Vector2f(xIn, yIn));
-        return isOverlapping(c);
+        double distanceBetweenCenterAndPoint = Vector2f::distance(getPosition(), Vector2f(xIn, yIn));
+        return distanceBetweenCenterAndPoint <= getDimensions().x;
     }
     
     bool Collectible::isOverlapping(int x1, int y1, int x2, int y2) const {

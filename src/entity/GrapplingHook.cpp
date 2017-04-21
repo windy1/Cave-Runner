@@ -1,4 +1,5 @@
 #include "GrapplingHook.h"
+#include "../graphics/graphics.h"
 
 namespace game {
 
@@ -17,7 +18,7 @@ namespace game {
     }
 
     void GrapplingHook::draw() const {
-        // TODO
+        graphics::drawCircle(dimensions, pos.round(), color);
     }
 
     string GrapplingHook::getType() const {

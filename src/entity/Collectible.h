@@ -10,12 +10,13 @@ namespace game {
     class Collectible : public Entity {
     public:
 
+        //scroll velocity - velocity at which entities move horizontally, towards player
         static const float SCROLL_VELOCITY;
 
-        //default constructor
+        // constructors
+        
         Collectible();
         
-        //constructor with position parameter
         Collectible(Vector2f pos);
 
         /**
@@ -25,8 +26,11 @@ namespace game {
          */
         virtual void becomeCollected(Player &player) = 0;
         
-        virtual bool isOverlapping(const Collectible &c) const;
-        
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: determines if collectible overlaps the given coordinates
+         */
         virtual bool isOverlapping(int xIn, int yIn) const;
         
         /**

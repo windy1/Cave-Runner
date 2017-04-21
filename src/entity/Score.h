@@ -15,12 +15,13 @@ namespace game {
         static const float SCORE_POS_X;
         static const float SCORE_POS_Y;
         
-        // default constructor
+        // constructors
+        
         Score();
 
-        // constructor with score value parameter
         Score(int startScore);
         
+        // get score
         int getScore() const;
         
         /**
@@ -30,8 +31,14 @@ namespace game {
          */
         void updateScore(int newPoints);
 
+        // get type
         virtual string getType() const override;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws score as string
+         */
         virtual void draw() const override;
 
     };

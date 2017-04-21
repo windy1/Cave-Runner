@@ -8,10 +8,18 @@ namespace game {
     class Torch : public Entity {
     public:
 
+        // constructors
+        
         Torch();
 
+        // get type
         virtual string getType() const override;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: draws torch as two rectangles: handle and flame
+         */
         virtual void draw() const override;
 
     };
