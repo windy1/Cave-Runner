@@ -1,6 +1,7 @@
 #include "tests.h"
 #include "game.h"
 #include "entity/Coin.h"
+#include "entity/PowerUp.h"
 #include "entity/Barrier.h"
 #include "loader.h"
 #include <iostream>
@@ -33,6 +34,12 @@ namespace game {
     
     // Collectible.h
     int testCollectiblePlayerOverlap();
+    
+    // Coin.h
+    int testCoinBecomeCollected();
+    
+    //PowerUp.h
+    int testPowerUpBecomeCollected();
 
     int runTests() {
         cout << "Running tests..." << endl;
@@ -51,6 +58,8 @@ namespace game {
         failed += testBarrierPointOverlap();
         failed += testBarrierPlayerOverlap();
         failed += testCollectiblePlayerOverlap();
+        failed += testCoinBecomeCollected();
+        failed += testPowerUpBecomeCollected();
         failed += testLoadLevel();
         failed += testSaveGame();
         failed += testLoadGame();
@@ -338,6 +347,45 @@ namespace game {
             cout << "collectible dimensions: " << collectible.getDimensions() << endl;
             cout << "player pos: " << player.getPosition() << endl;
             cout << "player dimensions: " << player.getDimensions() << endl;
+            failed++;
+        }
+        return failed;
+    }
+
+    int testCoinBecomeCollected() {
+        cout << "**** testCoinBecomeCollected() ****" << endl;
+        Player player;
+        Coin coin;
+        game::getGameState()->score = Score();
+        coin.becomeCollected(player);
+        int failed = 0;
+        // if coin not dead, test fails
+        if (!coin.isDead()) {
+            cout << "coin should be dead after collection" << endl;
+            failed++;
+        }
+        // if score not incremented, test fails
+        if (game::getGameState()->score.getScore() != Coin::COIN_VALUE) {
+            cout << "coin collection should increment score by coin value" << endl;
+            failed++;
+        }
+        return failed;
+    }
+
+    int testPowerUpBecomeCollected() {
+        cout << "**** testPowerUpBecomeCollected() ****" << endl;
+        Player player;
+        PowerUp powerUp;
+        powerUp.becomeCollected(player);
+        int failed = 0;
+        // if powerup not dead, test fails
+        if (!powerUp.isDead()) {
+            cout << "powerUp should be dead after collection" << endl;
+            failed++;
+        }
+        // player does not have powerUp, test fails
+        if (!player.hasPowerUp()) {
+            cout << "player should have powerUp access after powerUp collection" << endl;
             failed++;
         }
         return failed;
