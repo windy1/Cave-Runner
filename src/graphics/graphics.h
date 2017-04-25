@@ -33,6 +33,13 @@ namespace graphics {
      * Modifies: the window buffer
      */
     void drawCircle(const Vector2i &dimen, const Vector2i &center, const Color &color = {1, 1, 1, 1});
+    
+    /**
+     * Requires: nothing
+     * Effects: draws a string with given start_pos, message, and color
+     * Modifies: the window buffer
+     */
+    void drawString(const Vector2i &start_pos, string message, const Color &color);
 
     Vector2i getWindowDimensions();
 

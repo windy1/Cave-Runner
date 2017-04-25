@@ -17,6 +17,9 @@ namespace graphics {
 
     static int windowId;
 
+    enum page {menu, gameplay};
+    page currentPage;
+    
     // callback declarations
     static void display();
     static void onKey(unsigned char key, int x, int y);
@@ -28,6 +31,8 @@ namespace graphics {
     static void drawScene();
 
     void init(int argc, char **argv) {
+        // default page
+        currentPage = menu;
         // initialize window
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA);
@@ -74,6 +79,31 @@ namespace graphics {
         }
         glEnd();
     }
+    
+    void drawString(const Vector2i &start_pos, string message, const Color &color) {
+        glColor4f(color.r, color.g, color.b, color.a);
+        glRasterPos2i(start_pos.x, start_pos.y);
+        for (int i = 0; i < message.length(); i++) {
+            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, message[i]);
+        }
+    }
+    /*
+    
+     */
+    
+    void displayMenu() {
+        string title = "GNARLY RASTAFARIAN";
+        string controls1 = "Use the spacebar to jump";
+        string controls2 = "Click to use your grappling hook";
+        string directions1 = "Avoid the obstacles!";
+        string directions2 = "Click anywhere to begin!";
+        Color menu_text_color = Color::SAND;
+        drawString(Vector2i(WINDOW_DIMEN.x/2 - 130, WINDOW_DIMEN.y/4), title, menu_text_color);
+        drawString(Vector2i(WINDOW_DIMEN.x/2 - 120, WINDOW_DIMEN.y/2), controls1, menu_text_color);
+        drawString(Vector2i(WINDOW_DIMEN.x/2 - 150, WINDOW_DIMEN.y/2 + 25), controls2, menu_text_color);
+        drawString(Vector2i(WINDOW_DIMEN.x/2 - 100, WINDOW_DIMEN.y/2 + 100), directions1, menu_text_color);
+        drawString(Vector2i(WINDOW_DIMEN.x/2 - 120, WINDOW_DIMEN.y/2 + 125), directions2, menu_text_color);
+    }
 
     Vector2i getWindowDimensions() {
         return WINDOW_DIMEN;
@@ -89,13 +119,21 @@ namespace graphics {
         glOrtho(0.0, WINDOW_DIMEN.x, WINDOW_DIMEN.y, 0.0, -1.f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-        // draw stuff
-        drawScene();
-        if (!game::isPaused()) {
-            game::update();
+        
+        switch(currentPage) {
+            case menu:
+                displayMenu();
+                break;
+            case gameplay:
+                // draw stuff
+                drawScene();
+                if (!game::isPaused()) {
+                    game::update();
+                }
+                game::draw();
+                break;
         }
-        game::draw();
+        
 
         // finished
         glFlush();
@@ -139,6 +177,9 @@ namespace graphics {
 
     static void onMouseClick(int button, int state, int x, int y) {
         cout << "Mouse Click: " << button << " " << state << " " << Vector2i(x, y) << endl;
+        if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && currentPage == menu) {
+            currentPage = gameplay;
+        }
         // TODO
         glutPostRedisplay();
     }
