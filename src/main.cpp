@@ -1,30 +1,35 @@
-#include "graphics/graphics.h"
 #include "game.h"
 #include "tests.h"
 #include "loader.h"
-#include "entity/Torch.h"
-#include <cassert>
 
-using namespace std;
-
-GameState gameState;
+game::GameState gameState;
 bool paused = false;
 
 int main(int argc, char **argv) {
     if (argc > 1 && strcmp(*argv, "--tests")) {
         return game::runTests();
     }
+
     cout << "Starting..." << endl;
-    gameState.player = make_shared<game::Player>();
+
+    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();
+    gameState.player = make_shared<game::Player>(grapplingHook);
+    gameState.player->move(graphics::getWindowDimensions().y);
+
+    insertEntity(grapplingHook, gameState.entities);
     insertEntity(gameState.player, gameState.entities);
+
     gameState.globalX = 500;
     gameState.scrollSpeed = 1;
     gameState.level = 1;
-    //game::loadLevel(1, gameState);
+
+    game::loadLevel(1, gameState);
     for (int i = 0; i < gameState.entities.size(); i++) {
         cout << *gameState.entities[i] << endl;
     }
+
     graphics::init(argc, argv);
+
     return 0;
 }
 

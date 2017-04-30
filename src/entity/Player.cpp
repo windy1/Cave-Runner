@@ -12,11 +12,16 @@ namespace game {
     const float     Player::X_POSITION      =   100;
     const Vector2i  Player::DIMENSIONS          (50, 50);
 
-    Player::Player() {
+    Player::Player(hook_ptr grapplingHook) {
+        this->grapplingHook = grapplingHook;
         color = Color::BLUE;
         dimensions = DIMENSIONS;
         pos.x = X_POSITION;
-        pos.y = game::getGroundY(); // TODO: remove this, only here to test falling
+        pos.y = game::getGroundY();
+    }
+
+    hook_ptr Player::getGrapplingHook() const {
+        return grapplingHook;
     }
     
     bool Player::hasPowerUp() const {
@@ -28,12 +33,16 @@ namespace game {
     }
     
     bool Player::jump() {
-        if (pos.y == game::getGroundY() && velocity.y == 0) {
+        if (isOnGround() && velocity.y == 0) {
             // start jumping
             velocity.y = JUMP_VELOCITY;
             return true;
         }
         return false;
+    }
+
+    bool Player::isOnGround() {
+        return pos.y == game::getGroundY();
     }
 
     void Player::move(float deltaY) {
@@ -42,6 +51,7 @@ namespace game {
 
     void Player::update() {
         Entity::update();
+        // handle gravity
         int groundY = game::getGroundY();
         if (pos.y > groundY && velocity.y > TERM_VELOCITY) {
             // apply gravity
@@ -50,6 +60,10 @@ namespace game {
             // hit ground
             pos.y = groundY;
             velocity.y = 0;
+        }
+
+        if (pos.x > X_POSITION && isOnGround()) {
+            pos.x -= game::getGameState()->scrollSpeed;
         }
     }
 

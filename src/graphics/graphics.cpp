@@ -1,6 +1,6 @@
 #include "graphics.h"
 #include "../game.h"
-#include <cassert>
+#include "../entity/Player.h"
 
 namespace graphics {
 
@@ -70,12 +70,13 @@ namespace graphics {
         // dimen = (radius, number of points for triangle fan)
         assert(dimen.x >= 0 && dimen.y >= 0);
         int radius = dimen.x;
+        Vector2i pos = invertY(center, WINDOW_DIMEN);
         glBegin(GL_TRIANGLE_FAN);
         glColor4f(color.r, color.g, color.b, color.a);
-        glVertex2i(center.x, center.y);
+        glVertex2i(center.x, pos.y);
         for (int i = 0; i <= dimen.y; i++) {
             double radians = i * M_PI / 180.0;
-            glVertex2i((int) round(center.x + radius * cos(radians)), (int) round(center.y + radius * sin(radians)));
+            glVertex2i((int) round(pos.x + radius * cos(radians)), (int) round(pos.y + radius * sin(radians)));
         }
         glEnd();
     }
@@ -103,6 +104,15 @@ namespace graphics {
         drawString(Vector2i(WINDOW_DIMEN.x/2 - 150, WINDOW_DIMEN.y/2 + 25), controls2, menu_text_color);
         drawString(Vector2i(WINDOW_DIMEN.x/2 - 100, WINDOW_DIMEN.y/2 + 100), directions1, menu_text_color);
         drawString(Vector2i(WINDOW_DIMEN.x/2 - 120, WINDOW_DIMEN.y/2 + 125), directions2, menu_text_color);
+    }
+
+    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color) {
+        glLineWidth(2.5);
+        glColor4f(color.r, color.g, color.b, color.a);
+        glBegin(GL_LINES);
+        glVertex2i(p1.x, invertY(p1, WINDOW_DIMEN).y);
+        glVertex2i(p2.x, invertY(p2, WINDOW_DIMEN).y);
+        glEnd();
     }
 
     Vector2i getWindowDimensions() {
@@ -181,6 +191,9 @@ namespace graphics {
             currentPage = gameplay;
         }
         // TODO
+        game::hook_ptr hook = game::getPlayer()->getGrapplingHook();
+        hook->setPosition(Vector3f(invertY(Vector2i(x, y), WINDOW_DIMEN), 0));
+        hook->setHooked(true);
         glutPostRedisplay();
     }
 

@@ -13,6 +13,8 @@ namespace game {
 
     public:
 
+        GrapplingHook();
+
         /**
          * Requires: grappling hook is not being shot already
          * Modifies: grappling hook pos, isShot boolean, isHooked boolean
@@ -26,6 +28,8 @@ namespace game {
          * Effects: checks if grappling hook is currently hooked onto an object
          */
         bool isHooked() const;
+
+        void setHooked(bool hooked);
 
         /**
          * Requires: nothing

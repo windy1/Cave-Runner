@@ -1,14 +1,15 @@
 #ifndef CS_120_FINAL_PROJECT_PLAYER_H
 #define CS_120_FINAL_PROJECT_PLAYER_H
 
+#include "../ptr.h"
 #include "Entity.h"
-#include "Score.h"
-#include "../graphics/Color.h"
+#include "GrapplingHook.h"
 
 namespace game {
 
     class Player : public Entity {
 
+        hook_ptr grapplingHook;
         bool powerUp;
 
     public:
@@ -21,7 +22,9 @@ namespace game {
 
         // constructors
         
-        Player();
+        Player(hook_ptr grapplingHook);
+
+        hook_ptr getGrapplingHook() const;
 
         /**
          * Requires: nothing
@@ -46,6 +49,8 @@ namespace game {
          * Effects: player rises and falls to original position along y-axis
          */
         bool jump();
+
+        bool isOnGround();
 
         /**
          * Requires: nothing

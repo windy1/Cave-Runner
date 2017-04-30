@@ -14,7 +14,7 @@ namespace game {
 
     void Coin::becomeCollected(Player &player) {
         dead = true;
-        game::getGameState()->score.updateScore(COIN_VALUE);
+        game::getGameState()->score->updateScore(COIN_VALUE);
     }
 
     void Coin::draw() const {

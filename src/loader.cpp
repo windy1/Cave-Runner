@@ -1,8 +1,6 @@
+#include "game.h"
 #include "loader.h"
-#include "entity/Barrier.h"
-#include "entity/Coin.h"
 #include <fstream>
-#include <cassert>
 
 namespace game {
 
@@ -122,11 +120,11 @@ namespace game {
                         int score = -1;
                         file >> score;
                         cout << "s = " << score << endl;
-                        if (gameState.score.getScore() == -1) {
+                        if (gameState.score->getScore() == -1) {
                             cerr << "Error: Could not read score";
                             return false;
                         }
-                        gameState.score.updateScore(score);
+                        gameState.score->updateScore(score);
                     }
                 }
             }
@@ -196,6 +194,7 @@ namespace game {
             success = false;
             return true;
         }
+        pos.y += game::getGroundY(); // move entities up to ground
         entity->setPosition(pos);
 
         // get color
@@ -208,6 +207,7 @@ namespace game {
         in >> color.b;
         skipChars(in, 1, ch);
         in >> color.a;
+        cout << "color = " << color << endl;
         if (color.r == -1 || color.g == -1 || color.b == -1 || color.a == -1) {
             cerr << "Error: Could not read color";
             success = false;
@@ -268,7 +268,7 @@ namespace game {
         out << "globalX=" << gameState.globalX << endl;
         out << "scrollSpeed=" << gameState.scrollSpeed << endl;
         out << "level=" << gameState.level << endl;
-        out << "score=" << gameState.score.getScore() << endl;
+        out << "score=" << gameState.score->getScore() << endl;
     }
 
     static void skipChars(ifstream &file, int amount, char &ch) {

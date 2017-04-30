@@ -1,8 +1,7 @@
 #ifndef CS_120_FINAL_PROJECT_POWERUP_H
 #define CS_120_FINAL_PROJECT_POWERUP_H
 
-#include "Collectible.h"
-#include "../graphics/graphics.h"
+#include "../game.h"
 
 namespace game {
 

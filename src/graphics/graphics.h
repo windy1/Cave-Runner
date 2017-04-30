@@ -41,6 +41,8 @@ namespace graphics {
      */
     void drawString(const Vector2i &start_pos, string message, const Color &color);
 
+    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color = {1, 1, 1, 1});
+
     Vector2i getWindowDimensions();
 
 }

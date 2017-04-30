@@ -1,24 +1,34 @@
 #ifndef CS_120_FINAL_PROJECT_GAME_H
 #define CS_120_FINAL_PROJECT_GAME_H
 
-#include "entity/Entity.h"
-#include "entity/Player.h"
 #include <memory>
 #include <vector>
+#include <iostream>
+#include <cassert>
+#include "ptr.h"
+#include "entity/Entity.h"
+#include "entity/Barrier.h"
+#include "entity/Coin.h"
+#include "entity/Collectible.h"
+#include "entity/GrapplingHook.h"
+#include "entity/Obstacle.h"
+#include "entity/Player.h"
+#include "entity/PowerUp.h"
+#include "entity/Score.h"
+#include "entity/Torch.h"
 
-typedef std::shared_ptr<game::Player> player_ptr;
-typedef std::shared_ptr<game::Entity> entity_ptr;
-
-struct GameState {
-    player_ptr          player;
-    vector<entity_ptr>  entities;
-    game::Score         score;
-    int                 globalX;
-    int                 scrollSpeed;
-    int                 level;
-};
+using namespace std;
 
 namespace game {
+
+    struct GameState {
+        player_ptr          player;
+        vector<entity_ptr>  entities;
+        score_ptr           score;
+        int                 globalX;
+        int                 scrollSpeed;
+        int                 level;
+    };
 
     /**
      * Requires: none

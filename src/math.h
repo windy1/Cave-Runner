@@ -44,6 +44,10 @@ struct Vector2f {
     Vector2f(Vector3f vec3f);
     
     Vector2i round() const;
+
+    float length() const;
+
+    float dot(const Vector2f &v2) const;
     
     bool operator==(const Vector2f &other) const;
     
@@ -58,7 +62,7 @@ struct Vector2f {
     Vector2f operator/(const Vector2f &other) const;
     
     static float distance(const Vector2f &p1, const Vector2f &p2);
-    
+
     friend ostream& operator<<(ostream& stream, const Vector2f &vec2f);
     
 };
@@ -74,6 +78,8 @@ struct Vector3f {
     Vector3f(float x, float y, float z);
     
     Vector3f(Vector2f vec2f, float z);
+
+    Vector3f(Vector2i vec2i, float z);
 
     bool operator==(const Vector3f &other) const;
     

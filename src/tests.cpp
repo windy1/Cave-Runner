@@ -1,12 +1,5 @@
-#include "tests.h"
 #include "game.h"
-#include "entity/Coin.h"
-#include "entity/PowerUp.h"
-#include "entity/Barrier.h"
 #include "loader.h"
-#include <iostream>
-
-using namespace std;
 
 namespace game {
 
@@ -48,7 +41,8 @@ namespace game {
         testState.globalX = 500;
         testState.scrollSpeed = 42;
         testState.level = 13;
-        testState.score.updateScore(1337);
+        testState.score = make_shared<Score>();
+        testState.score->updateScore(1337);
         game::setGameState(testState);
         int failed = 0;
         failed += testUpdateEntities();
@@ -72,9 +66,9 @@ namespace game {
     int testUpdateEntities() {
         cout << "**** testUpdateEntities() ****" << endl;
         vector<entity_ptr> entities;
-        entities.push_back(make_shared<Player>());
+        entities.push_back(make_shared<Player>(make_shared<GrapplingHook>()));
         entities.push_back(make_shared<Coin>());
-        player_ptr e3 = make_shared<Player>();
+        player_ptr e3 = make_shared<Player>(make_shared<GrapplingHook>());
         e3->setDead(true);
         entities.push_back(e3);
         game::updateEntities(entities);
@@ -166,7 +160,7 @@ namespace game {
 
     int testPlayerJump() {
         cout << "**** testPlayerJump() ****" << endl;
-        Player player;
+        Player player(make_shared<GrapplingHook>());
         player.jump();
         do {
             player.update();
@@ -247,7 +241,7 @@ namespace game {
         barrier.setPosition(barrier_pos);
         barrier.setDimensions(Vector2i(10, 20)); //barrier points [(50,100), (60,100), (50, 80), (60,80)]
         int failed = 0;
-        Player player;
+        Player player(make_shared<GrapplingHook>());
         player.setDimensions(Vector2i(5, 5));
         player.setPosition(Vector3f(58, 82, 0));
         // barrier overlaps bottom-left corner of player
@@ -299,7 +293,7 @@ namespace game {
         collectible.setPosition(collectible_pos);
         collectible.setDimensions(Vector2i(3, 360)); // radius = 3
         int failed = 0;
-        Player player;
+        Player player(make_shared<GrapplingHook>());
         player.setDimensions(Vector2i(5, 5));
         // center of collectible overlaps player
         player.setPosition(Vector3f(48, 102, 0));
@@ -398,9 +392,9 @@ namespace game {
 
     int testCoinBecomeCollected() {
         cout << "**** testCoinBecomeCollected() ****" << endl;
-        Player player;
+        Player player(make_shared<GrapplingHook>());
         Coin coin;
-        game::getGameState()->score = Score();
+        game::getGameState()->score = make_shared<Score>();
         coin.becomeCollected(player);
         int failed = 0;
         // if coin not dead, test fails
@@ -409,7 +403,7 @@ namespace game {
             failed++;
         }
         // if score not incremented, test fails
-        if (game::getGameState()->score.getScore() != Coin::COIN_VALUE) {
+        if (game::getGameState()->score->getScore() != Coin::COIN_VALUE) {
             cout << "coin collection should increment score by coin value" << endl;
             failed++;
         }
@@ -418,7 +412,7 @@ namespace game {
 
     int testPowerUpBecomeCollected() {
         cout << "**** testPowerUpBecomeCollected() ****" << endl;
-        Player player;
+        Player player(make_shared<GrapplingHook>());
         PowerUp powerUp;
         powerUp.becomeCollected(player);
         int failed = 0;
@@ -465,7 +459,7 @@ namespace game {
         cout << "globalX = " << loadedState.globalX << endl;
         cout << "scrollSpeed = " << loadedState.scrollSpeed << endl;
         cout << "level = " << loadedState.level << endl;
-        cout << "score = " << loadedState.score.getScore() << endl;
+        cout << "score = " << loadedState.score->getScore() << endl;
         return 0;
     }
 
