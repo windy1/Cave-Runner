@@ -12,15 +12,8 @@ int main(int argc, char **argv) {
 
     cout << "Starting..." << endl;
 
-    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();
-    gameState.player = make_shared<game::Player>(grapplingHook);
-    gameState.player->move(graphics::getWindowDimensions().y);
-
-    insertEntity(grapplingHook, gameState.entities);
-    insertEntity(gameState.player, gameState.entities);
-
     gameState.globalX = 500;
-    gameState.scrollSpeed = 1;
+    gameState.scrollSpeed = 3;
     gameState.level = 1;
 
     game::loadLevel(1, gameState);
@@ -28,7 +21,14 @@ int main(int argc, char **argv) {
         cout << *gameState.entities[i] << endl;
     }
 
-    graphics::init(argc, argv);
+    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();
+    gameState.player = make_shared<game::Player>(grapplingHook);
+    gameState.player->move(game::getWindowDimensions().y);
+
+    insertEntity(grapplingHook, gameState.entities);
+    insertEntity(gameState.player, gameState.entities);
+
+    game::initGraphics(argc, argv);
 
     return 0;
 }
@@ -111,6 +111,10 @@ namespace game {
 
     int getGroundY() {
         return 50;
+    }
+
+    int getCeilingY() {
+        return getWindowDimensions().y - getGroundY();
     }
 
     void setGameState(GameState gs) {

@@ -61,8 +61,12 @@ namespace game {
         move(velocity.x, velocity.y);
         if (pos.x < -dimensions.x) {
             // remove once off screen
-            dead = true;
+            onLeaveScreen();
         }
+    }
+
+    void Entity::onLeaveScreen() {
+        dead = true;
     }
 
     ostream& operator<<(ostream &stream, const Entity &entity) {

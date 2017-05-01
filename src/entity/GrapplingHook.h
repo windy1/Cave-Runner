@@ -11,6 +11,10 @@ namespace game {
         bool hooked;
         bool shot;
 
+    protected:
+
+        virtual void onLeaveScreen() override;
+
     public:
 
         GrapplingHook();

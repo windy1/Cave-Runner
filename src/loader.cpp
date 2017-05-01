@@ -194,7 +194,7 @@ namespace game {
             success = false;
             return true;
         }
-        pos.y += game::getGroundY(); // move entities up to ground
+        pos.y += getGroundY(); // move entities up to ground
         entity->setPosition(pos);
 
         // get color

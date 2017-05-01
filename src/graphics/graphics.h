@@ -11,14 +11,14 @@
 #include <GL/glut.h>
 #endif
 
-namespace graphics {
+namespace game {
 
     /**
      * Requires: none
      * Effects: starts the main game loop
      * Modifies: game state
      */
-    void init(int argc, char **argv);
+    void initGraphics(int argc, char **argv);
 
     /**
      * Requires: dimen's x and y are both non-negative

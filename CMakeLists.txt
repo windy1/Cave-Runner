@@ -7,7 +7,6 @@ set(CMAKE_CXX_FLAGS -Wno-deprecated-declarations)
 set(SOURCE_FILES
         src/main.cpp
         src/tests.cpp src/tests.h
-        src/textbased_test.cpp
         src/graphics/graphics.cpp src/graphics/graphics.h
         src/game.h
         src/math.h

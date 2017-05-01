@@ -19,7 +19,7 @@ namespace game {
     }
 
     void PowerUp::draw() const {
-        graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
+        drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
 }

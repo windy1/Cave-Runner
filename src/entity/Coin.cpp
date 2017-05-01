@@ -14,11 +14,11 @@ namespace game {
 
     void Coin::becomeCollected(Player &player) {
         dead = true;
-        game::getGameState()->score->updateScore(COIN_VALUE);
+        getGameState()->score->updateScore(COIN_VALUE);
     }
 
     void Coin::draw() const {
-        graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
+        drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
     string Coin::getType() const {

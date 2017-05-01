@@ -4,8 +4,9 @@
 
 namespace game {
 
-    GrapplingHook::GrapplingHook() : Entity() {
+    GrapplingHook::GrapplingHook() {
         dimensions = Vector2i(10, 360);
+        velocity.x = -getGameState()->scrollSpeed;
     }
 
     void GrapplingHook::shoot(Vector2f target) {
@@ -26,13 +27,19 @@ namespace game {
         return shot;
     }
 
+    void GrapplingHook::onLeaveScreen() {
+        hooked = false;
+    }
+
     void GrapplingHook::draw() const {
         if (hooked) {
-            graphics::drawCircle(dimensions, Vector2f(pos).round(), color);
-            player_ptr player = game::getPlayer();
+            cout << "hookPos = " << pos << endl;
+            cout << "v = " << velocity << endl;
+            drawCircle(dimensions, Vector2f(pos).round(), color);
+            player_ptr player = getPlayer();
             Vector2i pDimen = player->getDimensions();
             Vector2f startPos = Vector2f(player->getPosition()) + Vector2f(pDimen.x / 2, pDimen.y / 2);
-            graphics::drawLine(Vector2f(pos).round(), startPos.round());
+            drawLine(Vector2f(pos).round(), startPos.round());
         }
     }
 

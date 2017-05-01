@@ -80,6 +80,8 @@ namespace game {
      */
     int getGroundY();
 
+    int getCeilingY();
+
     /**
      * Requires: none
      * Modifies: updates game elements

@@ -6,18 +6,21 @@ using namespace std;
 
 namespace game {
 
-    const float     Player::JUMP_VELOCITY   =   10;
-    const float     Player::GRAVITY         =   0.5;
-    const float     Player::TERM_VELOCITY   =   -100;
+    const float     Player::DEFAULT_JUMP_VELOCITY   =   10;
+    const float     Player::DEFAULT_GRAVITY         =   0.5;
+    const float     Player::DEFAULT_TERM_VELOCITY   =   -100;
     const float     Player::X_POSITION      =   100;
-    const Vector2i  Player::DIMENSIONS          (50, 50);
+    const Vector2i  Player::DEFAULT_DIMENSIONS          (50, 50);
 
     Player::Player(hook_ptr grapplingHook) {
         this->grapplingHook = grapplingHook;
+        jumpVelocity = DEFAULT_JUMP_VELOCITY;
+        gravity = DEFAULT_GRAVITY;
+        terminalVelocity = DEFAULT_TERM_VELOCITY;
         color = Color::BLUE;
-        dimensions = DIMENSIONS;
+        dimensions = DEFAULT_DIMENSIONS;
         pos.x = X_POSITION;
-        pos.y = game::getGroundY();
+        pos.y = getGroundY();
     }
 
     hook_ptr Player::getGrapplingHook() const {
@@ -31,18 +34,42 @@ namespace game {
     void Player::setPowerUp(bool newPowerUp) {
         powerUp = newPowerUp;
     }
+
+    float Player::getJumpVelocity() const {
+        return jumpVelocity;
+    }
+
+    void Player::setJumpVelocity(float jumpVelocity) {
+        this->jumpVelocity = jumpVelocity;
+    }
+
+    float Player::getGravity() const {
+        return gravity;
+    }
+
+    void Player::setGravity(float gravity) {
+        this->gravity = gravity;
+    }
+
+    float Player::getTerminalVelocity() const {
+        return terminalVelocity;
+    }
+
+    void Player::setTerminalVelocity(float terminalVelocity) {
+        this->terminalVelocity = terminalVelocity;
+    }
     
     bool Player::jump() {
         if (isOnGround() && velocity.y == 0) {
             // start jumping
-            velocity.y = JUMP_VELOCITY;
+            velocity.y = jumpVelocity;
             return true;
         }
         return false;
     }
 
     bool Player::isOnGround() {
-        return pos.y == game::getGroundY();
+        return pos.y == getGroundY();
     }
 
     void Player::move(float deltaY) {
@@ -51,19 +78,31 @@ namespace game {
 
     void Player::update() {
         Entity::update();
+
         // handle gravity
-        int groundY = game::getGroundY();
-        if (pos.y > groundY && velocity.y > TERM_VELOCITY) {
+        int groundY = getGroundY();
+        if (pos.y > groundY && velocity.y > terminalVelocity && !grapplingHook->isHooked()) {
             // apply gravity
-            velocity.y = max(velocity.y - GRAVITY, TERM_VELOCITY);
+            velocity.y = max(velocity.y - gravity, terminalVelocity);
         } else if (pos.y <= groundY) {
             // hit ground
             pos.y = groundY;
             velocity.y = 0;
         }
 
-        if (pos.x > X_POSITION && isOnGround()) {
-            pos.x -= game::getGameState()->scrollSpeed;
+        if (pos.x <= 0 || pos.x >= getWindowDimensions().x - dimensions.x) {
+            velocity = velocity * Vector3f(-1, -1, 0);
+        }
+
+        // handle hook
+        if (grapplingHook->isHooked()) {
+            Vector3f hookPos = grapplingHook->getPosition();
+            if (Vector2f::distance(Vector2f(hookPos), Vector2f(pos)) < 20 || pos.y + dimensions.y >= getCeilingY()) {
+                grapplingHook->setHooked(false);
+            } else {
+                velocity.y = (hookPos.y - pos.y) * 0.05f;
+                velocity.x = (hookPos.x - pos.x) * 0.05f;
+            }
         }
     }
 
@@ -72,7 +111,7 @@ namespace game {
     }
 
     void Player::draw() const {
-        graphics::drawRect(dimensions, Vector2f(pos).round(), color);
+        drawRect(dimensions, Vector2f(pos).round(), color);
     }
     
     bool Player::isOverlapping(float xIn, float yIn) const {

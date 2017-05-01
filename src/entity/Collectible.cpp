@@ -5,7 +5,7 @@
 namespace game {
 
     Collectible::Collectible() {
-        velocity.x = -game::getGameState()->scrollSpeed;
+        velocity.x = -getGameState()->scrollSpeed;
     }
     
     Collectible::Collectible(Vector3f pos) : Collectible::Collectible() {

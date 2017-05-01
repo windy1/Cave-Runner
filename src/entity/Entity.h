@@ -15,6 +15,8 @@ namespace game {
         Color color = Color::WHITE;
         bool dead = false;
 
+        virtual void onLeaveScreen();
+
     public:
 
         // entity type names (no abstracts)

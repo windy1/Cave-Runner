@@ -43,7 +43,7 @@ namespace game {
         testState.level = 13;
         testState.score = make_shared<Score>();
         testState.score->updateScore(1337);
-        game::setGameState(testState);
+        setGameState(testState);
         int failed = 0;
         failed += testUpdateEntities();
         failed += testInsertEntity();
@@ -71,7 +71,7 @@ namespace game {
         player_ptr e3 = make_shared<Player>(make_shared<GrapplingHook>());
         e3->setDead(true);
         entities.push_back(e3);
-        game::updateEntities(entities);
+        updateEntities(entities);
         for (int i = 0; i < entities.size(); i++) {
             if (entities[i] == e3) {
                 return 1;
@@ -165,7 +165,7 @@ namespace game {
         do {
             player.update();
             cout << player.getPosition() << endl;
-        } while (player.getPosition().y > game::getGroundY());
+        } while (player.getPosition().y > getGroundY());
         return 0;
     }
 
@@ -394,7 +394,7 @@ namespace game {
         cout << "**** testCoinBecomeCollected() ****" << endl;
         Player player(make_shared<GrapplingHook>());
         Coin coin;
-        game::getGameState()->score = make_shared<Score>();
+        getGameState()->score = make_shared<Score>();
         coin.becomeCollected(player);
         int failed = 0;
         // if coin not dead, test fails
@@ -403,7 +403,7 @@ namespace game {
             failed++;
         }
         // if score not incremented, test fails
-        if (game::getGameState()->score->getScore() != Coin::COIN_VALUE) {
+        if (getGameState()->score->getScore() != Coin::COIN_VALUE) {
             cout << "coin collection should increment score by coin value" << endl;
             failed++;
         }
@@ -431,8 +431,8 @@ namespace game {
 
     int testLoadLevel() {
         cout << "**** testLoadLevel() ****" << endl;
-        loadLevel(1, *game::getGameState());
-        vector<entity_ptr> *entities = &game::getGameState()->entities;
+        loadLevel(1, *getGameState());
+        vector<entity_ptr> *entities = &getGameState()->entities;
         for (int i = 0; i < entities->size(); i++) {
             cout << *(*entities)[i] << endl;
         }
@@ -441,7 +441,7 @@ namespace game {
 
     int testSaveGame() {
         cout << "**** testSaveGame() ****" << endl;
-        if (!saveGame(*game::getGameState())) {
+        if (!saveGame(*getGameState())) {
             return 1;
         }
         return 0;

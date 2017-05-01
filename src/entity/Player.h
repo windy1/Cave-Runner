@@ -11,14 +11,17 @@ namespace game {
 
         hook_ptr grapplingHook;
         bool powerUp;
+        float jumpVelocity;
+        float gravity;
+        float terminalVelocity;
 
     public:
 
-        static const float      JUMP_VELOCITY;
-        static const float      GRAVITY;
-        static const float      TERM_VELOCITY;
+        static const float      DEFAULT_JUMP_VELOCITY;
+        static const float      DEFAULT_GRAVITY;
+        static const float      DEFAULT_TERM_VELOCITY;
+        static const Vector2i   DEFAULT_DIMENSIONS;
         static const float      X_POSITION;
-        static const Vector2i   DIMENSIONS;
 
         // constructors
         
@@ -39,6 +42,18 @@ namespace game {
          * Effects: sets player's powerup status
          */
         void setPowerUp(bool newPowerUp);
+
+        float getJumpVelocity() const;
+
+        void setJumpVelocity(float jumpVelocity);
+
+        float getGravity() const;
+
+        void setGravity(float gravity);
+
+        float getTerminalVelocity() const;
+
+        void setTerminalVelocity(float terminalVelocity);
         
         // get type
         virtual string getType() const override;
@@ -58,6 +73,13 @@ namespace game {
          * Effects: moves player along y-axis by a given amount deltaY
          */
         void move(float deltaY);
+        
+        /*
+        * Requires: nothing
+        * Modifies: nothing
+        * Effects: determines if player overlaps the given coordinates
+        */
+        virtual bool isOverlapping(float xIn, float yIn) const;
 
         /**
          * Requires: nothing
@@ -72,13 +94,6 @@ namespace game {
          * Effects: draws player as rectangle
          */
         virtual void draw() const override;
-        
-        /*
-        * Requires: nothing
-        * Modifies: nothing
-        * Effects: determines if player overlaps the given coordinates
-        */
-        virtual bool isOverlapping(float xIn, float yIn) const;
 
     };
 

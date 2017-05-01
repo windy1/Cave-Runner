@@ -2,7 +2,7 @@
 #include "../game.h"
 #include "../entity/Player.h"
 
-namespace graphics {
+namespace game {
 
     static const char KEY_SPACE     = ' ';
     static const char KEY_ESCAPE    = 27;
@@ -11,9 +11,9 @@ namespace graphics {
     static const Vector2i   WINDOW_DIMEN            (700, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
 
-    static const Vector2i   FLOOR_CEIL_DIMEN        (WINDOW_DIMEN.x, game::getGroundY());
+    static const Vector2i   FLOOR_CEIL_DIMEN        (WINDOW_DIMEN.x, getGroundY());
     static const Vector2i   FLOOR_POS               (0, 0);
-    static const Vector2i   CEIL_POS                (0, WINDOW_DIMEN.y - FLOOR_CEIL_DIMEN.y);
+    static const Vector2i   CEIL_POS                (0, getCeilingY());
 
     static int windowId;
 
@@ -30,7 +30,7 @@ namespace graphics {
 
     static void drawScene();
 
-    void init(int argc, char **argv) {
+    void initGraphics(int argc, char **argv) {
         // default page
         currentPage = menu;
         // initialize window
@@ -137,10 +137,10 @@ namespace graphics {
             case gameplay:
                 // draw stuff
                 drawScene();
-                if (!game::isPaused()) {
-                    game::update();
+                if (!isPaused()) {
+                    update();
                 }
-                game::draw();
+                draw();
                 break;
         }
         
@@ -158,10 +158,10 @@ namespace graphics {
         cout << "Key: " << key << " " << Vector2i(x, y) << endl;
         switch (key) {
             case KEY_SPACE:
-                game::getPlayer()->jump();
+                getPlayer()->jump();
                 break;
             case KEY_ESCAPE:
-                game::setPaused(!game::isPaused());
+                setPaused(!game::isPaused());
                 break;
             case KEY_QUIT:
                 glutDestroyWindow(windowId);
@@ -187,13 +187,26 @@ namespace graphics {
 
     static void onMouseClick(int button, int state, int x, int y) {
         cout << "Mouse Click: " << button << " " << state << " " << Vector2i(x, y) << endl;
-        if (button == GLUT_LEFT_BUTTON && state == GLUT_UP && currentPage == menu) {
-            currentPage = gameplay;
+        switch (button) {
+            case GLUT_LEFT_BUTTON: {
+                hook_ptr hook = game::getPlayer()->getGrapplingHook();
+                if (state == GLUT_UP) {
+                    if (currentPage == menu) {
+                        currentPage = gameplay;
+                    } else if (currentPage == gameplay) {
+                        hook->setHooked(false);
+                    }
+                } else if (state == GLUT_DOWN && currentPage == gameplay) {
+                    Vector2i hookPos = invertY(Vector2i(x, y), WINDOW_DIMEN);
+                    hookPos.y = min(hookPos.y, CEIL_POS.y);
+                    hook->setPosition(Vector3f(hookPos, 0));
+                    hook->setHooked(true);
+                }
+                break;
+            }
+            default:
+                break;
         }
-        // TODO
-        game::hook_ptr hook = game::getPlayer()->getGrapplingHook();
-        hook->setPosition(Vector3f(invertY(Vector2i(x, y), WINDOW_DIMEN), 0));
-        hook->setHooked(true);
         glutPostRedisplay();
     }
 
