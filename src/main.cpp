@@ -37,7 +37,6 @@ namespace game {
         if (gameState.globalX % 300 == 0) {
             insertEntity(make_shared<Torch>(), gameState.entities);
         }
-        //cout << "gx = " << gameState.globalX << endl;
         updateEntities(gameState.entities);
     }
 

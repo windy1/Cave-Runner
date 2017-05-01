@@ -4,9 +4,11 @@
 #include "Menu.h"
 #include "StartMenu.h"
 #include "PauseMenu.h"
+#include "Scene.h"
 
 namespace game {
 
+    /// Some keyboard constants
     static const char KEY_SPACE     = ' ';
     static const char KEY_ESCAPE    = 27;
     static const char KEY_QUIT      = 'q';
@@ -14,18 +16,15 @@ namespace game {
     static const Vector2i   WINDOW_DIMEN            (700, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
 
-    static const Vector2i   FLOOR_CEIL_DIMEN        (WINDOW_DIMEN.x, getGroundY());
-    static const Vector2i   FLOOR_POS               (0, 0);
-    static const Vector2i   CEIL_POS                (0, getCeilingY());
-
     static int windowId;
 
     enum page {menu, gameplay, pause};
     page currentPage;
 
+    Scene scene;
     StartMenu startMenu;
     PauseMenu pauseMenu;
-    
+
     // callback declarations
     static void display();
     static void onKey(unsigned char key, int x, int y);
@@ -33,8 +32,6 @@ namespace game {
     static void onMouseMove(int x, int y);
     static void onMouseClick(int button, int state, int x, int y);
     static void timer(int extra);
-
-    static void drawScene();
 
     void initGraphics(int argc, char **argv) {
         // default page
@@ -59,6 +56,7 @@ namespace game {
 
         startMenu = StartMenu();
         pauseMenu = PauseMenu();
+        scene = Scene();
 
         glutMainLoop();
     }
@@ -114,9 +112,10 @@ namespace game {
         return WINDOW_DIMEN;
     }
 
-    /* callback definitions */
 
-    static void display() {
+    /* -- Callback definitions -- */
+
+    void display() {
         // initialize
         glViewport(0, 0, WINDOW_DIMEN.x, WINDOW_DIMEN.y);
         glMatrixMode(GL_PROJECTION);
@@ -131,7 +130,7 @@ namespace game {
                 break;
             case gameplay:
                 // draw stuff
-                drawScene();
+                scene.draw();
                 if (!isPaused()) {
                     update();
                 }
@@ -149,12 +148,7 @@ namespace game {
         glFlush();
     }
 
-    static void drawScene() {
-        drawRect(FLOOR_CEIL_DIMEN, FLOOR_POS, Color::SAND);
-        drawRect(FLOOR_CEIL_DIMEN, CEIL_POS, Color::SAND);
-    }
-
-    static void onKey(unsigned char key, int x, int y) {
+    void onKey(unsigned char key, int x, int y) {
         cout << "Key: " << key << " " << Vector2i(x, y) << endl;
         switch (key) {
             case KEY_SPACE:
@@ -181,17 +175,17 @@ namespace game {
         glutPostRedisplay();
     }
 
-    static void onSpecialKey(int key, int x, int y) {
+    void onSpecialKey(int key, int x, int y) {
         cout << "Special Key: " << key << " " << Vector2i(x, y) << endl;
         glutPostRedisplay();
     }
 
-    static void onMouseMove(int x, int y) {
+    void onMouseMove(int x, int y) {
         cout << "Mouse Move: " << Vector2i(x, y) << endl;
         glutPostRedisplay();
     }
 
-    static void onMouseClick(int button, int state, int x, int y) {
+    void onMouseClick(int button, int state, int x, int y) {
         cout << "Mouse Click: " << button << " " << state << " " << Vector2i(x, y) << endl;
         switch (button) {
             case GLUT_LEFT_BUTTON: {
@@ -204,7 +198,7 @@ namespace game {
                     }
                 } else if (state == GLUT_DOWN && currentPage == gameplay) {
                     Vector2i hookPos = invertY(Vector2i(x, y), WINDOW_DIMEN);
-                    hookPos.y = min(hookPos.y, CEIL_POS.y);
+                    hookPos.y = min(hookPos.y, scene.getCeilingPosition().y);
                     hook->setPosition(Vector3f(hookPos, 0));
                     hook->setHooked(true);
                 }
@@ -216,7 +210,7 @@ namespace game {
         glutPostRedisplay();
     }
 
-    static void timer(int extra) {
+    void timer(int extra) {
         glutPostRedisplay();
         glutTimerFunc(2, timer, 0);
     }

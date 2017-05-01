@@ -5,6 +5,9 @@
 
 namespace game {
 
+    /**
+     * The menu displayed when the game is started.
+     */
     class StartMenu : public Menu {
     public:
 

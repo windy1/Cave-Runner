@@ -4,11 +4,15 @@
 
 namespace game {
 
-    static const string FILE_SAVE           = "save.txt";
-    static const string SECTION_ENTITIES    = "[Entities]";
-    static const string SECTION_PROPERTIES  = "[Properties]";
+    static const string FILE_SAVE           = "save.txt";       /// file to save game state to
+    static const string SECTION_ENTITIES    = "[Entities]";     /// section in save file that has entities
+    static const string SECTION_PROPERTIES  = "[Properties]";   /// section in save file that has game properties
 
+    /// skips the next 'amount' of chars in the given file stream into the specified char
     static void skipChars(ifstream &file, int amount, char &ch);
+
+
+    /* -- Internal functions of loader -- */
 
     /**
      * Reads the game state in the given file into the given game state
@@ -44,6 +48,9 @@ namespace game {
      * Writes the properties of the given game state to the given stream.
      */
     static void writeProperties(ofstream &out, const GameState &gameState);
+
+
+    /* -- External definitions -- */
 
     bool loadLevel(int level, GameState &gameState) {
         assert(level > 0);
@@ -87,7 +94,10 @@ namespace game {
         return true;
     }
 
-    static bool readGameState(string fileName, GameState &gameState, bool saveFile) {
+
+    /* -- Internal definitions -- */
+
+    bool readGameState(string fileName, GameState &gameState, bool saveFile) {
         // get file handle
         ifstream file(fileName);
         if (!file) {
@@ -138,7 +148,7 @@ namespace game {
         return true;
     }
 
-    static bool readEntities(ifstream &in, vector<entity_ptr> &entities, int &lineNum, string &ln) {
+    bool readEntities(ifstream &in, vector<entity_ptr> &entities, int &lineNum, string &ln) {
         bool success = true;
         do {
             entity_ptr entity;
@@ -153,7 +163,7 @@ namespace game {
         return success;
     }
 
-    static bool readEntity(ifstream &in, entity_ptr &entity, bool &success, string &ln) {
+    bool readEntity(ifstream &in, entity_ptr &entity, bool &success, string &ln) {
         string entityName;
         in >> entityName;
         if (entityName == Entity::BARRIER) {
@@ -217,7 +227,7 @@ namespace game {
         return false;
     }
 
-    static void writeEntity(ofstream &out, const entity_ptr &entity) {
+    void writeEntity(ofstream &out, const entity_ptr &entity) {
         Vector2i dimen = entity->getDimensions();
         Vector2f pos = entity->getPosition();
         Color color = entity->getColor();
@@ -229,7 +239,7 @@ namespace game {
         cout << "- " << *entity << endl;
     }
 
-    static bool readProperties(ifstream &in, GameState &gameState, int &lineNum) {
+    bool readProperties(ifstream &in, GameState &gameState, int &lineNum) {
         gameState.globalX = -1;
         gameState.scrollSpeed = -1;
         gameState.level = -1;
@@ -264,14 +274,14 @@ namespace game {
         return true;
     }
 
-    static void writeProperties(ofstream &out, const GameState &gameState) {
+    void writeProperties(ofstream &out, const GameState &gameState) {
         out << "globalX=" << gameState.globalX << endl;
         out << "scrollSpeed=" << gameState.scrollSpeed << endl;
         out << "level=" << gameState.level << endl;
         out << "score=" << gameState.score->getScore() << endl;
     }
 
-    static void skipChars(ifstream &file, int amount, char &ch) {
+    void skipChars(ifstream &file, int amount, char &ch) {
         for (int i = 0; i < amount; i++) {
             file >> ch;
             //cout << ch;

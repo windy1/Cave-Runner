@@ -3,7 +3,7 @@
 
 namespace game {
 
-    /* Vector2f */
+    /* -- Vector2f -- */
 
     Vector2f::Vector2f() {
     }
@@ -49,25 +49,25 @@ namespace game {
     Vector2f Vector2f::operator/(const Vector2f &other) const {
         return Vector2f(x / other.x, y / other.y);
     }
-    
-    Vector2f& Vector2f::operator+=(const Vector2f &other) {
+
+    Vector2f &Vector2f::operator+=(const Vector2f &other) {
         x += other.x;
         y += other.y;
         return *this;
     }
-    
-    Vector2f& Vector2f::operator-=(const Vector2f &other) {
+
+    Vector2f &Vector2f::operator-=(const Vector2f &other) {
         x -= other.x;
         y -= other.y;
         return *this;
     }
-    
-    Vector2f& Vector2f::operator*=(const Vector2f &other) {
+
+    Vector2f &Vector2f::operator*=(const Vector2f &other) {
         x *= other.x;
         y *= other.y;
         return *this;
     }
-    
+
     Vector2f Vector2f::operator/=(const Vector2f &other) {
         x /= other.x;
         y /= other.y;
@@ -84,7 +84,7 @@ namespace game {
     }
 
 
-    /* Vector2i */
+    /* -- Vector2i -- */
 
     Vector2i::Vector2i() {
     }
@@ -150,7 +150,7 @@ namespace game {
     }
 
 
-    /* Vector3f */
+    /* -- Vector3f -- */
 
     Vector3f::Vector3f() {
     }

@@ -5,6 +5,9 @@
 
 namespace game {
 
+    /**
+     * A game menu to display.
+     */
     class Menu {
     protected:
 
@@ -14,6 +17,11 @@ namespace game {
 
         Menu();
 
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: draws this menu to the screen
+         */
         virtual void draw() const = 0;
 
     };

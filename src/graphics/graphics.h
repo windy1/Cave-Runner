@@ -1,12 +1,11 @@
 #ifndef CS_120_FINAL_PROJECT_GRAPHICS_H
 #define CS_120_FINAL_PROJECT_GRAPHICS_H
 
-#ifdef __APPLE__
-#include <GLUT/glut.h>
 #include "../math.h"
 #include "Color.h"
 #include <cmath>
-
+#ifdef __APPLE__
+#include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
@@ -41,8 +40,18 @@ namespace game {
      */
     void drawString(const Vector2i &start_pos, string message, const Color &color);
 
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: Draws a line from p1 to p2
+     */
     void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color = {1, 1, 1, 1});
 
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the window's dimensions
+     */
     Vector2i getWindowDimensions();
 
 }

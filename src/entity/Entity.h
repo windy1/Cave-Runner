@@ -15,11 +15,12 @@ namespace game {
         Color color = Color::WHITE;
         bool dead = false;
 
+        /// Called when the entity exits the screen
         virtual void onLeaveScreen();
 
     public:
 
-        // entity type names (no abstracts)
+        /// entity type names (no abstracts)
         static const string BARRIER;
         static const string COIN;
         static const string GRAPPLING_HOOK;

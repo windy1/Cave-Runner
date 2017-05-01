@@ -5,6 +5,9 @@
 
 namespace game {
 
+    /**
+     * The menu displayed when the game is paused.
+     */
     class PauseMenu : public Menu {
     public:
 

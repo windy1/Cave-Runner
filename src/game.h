@@ -22,12 +22,12 @@ using namespace std;
 namespace game {
 
     struct GameState {
-        player_ptr          player;
-        vector<entity_ptr>  entities;
-        score_ptr           score;
-        int                 globalX;
-        int                 scrollSpeed;
-        int                 level;
+        player_ptr          player;         /// a reference to the player
+        vector<entity_ptr>  entities;       /// all entities currently in game
+        score_ptr           score;          /// a reference to the score
+        int                 globalX;        /// the current scroll x-position
+        int                 scrollSpeed;    /// pixel-rate of how quickly we scroll
+        int                 level;          /// current game level
     };
 
     /**
@@ -80,6 +80,11 @@ namespace game {
      */
     int getGroundY();
 
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: return the ceiling y-position
+     */
     int getCeilingY();
 
     /**

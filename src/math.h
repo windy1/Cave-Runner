@@ -9,6 +9,9 @@ namespace game {
 
     struct Vector3f;
 
+    /**
+     * A 2-dimensional integer vector
+     */
     struct Vector2i {
 
         int x = 0;
@@ -42,6 +45,9 @@ namespace game {
 
     };
 
+    /**
+     * A 2-dimensional float vector
+     */
     struct Vector2f {
 
         float x = 0;
@@ -85,6 +91,9 @@ namespace game {
 
     };
 
+    /**
+     * A 3-dimensional float vector
+     */
     struct Vector3f {
 
         float x = 0;
@@ -123,6 +132,12 @@ namespace game {
 
     };
 
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: inverts the specified coordinate-vector's y-position in
+     * relation to the given screen dimensions
+     */
     Vector2i invertY(const Vector2i &coords, const Vector2i &screenDimen);
 
 }

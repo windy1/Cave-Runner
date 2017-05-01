@@ -7,6 +7,9 @@ using namespace std;
 
 namespace game {
 
+    /**
+     * An RGBA color where each value ranges from 0-1
+     */
     struct Color {
 
         static const Color WHITE;
