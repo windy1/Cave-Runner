@@ -22,7 +22,7 @@ set(SOURCE_FILES
         src/entity/Barrier.cpp src/entity/Barrier.h
         src/entity/Score.h src/entity/Score.cpp
         src/loader.cpp src/loader.h
-        src/graphics/Color.cpp src/graphics/Color.h src/entity/Torch.cpp src/entity/Torch.h src/ptr.h)
+        src/graphics/Color.cpp src/graphics/Color.h src/entity/Torch.cpp src/entity/Torch.h src/ptr.h src/graphics/Menu.cpp src/graphics/Menu.h src/graphics/StartMenu.cpp src/graphics/StartMenu.h src/graphics/PauseMenu.cpp src/graphics/PauseMenu.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})
 

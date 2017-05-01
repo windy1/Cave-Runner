@@ -49,6 +49,30 @@ namespace game {
     Vector2f Vector2f::operator/(const Vector2f &other) const {
         return Vector2f(x / other.x, y / other.y);
     }
+    
+    Vector2f& Vector2f::operator+=(const Vector2f &other) {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+    
+    Vector2f& Vector2f::operator-=(const Vector2f &other) {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    }
+    
+    Vector2f& Vector2f::operator*=(const Vector2f &other) {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    }
+    
+    Vector2f Vector2f::operator/=(const Vector2f &other) {
+        x /= other.x;
+        y /= other.y;
+        return *this;
+    }
 
     float Vector2f::distance(const Vector2f &p1, const Vector2f &p2) {
         return sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
@@ -92,6 +116,30 @@ namespace game {
         return Vector2i(x / other.x, y / other.y);
     }
 
+    Vector2i& Vector2i::operator+=(const Vector2i &other) {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+
+    Vector2i& Vector2i::operator-=(const Vector2i &other) {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    }
+
+    Vector2i& Vector2i::operator*=(const Vector2i &other) {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    }
+
+    Vector2i Vector2i::operator/=(const Vector2i &other) {
+        x /= other.x;
+        y /= other.y;
+        return *this;
+    }
+
     ostream &operator<<(ostream &stream, const Vector2i &vec2i) {
         stream << "(" << vec2i.x << ", " << vec2i.y << ")";
         return stream;
@@ -102,7 +150,7 @@ namespace game {
     }
 
 
-/* Vector3f */
+    /* Vector3f */
 
     Vector3f::Vector3f() {
     }
@@ -138,6 +186,34 @@ namespace game {
 
     Vector3f Vector3f::operator/(const Vector3f &other) const {
         return Vector3f(x / other.x, y / other.y, z / other.z);
+    }
+
+    Vector3f& Vector3f::operator+=(const Vector3f &other) {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return *this;
+    }
+
+    Vector3f& Vector3f::operator-=(const Vector3f &other) {
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+        return *this;
+    }
+
+    Vector3f& Vector3f::operator*=(const Vector3f &other) {
+        x *= other.x;
+        y *= other.y;
+        z *= other.z;
+        return *this;
+    }
+
+    Vector3f Vector3f::operator/=(const Vector3f &other) {
+        x /= other.x;
+        y /= other.y;
+        z /= other.z;
+        return *this;
     }
 
     ostream &operator<<(ostream &stream, const Vector3f &vec3f) {

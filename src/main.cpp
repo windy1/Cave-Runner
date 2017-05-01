@@ -17,9 +17,6 @@ int main(int argc, char **argv) {
     gameState.level = 1;
 
     game::loadLevel(1, gameState);
-    for (int i = 0; i < gameState.entities.size(); i++) {
-        cout << *gameState.entities[i] << endl;
-    }
 
     game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();
     gameState.player = make_shared<game::Player>(grapplingHook);

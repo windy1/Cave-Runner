@@ -14,12 +14,14 @@ namespace game {
         float jumpVelocity;
         float gravity;
         float terminalVelocity;
+        float groundFriction;
 
     public:
 
         static const float      DEFAULT_JUMP_VELOCITY;
         static const float      DEFAULT_GRAVITY;
         static const float      DEFAULT_TERM_VELOCITY;
+        static const float      DEFAULT_GROUND_FRICTION;
         static const Vector2i   DEFAULT_DIMENSIONS;
         static const float      X_POSITION;
 
@@ -54,6 +56,10 @@ namespace game {
         float getTerminalVelocity() const;
 
         void setTerminalVelocity(float terminalVelocity);
+
+        float getGroundFriction() const;
+
+        void setGroundFriction(float groundFriction);
         
         // get type
         virtual string getType() const override;

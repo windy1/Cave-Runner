@@ -23,12 +23,20 @@ namespace game {
         bool operator!=(const Vector2i &other) const;
 
         Vector2i operator+(const Vector2i &other) const;
-
+        
         Vector2i operator-(const Vector2i &other) const;
-
+        
         Vector2i operator*(const Vector2i &other) const;
 
         Vector2i operator/(const Vector2i &other) const;
+
+        Vector2i& operator+=(const Vector2i &other);
+
+        Vector2i& operator-=(const Vector2i &other);
+
+        Vector2i& operator*=(const Vector2i &other);
+
+        Vector2i operator/=(const Vector2i &other);
 
         friend ostream &operator<<(ostream &stream, const Vector2i &vec2i);
 
@@ -63,6 +71,14 @@ namespace game {
 
         Vector2f operator/(const Vector2f &other) const;
 
+        Vector2f& operator+=(const Vector2f &other);
+
+        Vector2f& operator-=(const Vector2f &other);
+
+        Vector2f& operator*=(const Vector2f &other);
+
+        Vector2f operator/=(const Vector2f &other);
+
         static float distance(const Vector2f &p1, const Vector2f &p2);
 
         friend ostream &operator<<(ostream &stream, const Vector2f &vec2f);
@@ -94,6 +110,14 @@ namespace game {
         Vector3f operator*(const Vector3f &other) const;
 
         Vector3f operator/(const Vector3f &other) const;
+
+        Vector3f& operator+=(const Vector3f &other);
+
+        Vector3f& operator-=(const Vector3f &other);
+
+        Vector3f& operator*=(const Vector3f &other);
+
+        Vector3f operator/=(const Vector3f &other);
 
         friend ostream &operator<<(ostream &stream, const Vector3f &vec2f);
 

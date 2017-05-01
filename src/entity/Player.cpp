@@ -9,14 +9,16 @@ namespace game {
     const float     Player::DEFAULT_JUMP_VELOCITY   =   10;
     const float     Player::DEFAULT_GRAVITY         =   0.5;
     const float     Player::DEFAULT_TERM_VELOCITY   =   -100;
-    const float     Player::X_POSITION      =   100;
+    const float     Player::DEFAULT_GROUND_FRICTION =   0.1;
     const Vector2i  Player::DEFAULT_DIMENSIONS          (50, 50);
+    const float     Player::X_POSITION              =   100;
 
     Player::Player(hook_ptr grapplingHook) {
         this->grapplingHook = grapplingHook;
         jumpVelocity = DEFAULT_JUMP_VELOCITY;
         gravity = DEFAULT_GRAVITY;
         terminalVelocity = DEFAULT_TERM_VELOCITY;
+        groundFriction = DEFAULT_GROUND_FRICTION;
         color = Color::BLUE;
         dimensions = DEFAULT_DIMENSIONS;
         pos.x = X_POSITION;
@@ -58,6 +60,14 @@ namespace game {
     void Player::setTerminalVelocity(float terminalVelocity) {
         this->terminalVelocity = terminalVelocity;
     }
+
+    float Player::getGroundFriction() const {
+        return groundFriction;
+    }
+
+    void Player::setGroundFriction(float groundFriction) {
+        this->groundFriction = groundFriction;
+    }
     
     bool Player::jump() {
         if (isOnGround() && velocity.y == 0) {
@@ -90,8 +100,28 @@ namespace game {
             velocity.y = 0;
         }
 
-        if (pos.x <= 0 || pos.x >= getWindowDimensions().x - dimensions.x) {
-            velocity = velocity * Vector3f(-1, -1, 0);
+        // handle friction
+        if (isOnGround()) {
+            if (velocity.x < 0) {
+                velocity.x = min(velocity.x + groundFriction, 0.0f);
+            } else if (velocity.x > 0) {
+                velocity.x = max(velocity.x - groundFriction, 0.0f);
+            }
+        }
+
+        // handle boundaries
+        bool invertVelocity = false;
+        if (pos.x <= 0) {
+            pos.x = 0;
+            invertVelocity = true;
+        }
+        float rightEdgeX = getWindowDimensions().x - dimensions.x;
+        if (pos.x >= rightEdgeX) {
+            pos.x = rightEdgeX;
+            invertVelocity = true;
+        }
+        if (invertVelocity) {
+            velocity *= Vector3f(-1, -1, 0);
         }
 
         // handle hook

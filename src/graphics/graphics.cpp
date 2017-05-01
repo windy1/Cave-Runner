@@ -1,6 +1,9 @@
 #include "graphics.h"
 #include "../game.h"
 #include "../entity/Player.h"
+#include "Menu.h"
+#include "StartMenu.h"
+#include "PauseMenu.h"
 
 namespace game {
 
@@ -17,8 +20,11 @@ namespace game {
 
     static int windowId;
 
-    enum page {menu, gameplay};
+    enum page {menu, gameplay, pause};
     page currentPage;
+
+    StartMenu startMenu;
+    PauseMenu pauseMenu;
     
     // callback declarations
     static void display();
@@ -33,6 +39,7 @@ namespace game {
     void initGraphics(int argc, char **argv) {
         // default page
         currentPage = menu;
+
         // initialize window
         glutInit(&argc, argv);
         glutInitDisplayMode(GLUT_RGBA);
@@ -41,6 +48,7 @@ namespace game {
         windowId = glutCreateWindow(WINDOW_TITLE.c_str());
         Color bg = Color::SAND_DARK;
         glClearColor(bg.r, bg.g, bg.b, bg.a);
+
         // set callbacks
         glutDisplayFunc(display);
         glutKeyboardFunc(onKey);
@@ -48,6 +56,10 @@ namespace game {
         glutPassiveMotionFunc(onMouseMove);
         glutMouseFunc(onMouseClick);
         glutTimerFunc(0, timer, 0);
+
+        startMenu = StartMenu();
+        pauseMenu = PauseMenu();
+
         glutMainLoop();
     }
 
@@ -88,23 +100,6 @@ namespace game {
             glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, message[i]);
         }
     }
-    /*
-    
-     */
-    
-    void displayMenu() {
-        string title = "GNARLY RASTAFARIAN";
-        string controls1 = "Use the spacebar to jump";
-        string controls2 = "Click to use your grappling hook";
-        string directions1 = "Avoid the obstacles!";
-        string directions2 = "Click anywhere to begin!";
-        Color menu_text_color = Color::SAND;
-        drawString(Vector2i(WINDOW_DIMEN.x/2 - 130, WINDOW_DIMEN.y/4), title, menu_text_color);
-        drawString(Vector2i(WINDOW_DIMEN.x/2 - 120, WINDOW_DIMEN.y/2), controls1, menu_text_color);
-        drawString(Vector2i(WINDOW_DIMEN.x/2 - 150, WINDOW_DIMEN.y/2 + 25), controls2, menu_text_color);
-        drawString(Vector2i(WINDOW_DIMEN.x/2 - 100, WINDOW_DIMEN.y/2 + 100), directions1, menu_text_color);
-        drawString(Vector2i(WINDOW_DIMEN.x/2 - 120, WINDOW_DIMEN.y/2 + 125), directions2, menu_text_color);
-    }
 
     void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color) {
         glLineWidth(2.5);
@@ -132,7 +127,7 @@ namespace game {
         
         switch(currentPage) {
             case menu:
-                displayMenu();
+                startMenu.draw();
                 break;
             case gameplay:
                 // draw stuff
@@ -141,6 +136,11 @@ namespace game {
                     update();
                 }
                 draw();
+                break;
+            case pause:
+                pauseMenu.draw();
+                break;
+            default:
                 break;
         }
         
@@ -161,7 +161,15 @@ namespace game {
                 getPlayer()->jump();
                 break;
             case KEY_ESCAPE:
-                setPaused(!game::isPaused());
+                if (currentPage == menu) {
+                    break;
+                }
+                setPaused(!isPaused());
+                if (isPaused()) {
+                    currentPage = pause;
+                } else {
+                    currentPage = gameplay;
+                }
                 break;
             case KEY_QUIT:
                 glutDestroyWindow(windowId);
@@ -175,13 +183,11 @@ namespace game {
 
     static void onSpecialKey(int key, int x, int y) {
         cout << "Special Key: " << key << " " << Vector2i(x, y) << endl;
-        // TODO
         glutPostRedisplay();
     }
 
     static void onMouseMove(int x, int y) {
         cout << "Mouse Move: " << Vector2i(x, y) << endl;
-        // TODO
         glutPostRedisplay();
     }
 
