@@ -4,14 +4,24 @@
 
 namespace game {
 
-    static const Vector2i HANDLE_DIMEN  (10, 20);
-    static const Vector2i FLAME_DIMEN   (10, 10);
+    const Vector2i Torch::DEFAULT_DIMENSIONS        (10, 20);
+    const Vector2i Torch::DEFAULT_FLAME_DIMENSIONS  (10, 10);
+    const Vector3f Torch::DEFAULT_POSITION          (getWindowDimensions().x, getWindowDimensions().y * 0.5f, -1);
 
     Torch::Torch() : Entity() {
-        pos.y = getWindowDimensions().y * 0.5f;
-        pos.x = getWindowDimensions().x;
-        pos.z = -1;
+        dimensions = DEFAULT_DIMENSIONS;
+        flameDimen = DEFAULT_FLAME_DIMENSIONS;
+        pos = DEFAULT_POSITION;
         velocity.x = -getGameState()->scrollSpeed;
+    }
+
+    Vector2i Torch::getFlameDimensions() const {
+        return flameDimen;
+    }
+
+    void Torch::setFlameDimensions(Vector2i flameDimen) {
+        assert(flameDimen.x >= 0 && flameDimen.y >= 0);
+        this->flameDimen = flameDimen;
     }
 
     string Torch::getType() const {
@@ -20,8 +30,8 @@ namespace game {
 
     void Torch::draw() const {
         Vector2i pos2i = Vector2f(pos).round();
-        drawRect(HANDLE_DIMEN, pos2i, Color::BROWN);
-        drawRect(FLAME_DIMEN, pos2i + Vector2i(0, HANDLE_DIMEN.y), Color::ORANGE);
+        drawRect(dimensions, pos2i, Color::BROWN);
+        drawRect(flameDimen, pos2i + Vector2i(0, dimensions.y), Color::ORANGE);
     }
 
 }

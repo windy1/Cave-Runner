@@ -17,12 +17,12 @@ namespace game {
         getGameState()->score->updateScore(COIN_VALUE);
     }
 
-    void Coin::draw() const {
-        drawCircle(dimensions, Vector2f(pos).round(), color);
-    }
-
     string Coin::getType() const {
         return COIN;
+    }
+
+    void Coin::draw() const {
+        drawCircle(dimensions, Vector2f(pos).round(), color);
     }
 
 }

@@ -7,14 +7,14 @@
 
 namespace game {
 
+    /**
+     * An entity that can be collected by the player.
+     */
     class Collectible : public Entity {
     public:
 
-        // constructors
-        
         Collectible();
 
-        // constructor with position parameter
         Collectible(Vector3f pos);
 
         /**
@@ -44,6 +44,7 @@ namespace game {
          * Effects: determines if collectible overlaps the player
          */
         virtual bool isOverlapping(const Player &player) const;
+
     };
 
 }

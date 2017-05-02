@@ -2,7 +2,6 @@
 #define CS_120_FINAL_PROJECT_PTR_H
 
 #include <memory>
-#include "entity/GrapplingHook.h"
 
 using namespace std;
 
@@ -11,6 +10,7 @@ namespace game {
     class Entity;
     class Player;
     class Score;
+    class GrapplingHook;
 
     typedef shared_ptr<Player>          player_ptr;
     typedef shared_ptr<Entity>          entity_ptr;

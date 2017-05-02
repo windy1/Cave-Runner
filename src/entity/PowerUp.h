@@ -5,18 +5,15 @@
 
 namespace game {
 
+    /**
+     * A collectible that gives the player a special ability.
+     */
     class PowerUp : public Collectible {
     public:
 
-        // constructors
-        
         PowerUp();
 
-        // constructor with position parameter
         PowerUp(Vector3f pos);
-
-        // get type
-        virtual string getType() const override;
 
         /**
          * Requires: nothing
@@ -24,13 +21,10 @@ namespace game {
          * Effects: powerup disappears from screen and player saves boolean access to powerup
          */
         virtual void becomeCollected(Player &player) override;
-        
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: draws powerup as circle
-         */
+
         virtual void draw() const override;
+
+        virtual string getType() const override;
 
     };
 

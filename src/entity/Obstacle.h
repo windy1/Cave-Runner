@@ -5,11 +5,12 @@
 
 namespace game {
 
+    /**
+     * Represents some impassible obstacle.
+     */
     class Obstacle : public Entity {
     public:
 
-        // constructors
-        
         Obstacle();
 
         Obstacle(Vector3f pos);

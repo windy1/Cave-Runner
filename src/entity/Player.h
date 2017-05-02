@@ -7,6 +7,9 @@
 
 namespace game {
 
+    /**
+     * The player of the game.
+     */
     class Player : public Entity {
 
         hook_ptr grapplingHook;
@@ -18,18 +21,29 @@ namespace game {
 
     public:
 
+        /// Defaults
         static const float      DEFAULT_JUMP_VELOCITY;
         static const float      DEFAULT_GRAVITY;
         static const float      DEFAULT_TERM_VELOCITY;
         static const float      DEFAULT_GROUND_FRICTION;
         static const Vector2i   DEFAULT_DIMENSIONS;
-        static const float      X_POSITION;
+        static const float      STARTING_X_POSITION;
 
-        // constructors
-        
-        Player(hook_ptr grapplingHook);
+        Player();
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns a pointer to this player's grappling hook
+         */
         hook_ptr getGrapplingHook() const;
+
+        /**
+         * Requires: a valid hook_ptr
+         * Modifies: player grappling hook
+         * Effects: sets the player's grappling hook
+         */
+        void setGrapplingHook(hook_ptr grapplingHook);
 
         /**
          * Requires: nothing
@@ -45,20 +59,65 @@ namespace game {
          */
         void setPowerUp(bool newPowerUp);
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns the initial y-velocity of the player when they jump
+         */
         float getJumpVelocity() const;
 
+        /**
+         * Requires: nothing
+         * Modifies: player jump velocity
+         * Effects: sets the initial y-velocity of the player when they jump
+         */
         void setJumpVelocity(float jumpVelocity);
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns the amount of negative velocity exerted on the
+         * player while in the air
+         */
         float getGravity() const;
 
+        /**
+         * Requires: nothing
+         * Modifies: player gravity
+         * Effects: sets the amount of negative velocity exerted on the player
+         * while in the air
+         */
         void setGravity(float gravity);
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns the maximum negative velocity of the player
+         */
         float getTerminalVelocity() const;
 
+        /**
+         * Requires: nothing
+         * Modifies: player terminal velocity
+         * Effects: sets the maximum negative velocity of the player
+         */
         void setTerminalVelocity(float terminalVelocity);
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns the amount of x-velocity exerted on the player
+         * towards zero while the player is on the ground and has a non-zero
+         * x-velocity
+         */
         float getGroundFriction() const;
 
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects; sets the amount of x-velocity exerted on the player towards
+         * zero while the player is on the ground and has a non-zero x-velocity
+         */
         void setGroundFriction(float groundFriction);
         
         // get type

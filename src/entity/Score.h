@@ -4,24 +4,28 @@
 #include "Entity.h"
 
 namespace game {
-    
+
+    /**
+     * The score display.
+     */
     class Score : public Entity {
 
         int score;
 
     public:
 
-        // default score display position
-        static const float SCORE_POS_X;
-        static const float SCORE_POS_Y;
-        
-        // constructors
-        
+        /// Default score display position
+        static const Vector3f DEFAULT_POSITION;
+
         Score();
 
         Score(int startScore);
-        
-        // get score
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the score's int value
+         */
         int getScore() const;
         
         /**
@@ -31,14 +35,8 @@ namespace game {
          */
         void updateScore(int newPoints);
 
-        // get type
         virtual string getType() const override;
 
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: draws score as string
-         */
         virtual void draw() const override;
 
     };
