@@ -48,20 +48,20 @@ namespace game {
             // bottom-right
             isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y) ||
             // top-right
-            isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y) ||
+            isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y + player.getDimensions().y) ||
             // top-left
-            isOverlapping(player.getPosition().x, player.getPosition().y - player.getDimensions().y)) {
+            isOverlapping(player.getPosition().x, player.getPosition().y + player.getDimensions().y)) {
             return true;
         }
         // edge of player intersects the collectible
             // bottom
         if (isOverlapping(player.getPosition().x, player.getPosition().y, player.getPosition().x + player.getDimensions().x, player.getPosition().y) ||
             // left
-            isOverlapping(player.getPosition().x, player.getPosition().y, player.getPosition().x, player.getPosition().y - player.getDimensions().y) ||
+            isOverlapping(player.getPosition().x, player.getPosition().y, player.getPosition().x, player.getPosition().y + player.getDimensions().y) ||
             // right
-            isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y, player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y) ||
+            isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y, player.getPosition().x + player.getDimensions().x, player.getPosition().y + player.getDimensions().y) ||
             // top
-            isOverlapping(player.getPosition().x, player.getPosition().y - player.getDimensions().y, player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y)) {
+            isOverlapping(player.getPosition().x, player.getPosition().y + player.getDimensions().y, player.getPosition().x + player.getDimensions().x, player.getPosition().y + player.getDimensions().y)) {
             return true;
         }
         return false;
@@ -73,5 +73,5 @@ namespace game {
             becomeCollected(*getPlayer());
         }
     }
-
+    
 }
