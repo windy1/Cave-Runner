@@ -7,45 +7,41 @@
 
 namespace game {
 
+    /**
+     * A wall-like obstacle.
+     */
     class Barrier : public Obstacle {
     public:
-        
-        //constructors
-        
+
         Barrier();
 
         Barrier(Vector3f pos);
 
-        // get type
-        virtual string getType() const override;
-
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: draws barrier as rectangle
-         */
-        virtual void draw() const override;
-        
         /**
          * Requires: nothing
          * Modifies: nothing
          * Effects: determines if barrier overlaps the given coordinates
          */
         virtual bool isOverlapping(float xIn, float yIn) const;
-        
+
         /**
          * Requires: nothing
          * Modifies: nothing
          * Effects: determines if barrier overlaps the given point
          */
         virtual bool isOverlapping(Vector2i point) const;
-        
+
         /**
          * Requires: nothing
          * Modifies: nothing
          * Effects: determines if barrier overlaps the player
          */
         virtual bool isOverlapping(const Player &player) const;
+
+        virtual string getType() const override;
+
+        virtual void draw() const override;
+
     };
 
 }

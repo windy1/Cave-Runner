@@ -3,29 +3,38 @@
 
 #include "../math.h"
 #include "Entity.h"
+#include "../ptr.h"
 
 namespace game {
 
+    /**
+     * A grappling hook tool used by the player.
+     */
     class GrapplingHook : public Entity {
 
+        player_ptr player;
         bool hooked;
-        bool shot;
         Vector2f retractVelocity;
 
     protected:
 
+        /// Overrides default "death" behavior and just unhooks instead
         virtual void onLeaveScreen() override;
 
     public:
 
-        GrapplingHook();
+        /// Defaults
+        static const Vector2i DEFAULT_DIMENSIONS;
+        static const Vector2f DEFAULT_RETRACT_VELOCITY;
+
+        GrapplingHook(player_ptr player);
 
         /**
-         * Requires: grappling hook is not being shot already
-         * Modifies: grappling hook pos, isShot boolean, isHooked boolean
-         * Effects: grappling hook pos updates towards selected target, stops on object if ever overlaps object on way to target until player reaches target
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the owning player of this grappling hook
          */
-        void shoot(Vector2f target);
+        player_ptr getPlayer() const;
 
         /**
          * Requires: nothing
@@ -56,22 +65,9 @@ namespace game {
          * player towards it
          */
         void setRetractVelocity(Vector2f retractVelocity);
-
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: checks if grappling hook is currently being shot
-         */
-        bool isShot() const;
         
-        // get type
         virtual string getType() const override;
-        
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: draws grappling hook as circle
-         */
+
         virtual void draw() const override;
 
     };

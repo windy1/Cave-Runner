@@ -21,6 +21,10 @@ using namespace std;
 
 namespace game {
 
+    /**
+     * Represents the current state of the game. Encapsulated for easily
+     * writing/reading the game state to/from disk.
+     */
     struct GameState {
         player_ptr          player;         /// a reference to the player
         vector<entity_ptr>  entities;       /// all entities currently in game

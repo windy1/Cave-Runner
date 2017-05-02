@@ -20,7 +20,7 @@ namespace game {
 
     public:
 
-        /// entity type names (no abstracts)
+        /// Entity type names (no abstracts)
         static const string BARRIER;
         static const string COIN;
         static const string GRAPPLING_HOOK;
@@ -87,13 +87,6 @@ namespace game {
         void setColor(Color color);
 
         /**
-         * Requires: none
-         * Modifies: none
-         * Effects: returns the string name of this entity type
-         */
-        virtual string getType() const = 0;
-
-        /**
          * Requires: nothing
          * Modifies: nothing
          * Effects: returns true if the entity is dead and should be removed
@@ -106,6 +99,13 @@ namespace game {
          * Effects: nothing
          */
         void setDead(bool dead);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the string name of this entity type
+         */
+        virtual string getType() const = 0;
 
         /**
          * Requires: nothing

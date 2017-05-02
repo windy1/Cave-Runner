@@ -66,9 +66,9 @@ namespace game {
     int testUpdateEntities() {
         cout << "**** testUpdateEntities() ****" << endl;
         vector<entity_ptr> entities;
-        entities.push_back(make_shared<Player>(make_shared<GrapplingHook>()));
+        entities.push_back(make_shared<Player>());
         entities.push_back(make_shared<Coin>());
-        player_ptr e3 = make_shared<Player>(make_shared<GrapplingHook>());
+        player_ptr e3 = make_shared<Player>();
         e3->setDead(true);
         entities.push_back(e3);
         updateEntities(entities);
@@ -160,7 +160,7 @@ namespace game {
 
     int testPlayerJump() {
         cout << "**** testPlayerJump() ****" << endl;
-        Player player(make_shared<GrapplingHook>());
+        Player player;
         player.jump();
         do {
             player.update();
@@ -241,7 +241,7 @@ namespace game {
         barrier.setPosition(barrier_pos);
         barrier.setDimensions(Vector2i(10, 20)); //barrier points [(50,100), (60,100), (50, 80), (60,80)]
         int failed = 0;
-        Player player(make_shared<GrapplingHook>());
+        Player player;
         player.setDimensions(Vector2i(5, 5));
         player.setPosition(Vector3f(58, 82, 0));
         // barrier overlaps bottom-left corner of player
@@ -293,7 +293,7 @@ namespace game {
         collectible.setPosition(collectible_pos);
         collectible.setDimensions(Vector2i(3, 360)); // radius = 3
         int failed = 0;
-        Player player(make_shared<GrapplingHook>());
+        Player player;
         player.setDimensions(Vector2i(5, 5));
         // center of collectible overlaps player
         player.setPosition(Vector3f(48, 102, 0));
@@ -392,7 +392,7 @@ namespace game {
 
     int testCoinBecomeCollected() {
         cout << "**** testCoinBecomeCollected() ****" << endl;
-        Player player(make_shared<GrapplingHook>());
+        Player player;
         Coin coin;
         getGameState()->score = make_shared<Score>();
         coin.becomeCollected(player);
@@ -412,7 +412,7 @@ namespace game {
 
     int testPowerUpBecomeCollected() {
         cout << "**** testPowerUpBecomeCollected() ****" << endl;
-        Player player(make_shared<GrapplingHook>());
+        Player player;
         PowerUp powerUp;
         powerUp.becomeCollected(player);
         int failed = 0;

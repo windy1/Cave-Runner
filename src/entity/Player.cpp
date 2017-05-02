@@ -11,22 +11,26 @@ namespace game {
     const float     Player::DEFAULT_TERM_VELOCITY   =   -100;
     const float     Player::DEFAULT_GROUND_FRICTION =   0.1;
     const Vector2i  Player::DEFAULT_DIMENSIONS          (50, 50);
-    const float     Player::X_POSITION              =   100;
+    const float     Player::STARTING_X_POSITION     =   100;
 
-    Player::Player(hook_ptr grapplingHook) {
-        this->grapplingHook = grapplingHook;
+    Player::Player() {
         jumpVelocity = DEFAULT_JUMP_VELOCITY;
         gravity = DEFAULT_GRAVITY;
         terminalVelocity = DEFAULT_TERM_VELOCITY;
         groundFriction = DEFAULT_GROUND_FRICTION;
         color = Color::BLUE;
         dimensions = DEFAULT_DIMENSIONS;
-        pos.x = X_POSITION;
+        pos.x = STARTING_X_POSITION;
         pos.y = getGroundY();
     }
 
     hook_ptr Player::getGrapplingHook() const {
         return grapplingHook;
+    }
+
+    void Player::setGrapplingHook(hook_ptr grapplingHook) {
+        assert(grapplingHook != NULL);
+        this->grapplingHook = grapplingHook;
     }
     
     bool Player::hasPowerUp() const {
@@ -91,7 +95,7 @@ namespace game {
 
         // handle gravity
         int groundY = getGroundY();
-        if (pos.y > groundY && velocity.y > terminalVelocity && !grapplingHook->isHooked()) {
+        if (pos.y > groundY && velocity.y > terminalVelocity && (grapplingHook == NULL || !grapplingHook->isHooked())) {
             // apply gravity
             velocity.y = max(velocity.y - gravity, terminalVelocity);
         } else if (pos.y <= groundY) {
@@ -125,7 +129,7 @@ namespace game {
         }
 
         // handle hook
-        if (grapplingHook->isHooked()) {
+        if (grapplingHook != NULL && grapplingHook->isHooked()) {
 
             float       hookRadius      = grapplingHook->getDimensions().x;
             Vector2f    hookBottom      = Vector2f(grapplingHook->getPosition() - Vector3f(0, hookRadius, 0));

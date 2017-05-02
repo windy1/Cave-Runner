@@ -19,9 +19,9 @@ int main(int argc, char **argv) {
     
     game::loadLevel(1, gameState);
 
-    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();
-    gameState.player = make_shared<game::Player>(grapplingHook);
-    gameState.player->move(game::getWindowDimensions().y);
+    gameState.player = make_shared<game::Player>();
+    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>(gameState.player);
+    gameState.player->setGrapplingHook(grapplingHook);
 
     insertEntity(grapplingHook, gameState.entities);
     insertEntity(gameState.player, gameState.entities);

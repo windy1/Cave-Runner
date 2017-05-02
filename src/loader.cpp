@@ -130,6 +130,9 @@ namespace game {
                         int score = -1;
                         file >> score;
                         cout << "s = " << score << endl;
+                        if (gameState.score == NULL) {
+                            gameState.score = make_shared<Score>(score);
+                        }
                         if (gameState.score->getScore() == -1) {
                             cerr << "Error: Could not read score";
                             return false;

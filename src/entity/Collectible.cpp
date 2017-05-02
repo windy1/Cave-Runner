@@ -73,4 +73,5 @@ namespace game {
             becomeCollected(*getPlayer());
         }
     }
+
 }

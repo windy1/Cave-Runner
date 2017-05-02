@@ -6,21 +6,18 @@
 
 namespace game {
 
+    /**
+     * A collectible coin.
+     */
     class Coin : public Collectible {
     public:
 
-        // coin value (score points)
+        /// Coin value (score points)
         static const int COIN_VALUE;
-        
-        // constructors
-        
+
         Coin();
 
-        // constructor with position parameter
         Coin(Vector3f pos);
-
-        //get type
-        virtual string getType() const override;
         
         /**
          * Requires: nothing
@@ -29,11 +26,8 @@ namespace game {
          */
         virtual void becomeCollected(Player &player) override;
 
-        /**
-         * Requires: nothing
-         * Modifies: nothing
-         * Effects: draws coin as circle
-         */
+        virtual string getType() const override;
+
         virtual void draw() const override;
 
     };
