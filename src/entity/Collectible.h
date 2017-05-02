@@ -44,6 +44,13 @@ namespace game {
          * Effects: determines if collectible overlaps the player
          */
         virtual bool isOverlapping(const Player &player) const;
+        
+        /**
+         * Requires: nothing
+         * Modifies: collectible properties, player (if collected)
+         * Effects: called every game loop, updates collectible logic
+         */
+        void update() override;
     };
 
 }

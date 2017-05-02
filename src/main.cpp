@@ -15,7 +15,8 @@ int main(int argc, char **argv) {
     gameState.globalX = 500;
     gameState.scrollSpeed = 3;
     gameState.level = 1;
-
+    gameState.score = make_shared<game::Score>();
+    
     game::loadLevel(1, gameState);
 
     game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>();

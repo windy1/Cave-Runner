@@ -66,4 +66,11 @@ namespace game {
         }
         return false;
     }
+    
+    void Collectible::update() {
+        Entity::update();
+        if (isOverlapping(*getPlayer())) {
+            becomeCollected(*getPlayer());
+        }
+    }
 }
