@@ -14,6 +14,10 @@ namespace game {
     Vector2f::Vector2f(Vector3f vec3f) : Vector2f(vec3f.x, vec3f.y) {
     }
 
+    Vector2f Vector2f::abs() {
+        return Vector2f(std::abs(x), std::abs(y));
+    }
+
     Vector2i Vector2f::round() const {
         return Vector2i((int) std::round(x), (int) std::round(y));
     }
@@ -92,6 +96,10 @@ namespace game {
     Vector2i::Vector2i(int x, int y) : x(x), y(y) {
     }
 
+    Vector2i Vector2i::abs() {
+        return Vector2i(std::abs(x), std::abs(y));
+    }
+
     bool Vector2i::operator==(const Vector2i &other) const {
         return x == other.x && y == other.y;
     }
@@ -162,6 +170,10 @@ namespace game {
     }
 
     Vector3f::Vector3f(Vector2i vec2i, float z) : Vector3f(vec2i.x, vec2i.y, z) {
+    }
+
+    Vector3f Vector3f::abs() {
+        return Vector3f(std::abs(x), std::abs(y), std::abs(z));
     }
 
     bool Vector3f::operator==(const Vector3f &other) const {

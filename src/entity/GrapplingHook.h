@@ -10,6 +10,7 @@ namespace game {
 
         bool hooked;
         bool shot;
+        Vector2f retractVelocity;
 
     protected:
 
@@ -33,7 +34,28 @@ namespace game {
          */
         bool isHooked() const;
 
+        /**
+         * Requires: nothing
+         * Modifies: hooked state
+         * Effects: sets if the grappling hook is attached and should be drawn
+         */
         void setHooked(bool hooked);
+
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: returns the velocity at which the grappling hook pulls the
+         * player towards it
+         */
+        Vector2f getRetractVelocity() const;
+
+        /**
+         * Requires: nothing
+         * Modifies: retract velocity
+         * Effects: sets the velocity at which the grappling hook pulls the
+         * player towards it
+         */
+        void setRetractVelocity(Vector2f retractVelocity);
 
         /**
          * Requires: nothing

@@ -126,12 +126,20 @@ namespace game {
 
         // handle hook
         if (grapplingHook->isHooked()) {
-            Vector3f hookPos = grapplingHook->getPosition();
-            if (Vector2f::distance(Vector2f(hookPos), Vector2f(pos)) < 20 || pos.y + dimensions.y >= getCeilingY()) {
+
+            float       hookRadius      = grapplingHook->getDimensions().x;
+            Vector2f    hookBottom      = Vector2f(grapplingHook->getPosition() - Vector3f(0, hookRadius, 0));
+            Vector2f    playerTop       = Vector2f(pos + Vector3f(dimensions.x / 2, dimensions.y, 0));
+            float       hookDistance    = Vector2f::distance(hookBottom, playerTop);
+
+            if (hookDistance < hookRadius || playerTop.y >= getCeilingY()) {
+                // release player from hook
                 grapplingHook->setHooked(false);
             } else {
-                velocity.y = (hookPos.y - pos.y) * 0.05f;
-                velocity.x = (hookPos.x - pos.x) * 0.05f;
+                // set velocity such that the top-center of the player is on course
+                // towards the bottom-center of the hook
+                Vector2f deltaPos = Vector2f(hookBottom - playerTop);
+                velocity = deltaPos / Vector2f(hookDistance, hookDistance) * grapplingHook->getRetractVelocity();
             }
         }
     }

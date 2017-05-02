@@ -7,6 +7,7 @@ namespace game {
     GrapplingHook::GrapplingHook() {
         dimensions = Vector2i(10, 360);
         velocity.x = -getGameState()->scrollSpeed;
+        retractVelocity = Vector2f(5, 5);
     }
 
     void GrapplingHook::shoot(Vector2f target) {
@@ -23,6 +24,14 @@ namespace game {
         this->hooked = hooked;
     }
 
+    Vector2f GrapplingHook::getRetractVelocity() const {
+        return retractVelocity;
+    }
+
+    void GrapplingHook::setRetractVelocity(Vector2f retractVelocity) {
+        this->retractVelocity = retractVelocity;
+    }
+
     bool GrapplingHook::isShot() const {
         return shot;
     }
@@ -33,8 +42,6 @@ namespace game {
 
     void GrapplingHook::draw() const {
         if (hooked) {
-            cout << "hookPos = " << pos << endl;
-            cout << "v = " << velocity << endl;
             drawCircle(dimensions, Vector2f(pos).round(), color);
             player_ptr player = getPlayer();
             Vector2i pDimen = player->getDimensions();

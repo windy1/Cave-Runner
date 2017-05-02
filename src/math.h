@@ -21,6 +21,8 @@ namespace game {
 
         Vector2i(int x, int y);
 
+        Vector2i abs();
+
         bool operator==(const Vector2i &other) const;
 
         bool operator!=(const Vector2i &other) const;
@@ -60,6 +62,8 @@ namespace game {
         Vector2f(Vector3f vec3f);
 
         Vector2i round() const;
+
+        Vector2f abs();
 
         float length() const;
 
@@ -107,6 +111,8 @@ namespace game {
         Vector3f(Vector2f vec2f, float z);
 
         Vector3f(Vector2i vec2i, float z);
+
+        Vector3f abs();
 
         bool operator==(const Vector3f &other) const;
 
