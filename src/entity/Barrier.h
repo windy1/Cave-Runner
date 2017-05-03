@@ -40,6 +40,8 @@ namespace game {
 
         virtual string getType() const override;
 
+        virtual void update() override;
+
         virtual void draw() const override;
 
     };

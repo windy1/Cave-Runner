@@ -5,6 +5,7 @@
 #include "StartMenu.h"
 #include "PauseMenu.h"
 #include "Scene.h"
+#include "GameOverMenu.h"
 
 namespace game {
 
@@ -19,12 +20,10 @@ namespace game {
 
     static int windowId;
 
-    enum page {menu, gameplay, pause};
-    page currentPage;
-
     Scene scene;
     StartMenu startMenu;
     PauseMenu pauseMenu;
+    GameOverMenu gameOverMenu;
 
     // callback declarations
     static void display();
@@ -36,7 +35,7 @@ namespace game {
 
     void initGraphics(int argc, char **argv) {
         // default page
-        currentPage = menu;
+        setCurrentPage(menu);
 
         // initialize window
         glutInit(&argc, argv);
@@ -57,6 +56,7 @@ namespace game {
 
         startMenu = StartMenu();
         pauseMenu = PauseMenu();
+        gameOverMenu = GameOverMenu();
         scene = Scene();
 
         glutMainLoop();
@@ -125,7 +125,7 @@ namespace game {
         glClear(GL_COLOR_BUFFER_BIT);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         
-        switch(currentPage) {
+        switch(getCurrentPage()) {
             case menu:
                 startMenu.draw();
                 break;
@@ -139,6 +139,10 @@ namespace game {
                 break;
             case pause:
                 pauseMenu.draw();
+                break;
+            case gameover:
+                gameOverMenu.setVictory(!getPlayer()->isDead());
+                gameOverMenu.draw();
                 break;
             default:
                 break;
@@ -155,21 +159,22 @@ namespace game {
             case KEY_SPACE:
                 getPlayer()->jump();
                 break;
-            case KEY_ESCAPE:
+            case KEY_ESCAPE: {
+                page currentPage = getCurrentPage();
                 if (currentPage == menu) {
                     break;
                 }
                 setPaused(!isPaused());
                 if (isPaused()) {
-                    currentPage = pause;
+                    setCurrentPage(pause);
                 } else {
-                    currentPage = gameplay;
+                    setCurrentPage(gameplay);
                 }
                 break;
+            }
             case KEY_QUIT:
                 glutDestroyWindow(windowId);
                 exit(0);
-                break;
             case KEY_POWER_UP:
                 if (getPlayer()->hasPowerUp()) {
                     getPlayer()->setColor(Color(0,1,1,0.5));
@@ -197,11 +202,15 @@ namespace game {
         switch (button) {
             case GLUT_LEFT_BUTTON: {
                 hook_ptr hook = game::getPlayer()->getGrapplingHook();
+                page currentPage = getCurrentPage();
                 if (state == GLUT_UP) {
                     if (currentPage == menu) {
-                        currentPage = gameplay;
+                        setCurrentPage(gameplay);
                     } else if (currentPage == gameplay) {
                         hook->setHooked(false);
+                    } else if (currentPage == gameover) {
+                        init();
+                        setCurrentPage(menu);
                     }
                 } else if (state == GLUT_DOWN && currentPage == gameplay) {
                     Vector2i hookPos = invertY(Vector2i(x, y), WINDOW_DIMEN);

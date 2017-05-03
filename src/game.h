@@ -21,6 +21,8 @@ using namespace std;
 
 namespace game {
 
+    enum page {menu, gameplay, pause, gameover};
+
     /**
      * Represents the current state of the game. Encapsulated for easily
      * writing/reading the game state to/from disk.
@@ -29,10 +31,18 @@ namespace game {
         player_ptr          player;         /// a reference to the player
         vector<entity_ptr>  entities;       /// all entities currently in game
         score_ptr           score;          /// a reference to the score
+        page                currentPage;    /// the current page being displayed
         int                 globalX;        /// the current scroll x-position
         int                 scrollSpeed;    /// pixel-rate of how quickly we scroll
         int                 level;          /// current game level
     };
+
+    /**
+     * Requires: none
+     * Modifies: game state
+     * Effects: resets and initializes the game state.
+     */
+    void init();
 
     /**
      * Requires: none
@@ -104,6 +114,20 @@ namespace game {
      * Effects: sets scroll speed
      */
     void setScrollSpeed(int newScrollSpeed);
+
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the current page that is being displayed.
+     */
+    page getCurrentPage();
+
+    /**
+     * Requires: none
+     * Modifies: current page
+     * Effects: sets the current page that is being displayed
+     */
+    void setCurrentPage(page newPage);
 
     /**
      * Requires: none

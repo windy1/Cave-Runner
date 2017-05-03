@@ -2,36 +2,43 @@
 #include "tests.h"
 #include "loader.h"
 
+using namespace game;
+
 game::GameState gameState;
 bool paused = false;
 
 int main(int argc, char **argv) {
     if (argc > 1 && strcmp(*argv, "--tests")) {
-        return game::runTests();
+        return runTests();
     }
 
     cout << "Starting..." << endl;
 
-    gameState.globalX = 500;
-    gameState.scrollSpeed = 3;
-    gameState.level = 1;
-    gameState.score = make_shared<game::Score>();
-    
-    game::loadLevel(1, gameState);
+    init();
 
-    gameState.player = make_shared<game::Player>();
-    game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>(gameState.player);
-    gameState.player->setGrapplingHook(grapplingHook);
-
-    insertEntity(grapplingHook, gameState.entities);
-    insertEntity(gameState.player, gameState.entities);
-
-    game::initGraphics(argc, argv);
+    initGraphics(argc, argv);
 
     return 0;
 }
 
 namespace game {
+
+    void init() {
+        gameState = {};
+        gameState.globalX = 500;
+        gameState.scrollSpeed = 3;
+        gameState.level = 1;
+        gameState.score = make_shared<game::Score>();
+
+        game::loadLevel(1, gameState);
+
+        gameState.player = make_shared<game::Player>();
+        game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>(gameState.player);
+        gameState.player->setGrapplingHook(grapplingHook);
+
+        insertEntity(grapplingHook, gameState.entities);
+        insertEntity(gameState.player, gameState.entities);
+    }
 
     void update() {
         gameState.globalX += gameState.scrollSpeed;
@@ -39,6 +46,10 @@ namespace game {
             insertEntity(make_shared<Torch>(), gameState.entities);
         }
         updateEntities(gameState.entities);
+        if (gameState.player->isDead()) {
+            // game over
+            setCurrentPage(gameover);
+        }
     }
 
     void draw() {
@@ -120,6 +131,14 @@ namespace game {
     
     void setScrollSpeed(int newScrollSpeed) {
         gameState.scrollSpeed = newScrollSpeed;
+    }
+
+    page getCurrentPage() {
+        return gameState.currentPage;
+    }
+
+    void setCurrentPage(page newPage) {
+        gameState.currentPage = newPage;
     }
 
     void setGameState(GameState gs) {

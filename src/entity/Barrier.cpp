@@ -1,4 +1,5 @@
 #include "Barrier.h"
+#include "../game.h"
 
 namespace game {
 
@@ -6,14 +7,6 @@ namespace game {
     }
 
     Barrier::Barrier(Vector3f pos) : Obstacle::Obstacle(pos) {
-    }
-
-    string Barrier::getType() const {
-        return BARRIER;
-    }
-
-    void Barrier::draw() const {
-        drawRect(dimensions, Vector2f(pos).round(), color);
     }
 
     bool Barrier::isOverlapping(float xIn, float yIn) const {
@@ -63,4 +56,21 @@ namespace game {
         }
         return false;
     }
+
+    string Barrier::getType() const {
+        return BARRIER;
+    }
+
+    void Barrier::update() {
+        Entity::update();
+        player_ptr player = getPlayer();
+        if (isOverlapping(*player)) {
+            player->setDead(true);
+        }
+    }
+
+    void Barrier::draw() const {
+        drawRect(dimensions, Vector2f(pos).round(), color);
+    }
+
 }
