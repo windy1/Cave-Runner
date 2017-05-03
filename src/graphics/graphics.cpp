@@ -12,6 +12,7 @@ namespace game {
     static const char KEY_SPACE     = ' ';
     static const char KEY_ESCAPE    = 27;
     static const char KEY_QUIT      = 'q';
+    static const char KEY_POWER_UP  = 'p';
 
     static const Vector2i   WINDOW_DIMEN            (700, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
@@ -169,6 +170,12 @@ namespace game {
                 glutDestroyWindow(windowId);
                 exit(0);
                 break;
+            case KEY_POWER_UP:
+                if (getPlayer()->hasPowerUp()) {
+                    getPlayer()->setColor(Color(0,1,1,0.5));
+                    setScrollSpeed(getScrollSpeed()/2);
+                    getPlayer()->setPowerUp(false);
+                }
             default:
                 break;
         }

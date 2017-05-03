@@ -113,6 +113,14 @@ namespace game {
     int getCeilingY() {
         return getWindowDimensions().y - getGroundY();
     }
+    
+    int getScrollSpeed() {
+        return gameState.scrollSpeed;
+    }
+    
+    void setScrollSpeed(int newScrollSpeed) {
+        gameState.scrollSpeed = newScrollSpeed;
+    }
 
     void setGameState(GameState gs) {
         gameState = gs;

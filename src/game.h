@@ -90,6 +90,20 @@ namespace game {
      * Effects: return the ceiling y-position
      */
     int getCeilingY();
+    
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: return the scroll speed
+     */
+    int getScrollSpeed();
+    
+    /**
+     * Requires: none
+     * Modifies: scroll speed
+     * Effects: sets scroll speed
+     */
+    void setScrollSpeed(int newScrollSpeed);
 
     /**
      * Requires: none

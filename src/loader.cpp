@@ -173,6 +173,8 @@ namespace game {
             entity = make_shared<Barrier>();
         } else if (entityName == Entity::COIN) {
             entity = make_shared<Coin>();
+        } else if (entityName == Entity::POWER_UP) {
+            entity = make_shared<PowerUp>();
         } else if (entityName == "" || entityName[0] == '[') {
             ln = entityName;
             return true;

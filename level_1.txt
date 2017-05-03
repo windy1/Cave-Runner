@@ -5,6 +5,9 @@ barrier 50x200 (700,0) color={0.6471,0.1647,0.1647,1}
 barrier 50x150 (800,0) color={0.6471,0.1647,0.1647,1}
 barrier 50x100 (900,0) color={0.6471,0.1647,0.1647,1}
 coin 10x360 (1000,100) color={1,1,0,1}
+powerUp 10x360 (1300,100) color={1,0,1,1}
+coin 10x360 (2000,100) color={1,1,0,1}
+coin 10x360 (2500,270) color={1,1,0,1}
 [Properties]
 globalX=0
 scrollSpeed=1
