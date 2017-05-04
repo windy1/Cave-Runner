@@ -38,20 +38,31 @@ namespace game {
     }
     
     bool Barrier::isOverlapping(const Player &player) const {
+        /*
+         WTF
+        cout << "Player top-left: " << player.getPosition() << endl;
+        cout << "Player top-right: " << Vector2f(player.getPosition().x + player.getDimensions().x, player.getPosition().y) << endl;
+        cout << "Player bot-right: " << Vector2f(player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y) << endl;
+        cout << "Player bot-left: " << Vector2f(player.getPosition().x, player.getPosition().y - player.getDimensions().y) << endl;
+        */
         if (isOverlapping(player.getPosition().x, player.getPosition().y)) {
-            // bottom-left corner of player overlaps barrier
+            // top-left corner of player overlaps barrier
+            cout << "top-left of player overlaps" << endl;
             return true;
         }
         if (isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y)) {
-            // bottom-right corner of player overlaps barrier
+            // top-right corner of player overlaps barrier
+            cout << "top-right of player overlaps" << endl;
             return true;
         }
         if (isOverlapping(player.getPosition().x + player.getDimensions().x, player.getPosition().y - player.getDimensions().y)) {
-            // top-right corner of player overlaps barrier
+            // bot-right corner of player overlaps barrier
+            cout << "bot-right of player overlaps" << endl;
             return true;
         }
         if (isOverlapping(player.getPosition().x, player.getPosition().y - player.getDimensions().y)) {
-            // top-left corner of player overlaps barrier
+            // bot-left corner of player overlaps barrier
+            cout << "bot-left of player overlaps" << endl;
             return true;
         }
         return false;

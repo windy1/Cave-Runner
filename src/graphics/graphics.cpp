@@ -184,6 +184,7 @@ namespace game {
                     setScrollSpeed(getScrollSpeed()/2);
                     getPlayer()->setPowerUp(false);
                 }
+                break;
             case KEY_SAVE: {
                 saveGame();
                 break;
@@ -205,7 +206,7 @@ namespace game {
     }
 
     void onMouseMove(int x, int y) {
-        cout << "Mouse Move: " << Vector2i(x, y) << endl;
+        //cout << "Mouse Move: " << Vector2i(x, y) << endl;
         glutPostRedisplay();
     }
 
