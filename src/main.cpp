@@ -1,6 +1,8 @@
 #include "game.h"
 #include "tests.h"
-#include "loader.h"
+#include "io/GameStateReader.h"
+#include "io/GameStateWriter.h"
+#include "entity/Checkpoint.h"
 
 using namespace game;
 
@@ -14,8 +16,6 @@ int main(int argc, char **argv) {
 
     cout << "Starting..." << endl;
 
-    init();
-
     initGraphics(argc, argv);
 
     return 0;
@@ -23,19 +23,48 @@ int main(int argc, char **argv) {
 
 namespace game {
 
-    void init() {
+    void startNewGame() {
         gameState = {};
-        gameState.globalX = 500;
-        gameState.scrollSpeed = 3;
-        gameState.level = 1;
-        gameState.score = make_shared<game::Score>();
+        loadLevel(1);
+        init();
+        setCurrentPage(gameplay);
+    }
 
-        game::loadLevel(1, gameState);
+    void resumeGame() {
+        gameState = {};
+        init();
+        GameStateReader reader(*getGameState());
+        if (!reader.read("save.grs")) {
+            cerr << "Could not read game state" << endl;
+        }
+        setCurrentPage(gameplay);
+    }
 
+    void saveGame() {
+        if (gameState.checkpoint != NULL) {
+            gameState.checkpoint->setDead(true);
+        }
+        Vector3f checkpointPos =  gameState.player->getPosition() - Vector3f(0, 0, 1);
+        gameState.checkpoint = make_shared<Checkpoint>(checkpointPos);
+        insertEntity(gameState.checkpoint, gameState.entities);
+        GameStateWriter writer(*getGameState());
+        if (!writer.write("save.grs")) {
+            cerr << "Could not save game state" << endl;
+        }
+    }
+
+    void loadLevel(int level) {
+        GameStateReader reader(gameState);
+        reader.setEntityYOffset(getGroundY());
+        if (!reader.read("level_" + to_string(level) + ".grs")) {
+            cerr << "Could not load level: " << level << endl;
+        }
+    }
+
+    void init() {
         gameState.player = make_shared<game::Player>();
         game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>(gameState.player);
         gameState.player->setGrapplingHook(grapplingHook);
-
         insertEntity(grapplingHook, gameState.entities);
         insertEntity(gameState.player, gameState.entities);
     }

@@ -10,6 +10,7 @@ namespace game {
     const string Entity::POWER_UP       = "powerUp";
     const string Entity::SCORE          = "score";
     const string Entity::TORCH          = "torch";
+    const string Entity::CHECKPOINT     = "checkpoint";
 
     Vector3f Entity::getPosition() const {
         return pos;
@@ -75,7 +76,8 @@ namespace game {
         stream << "pos=" << entity.getPosition() << ", ";
         stream << "velocity=" << entity.getVelocity() << ", ";
         stream << "dimensions=" << entity.getDimensions() << ", ";
-        stream << "dead=" << entity.isDead() << ")";
+        stream << "dead=" << entity.isDead() << ", ";
+        stream << "color=" << entity.getColor() << ")";
         return stream;
     }
 

@@ -21,7 +21,6 @@ set(SOURCE_FILES
         src/math.cpp
         src/entity/Barrier.cpp src/entity/Barrier.h
         src/entity/Score.h src/entity/Score.cpp
-        src/loader.cpp src/loader.h
         src/graphics/Color.cpp src/graphics/Color.h
         src/entity/Torch.cpp src/entity/Torch.h
         src/ptr.h
@@ -29,7 +28,11 @@ set(SOURCE_FILES
         src/graphics/StartMenu.cpp src/graphics/StartMenu.h
         src/graphics/PauseMenu.cpp src/graphics/PauseMenu.h
         src/graphics/Scene.cpp src/graphics/Scene.h
-        src/graphics/GameOverMenu.cpp src/graphics/GameOverMenu.h)
+        src/graphics/GameOverMenu.cpp src/graphics/GameOverMenu.h
+        src/io/GameStateReader.cpp src/io/GameStateReader.h
+        src/io/grs.h src/io/grs.cpp
+        src/io/GameStateWriter.cpp src/io/GameStateWriter.h
+        src/entity/Checkpoint.cpp src/entity/Checkpoint.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})
 

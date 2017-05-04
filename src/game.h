@@ -28,14 +28,23 @@ namespace game {
      * writing/reading the game state to/from disk.
      */
     struct GameState {
-        player_ptr          player;         /// a reference to the player
-        vector<entity_ptr>  entities;       /// all entities currently in game
-        score_ptr           score;          /// a reference to the score
-        page                currentPage;    /// the current page being displayed
-        int                 globalX;        /// the current scroll x-position
-        int                 scrollSpeed;    /// pixel-rate of how quickly we scroll
-        int                 level;          /// current game level
+        vector<entity_ptr>  entities;                   /// all entities currently in game
+        player_ptr          player          = NULL;     /// a reference to the player
+        score_ptr           score           = NULL;     /// a reference to the score
+        checkpt_ptr         checkpoint      = NULL;
+        page                currentPage;                /// the current page being displayed
+        int                 globalX;                    /// the current scroll x-position
+        int                 scrollSpeed;                /// pixel-rate of how quickly we scroll
+        int                 level;                      /// current game level
     };
+
+    void startNewGame();
+
+    void saveGame();
+
+    void resumeGame();
+
+    void loadLevel(int level);
 
     /**
      * Requires: none

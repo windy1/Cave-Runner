@@ -11,11 +11,13 @@ namespace game {
     class Player;
     class Score;
     class GrapplingHook;
+    class Checkpoint;
 
     typedef shared_ptr<Player>          player_ptr;
     typedef shared_ptr<Entity>          entity_ptr;
     typedef shared_ptr<Score>           score_ptr;
     typedef shared_ptr<GrapplingHook>   hook_ptr;
+    typedef shared_ptr<Checkpoint>      checkpt_ptr;
 
 }
 

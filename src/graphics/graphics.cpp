@@ -1,11 +1,12 @@
 #include "graphics.h"
 #include "../game.h"
-#include "../entity/Player.h"
 #include "Menu.h"
 #include "StartMenu.h"
 #include "PauseMenu.h"
 #include "Scene.h"
 #include "GameOverMenu.h"
+#include "../io/GameStateWriter.h"
+#include "../io/GameStateReader.h"
 
 namespace game {
 
@@ -14,6 +15,8 @@ namespace game {
     static const char KEY_ESCAPE    = 27;
     static const char KEY_QUIT      = 'q';
     static const char KEY_POWER_UP  = 'p';
+    static const char KEY_SAVE      = 's';
+    static const char KEY_RESUME    = 'r';
 
     static const Vector2i   WINDOW_DIMEN            (700, 400);
     static const string     WINDOW_TITLE        =   "Untitled";
@@ -181,6 +184,15 @@ namespace game {
                     setScrollSpeed(getScrollSpeed()/2);
                     getPlayer()->setPowerUp(false);
                 }
+            case KEY_SAVE: {
+                saveGame();
+                break;
+            }
+            case KEY_RESUME: {
+                if (getCurrentPage() == menu) {
+                    resumeGame();
+                }
+            }
             default:
                 break;
         }
@@ -201,15 +213,21 @@ namespace game {
         cout << "Mouse Click: " << button << " " << state << " " << Vector2i(x, y) << endl;
         switch (button) {
             case GLUT_LEFT_BUTTON: {
-                hook_ptr hook = game::getPlayer()->getGrapplingHook();
                 page currentPage = getCurrentPage();
+                if (state == GLUT_UP && currentPage == menu) {
+                    startNewGame();
+                    break;
+                }
+
+                if (currentPage == menu) {
+                    break;
+                }
+
+                hook_ptr hook = game::getPlayer()->getGrapplingHook();
                 if (state == GLUT_UP) {
-                    if (currentPage == menu) {
-                        setCurrentPage(gameplay);
-                    } else if (currentPage == gameplay) {
+                    if (currentPage == gameplay) {
                         hook->setHooked(false);
                     } else if (currentPage == gameover) {
-                        init();
                         setCurrentPage(menu);
                     }
                 } else if (state == GLUT_DOWN && currentPage == gameplay) {
@@ -218,6 +236,7 @@ namespace game {
                     hook->setPosition(Vector3f(hookPos, 0));
                     hook->setHooked(true);
                 }
+
                 break;
             }
             default:
