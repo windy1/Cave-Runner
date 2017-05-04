@@ -67,8 +67,6 @@ namespace game {
         gameState.player->setGrapplingHook(grapplingHook);
         insertEntity(grapplingHook, gameState.entities);
         insertEntity(gameState.player, gameState.entities);
-        gameState.score = make_shared<Score>();
-        insertEntity(gameState.score, gameState.entities);
     }
 
     void update() {
