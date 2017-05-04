@@ -19,7 +19,7 @@ namespace game {
     static const char KEY_RESUME    = 'r';
 
     static const Vector2i   WINDOW_DIMEN            (700, 400);
-    static const string     WINDOW_TITLE        =   "Untitled";
+    static const string     WINDOW_TITLE        =   "Cave Runner";
 
     static int windowId;
 
