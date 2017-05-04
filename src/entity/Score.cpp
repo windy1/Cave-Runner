@@ -1,4 +1,5 @@
 #include "Score.h"
+#include "../graphics/graphics.h"
 
 namespace game {
 
@@ -27,7 +28,7 @@ namespace game {
     }
 
     void Score::draw() const {
-        // TODO
+        drawString(Vector2i(50, 100), "SCORE: ", Color::WHITE);
+        drawString(Vector2i(140, 100), to_string(getScore()), Color::WHITE);
     }
-
 }

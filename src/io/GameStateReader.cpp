@@ -188,6 +188,7 @@ namespace game {
         file >> score;
         if (gameState.score == NULL) {
             gameState.score = make_shared<Score>(score);
+            insertEntity(gameState.score, gameState.entities);
         }
         if (gameState.score->getScore() == -1) {
             cerr << "Could not read score" << endl;
