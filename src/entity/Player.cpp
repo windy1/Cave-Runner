@@ -22,6 +22,7 @@ namespace game {
         dimensions = DEFAULT_DIMENSIONS;
         pos.x = STARTING_X_POSITION;
         pos.y = getGroundY();
+        powered = false;
     }
 
     hook_ptr Player::getGrapplingHook() const {
@@ -39,6 +40,14 @@ namespace game {
     
     void Player::setPowerUp(bool newPowerUp) {
         powerUp = newPowerUp;
+    }
+    
+    bool Player::isPowered() const {
+        return powered;
+    }
+    
+    void Player::setPowered(bool newPoweredStatus) {
+        powered = newPoweredStatus;
     }
 
     float Player::getJumpVelocity() const {

@@ -154,12 +154,17 @@ namespace game {
         return getWindowDimensions().y - getGroundY();
     }
     
-    int getScrollSpeed() {
+    float getScrollSpeed() {
+        cout << "get: " << gameState.scrollSpeed << endl;
         return gameState.scrollSpeed;
     }
     
-    void setScrollSpeed(int newScrollSpeed) {
+    void setScrollSpeed(float newScrollSpeed) {
         gameState.scrollSpeed = newScrollSpeed;
+        for (int i = 0; i < gameState.entities.size(); i++) {
+            entity_ptr entity = gameState.entities[i];
+            entity->setVelocity(Vector2f(-gameState.scrollSpeed, 0));
+        }
     }
 
     page getCurrentPage() {

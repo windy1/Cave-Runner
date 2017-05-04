@@ -14,6 +14,7 @@ namespace game {
 
         hook_ptr grapplingHook;
         bool powerUp;
+        bool powered;
         float jumpVelocity;
         float gravity;
         float terminalVelocity;
@@ -55,9 +56,23 @@ namespace game {
         /**
          * Requires: nothing
          * Modifies: player's powerup access status
-         * Effects: sets player's powerup status
+         * Effects: sets player's powerup inventory status
          */
         void setPowerUp(bool newPowerUp);
+        
+        /**
+         * Requires: nothing
+         * Modifies: nothing
+         * Effects: checks if player is currently executing powerup
+         */
+        bool isPowered() const;
+        
+        /**
+         * Requires: nothing
+         * Modifies: player's powerup execution status
+         * Effects: sets player's powerup execution status
+         */
+        void setPowered(bool newPoweredStatus);
 
         /**
          * Requires: nothing

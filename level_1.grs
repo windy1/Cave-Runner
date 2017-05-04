@@ -1,0 +1,10 @@
+[Properties]
+globalX=0
+scrollSpeed=3
+level=1
+score=0
+[Entities]
+coin 10x360 (1000,100,0) color={1,1,0,1}
+powerUp 10x360 (1300,100,0) color={1,0,1,1}
+coin 10x360 (2000,100,0) color={1,1,0,1}
+coin 10x360 (2500,270,0) color={1,1,0,1}

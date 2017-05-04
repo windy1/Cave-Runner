@@ -22,6 +22,10 @@ namespace game {
     static const string     WINDOW_TITLE        =   "Cave Runner";
 
     static int windowId;
+    
+    static int relative_powerup_time = 0;
+    static int POWER_UP_DURATION = 1000;
+    
 
     Scene scene;
     StartMenu startMenu;
@@ -180,9 +184,11 @@ namespace game {
                 exit(0);
             case KEY_POWER_UP:
                 if (getPlayer()->hasPowerUp()) {
-                    getPlayer()->setColor(Color(0,1,1,0.5));
-                    setScrollSpeed(getScrollSpeed()/2);
+                    relative_powerup_time = 0;
+                    getPlayer()->setPowered(true);
                     getPlayer()->setPowerUp(false);
+                    getPlayer()->setColor(Color(0,1,1,0.5));
+                    setScrollSpeed(getScrollSpeed()/3.0);
                 }
                 break;
             case KEY_SAVE: {
@@ -247,8 +253,15 @@ namespace game {
     }
 
     void timer(int extra) {
+        relative_powerup_time += 1;
+        
+        if (getPlayer() && getPlayer()->isPowered() && relative_powerup_time == POWER_UP_DURATION) {
+            getPlayer()->setPowered(false);
+            getPlayer()->setColor(Color(0,0,1,1));
+            setScrollSpeed(getScrollSpeed()*3.0);
+        }
+        
         glutPostRedisplay();
         glutTimerFunc(2, timer, 0);
     }
-
 }

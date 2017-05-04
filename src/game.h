@@ -34,7 +34,7 @@ namespace game {
         checkpt_ptr         checkpoint      = NULL;
         page                currentPage;                /// the current page being displayed
         int                 globalX;                    /// the current scroll x-position
-        int                 scrollSpeed;                /// pixel-rate of how quickly we scroll
+        float               scrollSpeed;                /// pixel-rate of how quickly we scroll
         int                 level;                      /// current game level
     };
 
@@ -115,14 +115,14 @@ namespace game {
      * Modifies: none
      * Effects: return the scroll speed
      */
-    int getScrollSpeed();
+    float getScrollSpeed();
     
     /**
      * Requires: none
      * Modifies: scroll speed
      * Effects: sets scroll speed
      */
-    void setScrollSpeed(int newScrollSpeed);
+    void setScrollSpeed(float newScrollSpeed);
 
     /**
      * Requires: none
