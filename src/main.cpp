@@ -25,8 +25,8 @@ namespace game {
 
     void startNewGame() {
         gameState = {};
-        loadLevel(1);
         createPlayer();
+        loadLevel(1);
         setCurrentPage(gameplay);
     }
 

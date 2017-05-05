@@ -161,12 +161,14 @@ namespace game {
 
     void onKey(unsigned char key, int x, int y) {
         cout << "Key: " << key << " " << Vector2i(x, y) << endl;
+        page currentPage = getCurrentPage();
         switch (key) {
             case KEY_SPACE:
-                getPlayer()->jump();
+                if (currentPage == gameplay) {
+                    getPlayer()->jump();
+                }
                 break;
             case KEY_ESCAPE: {
-                page currentPage = getCurrentPage();
                 if (currentPage == menu) {
                     break;
                 }
@@ -191,11 +193,13 @@ namespace game {
                 }
                 break;
             case KEY_SAVE: {
-                saveGame();
+                if (currentPage == gameplay || currentPage == pause) {
+                    saveGame();
+                }
                 break;
             }
             case KEY_RESUME: {
-                if (getCurrentPage() == menu) {
+                if (currentPage == menu) {
                     resumeGame();
                 }
             }
