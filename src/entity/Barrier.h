@@ -11,11 +11,14 @@ namespace game {
      * A wall-like obstacle.
      */
     class Barrier : public Obstacle {
+
+        player_ptr player;
+
     public:
 
-        Barrier();
+        Barrier(player_ptr player);
 
-        Barrier(Vector3f pos);
+        Barrier(player_ptr player, Vector3f pos);
 
         /**
          * Requires: nothing

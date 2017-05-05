@@ -3,10 +3,10 @@
 
 namespace game {
     
-    PowerUp::PowerUp() : Collectible::Collectible() {
+    PowerUp::PowerUp(player_ptr player) : Collectible::Collectible(player) {
     }
     
-    PowerUp::PowerUp(Vector3f pos) : Collectible::Collectible(pos) {
+    PowerUp::PowerUp(player_ptr player, Vector3f pos) : Collectible::Collectible(player, pos) {
     }
     
     void PowerUp::becomeCollected(Player &player) {

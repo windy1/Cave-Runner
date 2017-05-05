@@ -4,11 +4,12 @@
 
 namespace game {
 
-    Collectible::Collectible() {
+    Collectible::Collectible(player_ptr player) {
+        this->player = player;
         velocity.x = -getGameState()->scrollSpeed;
     }
     
-    Collectible::Collectible(Vector3f pos) : Collectible::Collectible() {
+    Collectible::Collectible(player_ptr player, Vector3f pos) : Collectible::Collectible(player) {
         this->pos = pos;
     }
     
@@ -69,8 +70,8 @@ namespace game {
     
     void Collectible::update() {
         Entity::update();
-        if (isOverlapping(*getPlayer())) {
-            becomeCollected(*getPlayer());
+        if (isOverlapping(*player)) {
+            becomeCollected(*player);
         }
     }
     

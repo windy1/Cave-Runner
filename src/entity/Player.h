@@ -146,13 +146,6 @@ namespace game {
         bool jump();
 
         bool isOnGround();
-
-        /**
-         * Requires: nothing
-         * Modifies: player y position
-         * Effects: moves player along y-axis by a given amount deltaY
-         */
-        void move(float deltaY);
         
         /*
         * Requires: nothing

@@ -11,11 +11,14 @@ namespace game {
      * An entity that can be collected by the player.
      */
     class Collectible : public Entity {
+
+        player_ptr player;
+
     public:
 
-        Collectible();
+        Collectible(player_ptr player);
 
-        Collectible(Vector3f pos);
+        Collectible(player_ptr player, Vector3f pos);
 
         /**
          * Requires: the collectible has not been collected already

@@ -15,9 +15,9 @@ namespace game {
         /// Coin value (score points)
         static const int COIN_VALUE;
 
-        Coin();
+        Coin(player_ptr player);
 
-        Coin(Vector3f pos);
+        Coin(player_ptr player, Vector3f pos);
         
         /**
          * Requires: nothing

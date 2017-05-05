@@ -11,9 +11,9 @@ namespace game {
     class PowerUp : public Collectible {
     public:
 
-        PowerUp();
+        PowerUp(player_ptr player);
 
-        PowerUp(Vector3f pos);
+        PowerUp(player_ptr player, Vector3f pos);
 
         /**
          * Requires: nothing

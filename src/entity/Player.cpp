@@ -95,10 +95,6 @@ namespace game {
         return pos.y == getGroundY();
     }
 
-    void Player::move(float deltaY) {
-        Entity::move(0, deltaY);
-    }
-
     void Player::update() {
         Entity::update();
 

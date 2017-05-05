@@ -3,10 +3,12 @@
 
 namespace game {
 
-    Barrier::Barrier() : Obstacle::Obstacle() {
+    Barrier::Barrier(player_ptr player) : Obstacle::Obstacle() {
+        this->player = player;
     }
 
-    Barrier::Barrier(Vector3f pos) : Obstacle::Obstacle(pos) {
+    Barrier::Barrier(player_ptr player, Vector3f pos) : Obstacle::Obstacle(pos) {
+        this->player = player;
     }
 
     bool Barrier::isOverlapping(float xIn, float yIn) const {
@@ -33,7 +35,6 @@ namespace game {
 
     void Barrier::update() {
         Entity::update();
-        player_ptr player = getPlayer();
         if (isOverlapping(*player)) {
             player->setDead(true);
         }

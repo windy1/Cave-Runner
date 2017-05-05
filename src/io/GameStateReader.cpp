@@ -66,11 +66,11 @@ namespace game {
             string entityName;
             file >> entityName;
             if (entityName == Entity::BARRIER) {
-                entity = make_shared<Barrier>();
+                entity = make_shared<Barrier>(gameState.player);
             } else if (entityName == Entity::COIN) {
-                entity = make_shared<Coin>();
+                entity = make_shared<Coin>(gameState.player);
             } else if (entityName == Entity::POWER_UP) {
-                entity = make_shared<PowerUp>();
+                entity = make_shared<PowerUp>(gameState.player);
             } else if (entityName == Entity::PLAYER) {
                 if (gameState.player == NULL) {
                     cerr << "Player must be initialized before loading game state" << endl;

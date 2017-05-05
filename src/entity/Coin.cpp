@@ -6,10 +6,10 @@ namespace game {
 
     const int Coin::COIN_VALUE = 10;
 
-    Coin::Coin() : Collectible::Collectible() {
+    Coin::Coin(player_ptr player) : Collectible::Collectible(player) {
     }
     
-    Coin::Coin(Vector3f pos) : Collectible::Collectible(pos) {
+    Coin::Coin(player_ptr player, Vector3f pos) : Collectible::Collectible(player, pos) {
     }
 
     void Coin::becomeCollected(Player &player) {
