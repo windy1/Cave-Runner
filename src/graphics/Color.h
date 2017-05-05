@@ -20,7 +20,10 @@ namespace game {
         static const Color SAND;
         static const Color SAND_DARK;
         static const Color BROWN;
+        static const Color SADDLE_BROWN;
         static const Color ORANGE;
+        static const Color SILVER;
+        static const Color DIM_GRAY;
 
         float r;
         float g;

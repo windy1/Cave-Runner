@@ -45,7 +45,7 @@ namespace game {
      * Modifies: none
      * Effects: Draws a line from p1 to p2
      */
-    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color = {1, 1, 1, 1});
+    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color, float lineWidth);
 
     /**
      * Requires: none

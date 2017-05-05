@@ -107,8 +107,8 @@ namespace game {
         }
     }
 
-    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color) {
-        glLineWidth(2.5);
+    void drawLine(const Vector2i &p1, const Vector2i &p2, const Color &color, float lineWidth) {
+        glLineWidth(lineWidth);
         glColor4f(color.r, color.g, color.b, color.a);
         glBegin(GL_LINES);
         glVertex2i(p1.x, invertY(p1, WINDOW_DIMEN).y);

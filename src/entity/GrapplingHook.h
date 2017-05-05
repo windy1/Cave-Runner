@@ -15,6 +15,8 @@ namespace game {
         player_ptr player;
         bool hooked;
         Vector2f retractVelocity;
+        Color hookColor;
+        float ropeWidth;
 
     protected:
 
@@ -24,8 +26,9 @@ namespace game {
     public:
 
         /// Defaults
-        static const Vector2i DEFAULT_DIMENSIONS;
-        static const Vector2f DEFAULT_RETRACT_VELOCITY;
+        static const Vector2i   DEFAULT_DIMENSIONS;
+        static const Vector2f   DEFAULT_RETRACT_VELOCITY;
+        static const float      DEFAULT_ROPE_WIDTH = 5;
 
         GrapplingHook(player_ptr player);
 
@@ -65,6 +68,34 @@ namespace game {
          * player towards it
          */
         void setRetractVelocity(Vector2f retractVelocity);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the color of the hook
+         */
+        Color getHookColor() const;
+
+        /**
+         * Requires: none
+         * Modifies: hook color
+         * Effects: sets the color of the hook
+         */
+        void setHookColor(Color hookColor);
+
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: sets the width of the rope
+         */
+        float getRopeWidth() const;
+
+        /**
+         * Requires: none
+         * Modifies: rope width
+         * Effects: sets the rope width
+         */
+        void setRopeWidth(float ropeWidth);
         
         virtual string getType() const override;
 
