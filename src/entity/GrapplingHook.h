@@ -28,7 +28,7 @@ namespace game {
         /// Defaults
         static const Vector2i   DEFAULT_DIMENSIONS;
         static const Vector2f   DEFAULT_RETRACT_VELOCITY;
-        static const float      DEFAULT_ROPE_WIDTH = 5;
+        static const float      DEFAULT_ROPE_WIDTH;
 
         GrapplingHook(player_ptr player);
 

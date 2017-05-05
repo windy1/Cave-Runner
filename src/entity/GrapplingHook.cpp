@@ -4,8 +4,9 @@
 
 namespace game {
 
-    const Vector2i GrapplingHook::DEFAULT_DIMENSIONS        (7, 360);
-    const Vector2f GrapplingHook::DEFAULT_RETRACT_VELOCITY  (5, 5);
+    const Vector2i  GrapplingHook::DEFAULT_DIMENSIONS        (7, 360);
+    const Vector2f  GrapplingHook::DEFAULT_RETRACT_VELOCITY  (5, 5);
+    const float     GrapplingHook::DEFAULT_ROPE_WIDTH       = 5.0f;
 
     GrapplingHook::GrapplingHook(player_ptr player) {
         assert(player != NULL);
