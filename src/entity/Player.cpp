@@ -91,7 +91,7 @@ namespace game {
         return false;
     }
 
-    bool Player::isOnGround() {
+    bool Player::isOnGround() const {
         return pos.y == getGroundY();
     }
 

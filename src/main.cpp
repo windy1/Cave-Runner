@@ -26,31 +26,34 @@ namespace game {
     void startNewGame() {
         gameState = {};
         loadLevel(1);
-        init();
-        setCurrentPage(gameplay);
-    }
-
-    void resumeGame() {
-        gameState = {};
-        init();
-        GameStateReader reader(*getGameState());
-        if (!reader.read("save.grs")) {
-            cerr << "Could not read game state" << endl;
-        }
+        createPlayer();
         setCurrentPage(gameplay);
     }
 
     void saveGame() {
         if (gameState.checkpoint != NULL) {
+            // remove old checkpoint, if any
             gameState.checkpoint->setDead(true);
         }
         Vector3f checkpointPos =  gameState.player->getPosition() - Vector3f(0, 0, 1);
         gameState.checkpoint = make_shared<Checkpoint>(checkpointPos);
         insertEntity(gameState.checkpoint, gameState.entities);
+
+        // write game state
         GameStateWriter writer(*getGameState());
         if (!writer.write("save.grs")) {
             cerr << "Could not save game state" << endl;
         }
+    }
+
+    void resumeGame() {
+        gameState = {};
+        createPlayer();
+        GameStateReader reader(*getGameState());
+        if (!reader.read("save.grs")) {
+            cerr << "Could not read game state" << endl;
+        }
+        setCurrentPage(gameplay);
     }
 
     void loadLevel(int level) {
@@ -61,7 +64,7 @@ namespace game {
         }
     }
 
-    void init() {
+    void createPlayer() {
         gameState.player = make_shared<game::Player>();
         game::hook_ptr grapplingHook = make_shared<game::GrapplingHook>(gameState.player);
         gameState.player->setGrapplingHook(grapplingHook);
@@ -155,7 +158,6 @@ namespace game {
     }
     
     float getScrollSpeed() {
-        cout << "get: " << gameState.scrollSpeed << endl;
         return gameState.scrollSpeed;
     }
     

@@ -21,6 +21,7 @@ namespace game {
     }
 
     void Checkpoint::setFlagDimensions(Vector2i flagDimen) {
+        assert(flagDimen.x > 0 && flagDimen.y > 0);
         this->flagDimen = flagDimen;
     }
 

@@ -145,7 +145,12 @@ namespace game {
          */
         bool jump();
 
-        bool isOnGround();
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns true if the player is on the ground
+         */
+        bool isOnGround() const;
         
         /*
         * Requires: nothing

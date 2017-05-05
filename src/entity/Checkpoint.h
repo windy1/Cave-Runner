@@ -5,6 +5,9 @@
 
 namespace game {
 
+    /**
+     * A marker for saved game locations.
+     */
     class Checkpoint : public Entity {
 
         Vector2i flagDimen;
@@ -18,8 +21,18 @@ namespace game {
 
         Checkpoint(Vector3f pos);
 
+        /**
+         * Requires: none
+         * Modifies: none
+         * Effects: returns the dimensions of the flag portion
+         */
         Vector2i getFlagDimensions() const;
 
+        /**
+         * Requires: dimensions > 0
+         * Modifies: flag dimensions
+         * Effects: sets the dimensions of the flag portion
+         */
         void setFlagDimensions(Vector2i flagDimen);
 
         virtual string getType() const override;

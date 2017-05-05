@@ -31,34 +31,61 @@ namespace game {
         vector<entity_ptr>  entities;                   /// all entities currently in game
         player_ptr          player          = NULL;     /// a reference to the player
         score_ptr           score           = NULL;     /// a reference to the score
-        checkpt_ptr         checkpoint      = NULL;
+        checkpt_ptr         checkpoint      = NULL;     /// a reference to the currently set checkpoint, if any
         page                currentPage;                /// the current page being displayed
         int                 globalX;                    /// the current scroll x-position
         float               scrollSpeed;                /// pixel-rate of how quickly we scroll
         int                 level;                      /// current game level
     };
 
+    /**
+     * Requires: none
+     * Modifies: game state
+     * Effects: resets the game state, loads a level, and starts the game
+     */
     void startNewGame();
 
+    /**
+     * Requires: none
+     * Modifies: save file
+     * Effects: saves the current game state to file
+     */
     void saveGame();
 
+    /**
+     * Requires: none
+     * Modifies: save file
+     * Effects: resumes the game from the last checkpoint
+     */
     void resumeGame();
 
+    /**
+     * Requires: a valid level integer
+     * Modifies: game state
+     * Effects: loads the specified level into the game state
+     */
     void loadLevel(int level);
 
     /**
      * Requires: none
      * Modifies: game state
-     * Effects: resets and initializes the game state.
+     * Effects: creates and initializes the player entity
      */
-    void init();
+    void createPlayer();
+
+    /**
+     * Requires: none
+     * Modifies: updates game elements
+     * Effects: game entities
+     */
+    void update();
 
     /**
      * Requires: none
      * Modifies: none
-     * Effects: returns the player
+     * Effects: draws game elements
      */
-    player_ptr getPlayer();
+    void draw();
 
     /**
      * Requires: non-null entity
@@ -67,6 +94,27 @@ namespace game {
      * z-position
      */
     void insertEntity(entity_ptr entity, vector<entity_ptr> &entities);
+
+    /**
+     * Requires: a vector of entities
+     * Modifies: removes any dead entities and updates any alive entities
+     * Effects: the given entity vector
+     */
+    void updateEntities(std::vector<entity_ptr> &entities);
+
+    /**
+     * Requires: a vector of entities
+     * Modifies: draws each entity to the screen
+     * Effects: none
+     */
+    void drawEntities(const std::vector<entity_ptr> &entities);
+
+    /**
+     * Requires: none
+     * Modifies: none
+     * Effects: returns the player
+     */
+    player_ptr getPlayer();
 
     /**
      * Requires: none
@@ -137,34 +185,6 @@ namespace game {
      * Effects: sets the current page that is being displayed
      */
     void setCurrentPage(page newPage);
-
-    /**
-     * Requires: none
-     * Modifies: updates game elements
-     * Effects: game entities
-     */
-    void update();
-
-    /**
-     * Requires: none
-     * Modifies: none
-     * Effects: draws game elements
-     */
-    void draw();
-
-    /**
-     * Requires: a vector of entities
-     * Modifies: removes any dead entities and updates any alive entities
-     * Effects: the given entity vector
-     */
-    void updateEntities(std::vector<entity_ptr> &entities);
-
-    /**
-     * Requires: a vector of entities
-     * Modifies: draws each entity to the screen
-     * Effects: none
-     */
-    void drawEntities(const std::vector<entity_ptr> &entities);
 
 }
 

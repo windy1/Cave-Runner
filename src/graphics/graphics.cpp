@@ -25,7 +25,6 @@ namespace game {
     
     static int relative_powerup_time = 0;
     static int POWER_UP_DURATION = 1000;
-    
 
     Scene scene;
     StartMenu startMenu;
