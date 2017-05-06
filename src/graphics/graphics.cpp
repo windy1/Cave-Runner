@@ -24,7 +24,7 @@ namespace game {
     static int windowId;
     
     static int relative_powerup_time = 0;
-    static int POWER_UP_DURATION = 1000;
+    static int POWER_UP_DURATION = 100;
 
     Scene scene;
     StartMenu startMenu;
@@ -215,7 +215,10 @@ namespace game {
     }
 
     void onMouseMove(int x, int y) {
-        //cout << "Mouse Move: " << Vector2i(x, y) << endl;
+        if (getCurrentPage() == menu) {
+            //cout << "Mouse Move: " << Vector2i(x, y) << endl;
+            startMenu.onMouseMove(x, y);
+        }
         glutPostRedisplay();
     }
 
@@ -225,7 +228,7 @@ namespace game {
             case GLUT_LEFT_BUTTON: {
                 page currentPage = getCurrentPage();
                 if (state == GLUT_UP && currentPage == menu) {
-                    startNewGame();
+                    startMenu.onClick(x, y);
                     break;
                 }
 

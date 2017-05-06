@@ -36,6 +36,7 @@ namespace game {
         int                 globalX;                    /// the current scroll x-position
         float               scrollSpeed;                /// pixel-rate of how quickly we scroll
         int                 level;                      /// current game level
+        int                 endX;                       /// x-position where the current level ends
     };
 
     /**
@@ -43,7 +44,7 @@ namespace game {
      * Modifies: game state
      * Effects: resets the game state, loads a level, and starts the game
      */
-    void startNewGame();
+    void startLevel(int level);
 
     /**
      * Requires: none
@@ -164,6 +165,8 @@ namespace game {
      * Effects: return the scroll speed
      */
     float getScrollSpeed();
+
+    int getTotalLevels();
     
     /**
      * Requires: none

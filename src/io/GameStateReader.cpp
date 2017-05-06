@@ -151,6 +151,7 @@ namespace game {
         gameState.scrollSpeed = -1;
         gameState.level = -1;
 
+
         // get global x-position
         char ch;
         skipChars(file, 8, ch);
@@ -195,6 +196,14 @@ namespace game {
             return false;
         }
         gameState.score->updateScore(score);
+
+        // get end x
+        skipChars(file, 5, ch);
+        file >> gameState.endX;
+        if (gameState.endX == -1) {
+            cerr << "Could not read end x-position" << endl;
+            return false;
+        }
         
         return true;
     }

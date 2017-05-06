@@ -56,6 +56,7 @@ namespace game {
         file << "scrollSpeed=" << gameState.scrollSpeed << endl;
         file << "level=" << gameState.level << endl;
         file << "score=" << gameState.score->getScore() << endl;
+        file << "endX=" << gameState.endX << endl;
     }
 
 }

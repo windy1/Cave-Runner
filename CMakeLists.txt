@@ -32,7 +32,7 @@ set(SOURCE_FILES
         src/io/GameStateReader.cpp src/io/GameStateReader.h
         src/io/grs.h src/io/grs.cpp
         src/io/GameStateWriter.cpp src/io/GameStateWriter.h
-        src/entity/Checkpoint.cpp src/entity/Checkpoint.h)
+        src/entity/Checkpoint.cpp src/entity/Checkpoint.h src/graphics/LevelButton.cpp src/graphics/LevelButton.h)
 
 add_executable(CS_120_Final_Project ${SOURCE_FILES})
 

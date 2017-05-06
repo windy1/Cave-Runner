@@ -23,10 +23,10 @@ int main(int argc, char **argv) {
 
 namespace game {
 
-    void startNewGame() {
+    void startLevel(int level) {
         gameState = {};
         createPlayer();
-        loadLevel(1);
+        loadLevel(level);
         setCurrentPage(gameplay);
     }
 
@@ -76,6 +76,10 @@ namespace game {
         gameState.globalX += gameState.scrollSpeed;
         if (gameState.globalX % 300 == 0) {
             insertEntity(make_shared<Torch>(), gameState.entities);
+        }
+        if (gameState.globalX >= gameState.endX) {
+            setCurrentPage(gameover);
+            return;
         }
         updateEntities(gameState.entities);
         if (gameState.player->isDead()) {
@@ -159,6 +163,10 @@ namespace game {
     
     float getScrollSpeed() {
         return gameState.scrollSpeed;
+    }
+
+    int getTotalLevels() {
+        return 3;
     }
     
     void setScrollSpeed(float newScrollSpeed) {

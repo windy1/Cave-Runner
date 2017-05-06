@@ -3,7 +3,7 @@
 
 namespace game {
 
-    const Vector3f Score::DEFAULT_POSITION(5, 5, 0);
+    const Vector3f Score::DEFAULT_POSITION(5, 5, 1);
 
     Score::Score() {
         score = 0;
@@ -31,4 +31,5 @@ namespace game {
         drawString(Vector2i(50, 100), "SCORE: ", Color::WHITE);
         drawString(Vector2i(140, 100), to_string(getScore()), Color::WHITE);
     }
+
 }

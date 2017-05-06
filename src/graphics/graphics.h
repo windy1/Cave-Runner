@@ -4,6 +4,7 @@
 #include "../math.h"
 #include "Color.h"
 #include <cmath>
+#include <cassert>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
